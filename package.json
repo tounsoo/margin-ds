@@ -1,7 +1,7 @@
 {
 	"name": "@tounsoo/margin-ds",
 	"private": true,
-	"version": "1.0.0",
+	"version": "0.0.1",
 	"type": "module",
 	"scripts": {
 		"dev": "storybook dev -p 6006",
