@@ -1,0 +1,84 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .button {
+        all: unset;
+    }
+}
+
+@layer base {
+    .button {
+        color-scheme: light dark;
+        
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        font-family: $font-family;
+        font-size: $font-size-sm;
+        line-height: $font-size-sm--line-height;
+        gap: $spacing-1;
+        margin-block: var(--safety-margin, $spacing-2);
+        margin-inline: calc(var(--safety-margin, $spacing-2) / 2);
+        padding-block: $spacing-1;
+        padding-inline: $spacing-3;
+        border-radius: $radius-md;
+    
+        outline-style: solid;
+        outline-color: transparent;
+        outline-offset: 0;
+        outline-width: 0;
+        transition: outline $default-transition-duration $transition-timing-function-out;
+    }
+}
+
+@layer variant {
+    .button.default {
+        background-color: light-dark($color-gray-100, $color-gray-700);
+        color: light-dark($color-gray-950, $color-gray-50);
+    }
+    .button.primary {
+        background-color: light-dark($color-gray-900, $color-gray-200);
+        color: light-dark($color-gray-50, $color-gray-900);
+    }
+    .button.text {
+        background-color: transparent;
+        color: light-dark($color-gray-950, $color-gray-50);
+    }
+    .button.danger {
+        background-color: light-dark($color-red-600, $color-red-400);
+        color: light-dark($color-gray-50, $color-gray-950);
+    }
+}
+
+@layer state {
+    .button.default:hover {
+        background-color: light-dark($color-gray-200, $color-gray-600)
+    }
+    .button.primary:hover {
+        background-color: light-dark($color-gray-700, $color-gray-100)
+    }
+    .button.text:hover {
+        background-color: light-dark($color-gray-200, $color-gray-800)
+    }
+    .button.danger:hover {
+        background-color: light-dark($color-red-700, $color-red-300)
+    } 
+
+    .button:focus-visible {
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+        outline-color: light-dark($color-gray-950, $color-gray-50)
+    }
+    
+    @media (prefers-reduced-motion) {
+        .button {
+            transition: outline-offset 0.1ms;
+        }
+    }
+}
