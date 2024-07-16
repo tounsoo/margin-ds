@@ -1,16 +1,38 @@
 {
-  "private": true,
-  "scripts": {
-    "build": "turbo build",
-    "dev": "turbo dev",
-    "lint": "turbo lint",
-    "format": "prettier --write \"**/*.{ts,tsx,md}\""
-  },
-  "devDependencies": {
-    "eslint": "^8.57.0",
-    "prettier": "^3.2.5",
-    "turbo": "^2.0.6"
-  },
-  "packageManager": "pnpm@8.15.6",
-  "name": "with-vite"
+	"name": "@tounsoo/margin-ds",
+	"private": true,
+	"version": "1.0.0",
+	"type": "module",
+	"scripts": {
+		"dev": "storybook dev -p 6006",
+		"build": "rsbuild build",
+		"preview": "rsbuild preview"
+	},
+	"dependencies": {
+		"react": "18.3.1",
+		"react-dom": "18.3.1"
+	},
+	"devDependencies": {
+		"@biomejs/biome": "1.8.3",
+		"@chromatic-com/storybook": "^1.6.1",
+		"@rsbuild/core": "^1.0.1-beta.1",
+		"@rsbuild/plugin-babel": "^1.0.1-beta.1",
+		"@rsbuild/plugin-lightningcss": "^1.0.1-beta.1",
+		"@rsbuild/plugin-react": "^1.0.1-beta.1",
+		"@rsbuild/plugin-sass": "1.0.1-beta.1",
+		"@storybook/addon-a11y": "^8.2.4",
+		"@storybook/addon-essentials": "^8.2.4",
+		"@storybook/addon-interactions": "^8.2.4",
+		"@storybook/addon-links": "^8.2.4",
+		"@storybook/addon-onboarding": "^8.2.4",
+		"@storybook/blocks": "^8.2.4",
+		"@storybook/react": "^8.2.4",
+		"@storybook/test": "^8.2.4",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
+		"classnames": "^2.5.1",
+		"storybook": "^8.2.4",
+		"storybook-react-rsbuild": "^0.0.7",
+		"typescript": "^5.5.3"
+	}
 }

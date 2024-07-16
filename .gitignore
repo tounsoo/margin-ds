@@ -1,11 +1,13 @@
+# Local
 .DS_Store
-node_modules
-.turbo
-*.log
-dist
-dist-ssr
 *.local
-.env
-.cache
-server/dist
-public/dist
+*.log*
+
+# Dist
+node_modules
+dist/
+
+# IDE
+.vscode/*
+!.vscode/extensions.json
+.idea
