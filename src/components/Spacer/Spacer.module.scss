@@ -1,0 +1,14 @@
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .spacer {
+        all: unset;
+    }
+}
+
+@layer base {
+    .spacer {
+        flex-grow: 1;
+        flex-basis: 100%;
+    }
+}

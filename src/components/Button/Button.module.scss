@@ -2,7 +2,8 @@
 @layer reset, base, variant, state, component;
 
 @layer reset {
-    .button {
+    .button,
+    .button-group {
         all: unset;
     }
 }
@@ -34,6 +35,18 @@
         outline-offset: 0;
         outline-width: 0;
         transition: outline $default-transition-duration $transition-timing-function-out;
+    }
+
+    .button-group {
+        --safety-margin: #{$spacing-2};
+        
+        display: inline-flex;
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: var(--justify-content);
+        flex-direction: var(--direction);
+        flex-wrap: var(--wrap);
+        width: -webkit-fill-available;
     }
 }
 
