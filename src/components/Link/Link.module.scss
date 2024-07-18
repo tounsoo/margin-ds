@@ -1,0 +1,57 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .link {
+        all: unset;
+    }
+}
+
+@layer base {
+    .link {
+        color-scheme: light dark;
+        
+        display: inline-flex;
+        box-sizing: border-box;
+        cursor: pointer;
+
+        font-family: $font-family;
+        font-size: $font-size-sm;
+        line-height: $font-size-sm--line-height;
+        margin-block: var(--safety-margin, $spacing-1);
+        margin-inline: var(--safety-margin, $spacing-1);
+        border-radius: $radius-md;
+
+        outline-style: solid;
+        outline-color: transparent;
+        outline-offset: 0;
+        outline-width: 0;
+        transition: outline $default-transition-duration $transition-timing-function-out;
+
+        color: light-dark($color-gray-950, $color-gray-50);
+    }
+}
+
+@layer variant {
+    .link.underlined {
+        text-decoration: underline;
+    }
+}
+
+// @layer state {
+//     .link:hover {
+//         background-color: light-dark($color-gray-200, $color-gray-600)
+//     }
+
+//     .link:focus-visible {
+//         outline-width: 0.125rem;
+//         outline-offset: 0.125rem;
+//         outline-color: light-dark($color-gray-950, $color-gray-50)
+//     }
+    
+//     @media (prefers-reduced-motion) {
+//         .link {
+//             transition: outline-offset 0.1ms;
+//         }
+//     }
+// }
