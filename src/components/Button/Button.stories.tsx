@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { fn } from "@storybook/test";
 import { Button } from "./Button";
+import { Group } from "../Group";
 import { Spacer } from "../Spacer";
 
 const meta = {
@@ -21,21 +21,39 @@ export const Default: Story = {
 	},
 };
 
-export const Test: Story = {
-    render: function Render() {
-        return <Button >test</Button>
-    }
-}
-
-export const Group: Story = {
+export const Fill: Story = {
 	render: function Render() {
 		return (
 			<div style={{ width: 280, border: "1px solid red" }}>
-				<Button.Group>
+                <Button fill>First</Button>
+			</div>
+		);
+	},
+};
+
+export const FillGroup: Story = {
+	render: function Render() {
+		return (
+			<div style={{ width: 280, border: "1px solid red" }}>
+				<Group fill>
+                    <Button fill>First</Button>
+                    <Button fill>Second</Button>
+                    <Button fill>Third</Button>
+                </Group>
+			</div>
+		);
+	},
+};
+
+export const Grouping: Story = {
+	render: function Render() {
+		return (
+			<div style={{ width: 280, border: "1px solid red" }}>
+				<Group fill>
                     <Button>First</Button>
                     <Button>Second</Button>
                     <Button>Third</Button>
-                </Button.Group>
+                </Group>
 			</div>
 		);
 	},
@@ -45,12 +63,12 @@ export const Spacing: Story = {
 	render: function Render() {
 		return (
 			<div style={{ width: 280, border: "1px solid red" }}>
-				<Button.Group>
+				<Group fill>
                     <Button>First</Button>
                     <Spacer />
                     <Button>Second</Button>
                     <Button>Third</Button>
-                </Button.Group>
+                </Group>
 			</div>
 		);
 	},

@@ -1,0 +1,29 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .group {
+        all: unset;
+    }
+}
+
+@layer base {
+    .group {
+        --safety-margin: #{$spacing-1};
+        box-sizing: border-box;
+        align-items: center;
+        justify-content: var(--justify-content);
+        flex-direction: var(--direction);
+        flex-wrap: var(--wrap);
+        
+        display: inline-flex;
+    }
+}
+
+@layer variant {
+    .group {
+        &.fill {
+            display: flex;
+        }
+    }
+}
