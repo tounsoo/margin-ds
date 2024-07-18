@@ -1,0 +1,56 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .input {
+        all: unset;
+    }
+}
+
+@layer base {
+    .input {
+        color-scheme: light dark;
+        
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: baseline;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        cursor: text;
+
+        font-family: $font-family;
+        font-size: $font-size-sm;
+        line-height: $font-size-sm--line-height;
+        gap: $spacing-1;
+        margin-block: var(--safety-margin, $spacing-1);
+        margin-inline: var(--safety-margin, $spacing-1);
+        padding-inline: $spacing-3;
+        border-radius: $radius-md;
+        border-style: solid;
+        border-width: 0.0625rem;
+        border-color: $color-gray-300;
+
+        height: $font-size-sm--line-height + $spacing-4;
+    
+        outline-style: solid;
+        outline-color: transparent;
+        outline-offset: 0;
+        outline-width: 0;
+        transition: outline $default-transition-duration $transition-timing-function-out;
+    }
+}
+
+@layer state {
+    .input:focus-visible {
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+        outline-color: light-dark($color-gray-950, $color-gray-50)
+    }
+
+    @media (prefers-reduced-motion) {
+        .button {
+            transition: outline-offset 0.1ms;
+        }
+    }
+}
