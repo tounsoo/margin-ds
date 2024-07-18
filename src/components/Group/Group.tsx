@@ -18,11 +18,11 @@ export const Group = (props: GroupProps) => {
         [styles.fill]: fill
     });
 	const combinedStyle = {
-		"flex-direction": direction,
-		"justify-content": justifyContent,
-		"align-items": alignItems,
-		"flex-wrap": wrap,
-        "gap": gap,
+		flexDirection: direction,
+		justifyContent: justifyContent,
+		alignItems: alignItems,
+		flexWrap: wrap,
+        gap,
 		...style,
 	};
 

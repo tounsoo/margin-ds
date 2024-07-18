@@ -62,6 +62,9 @@
         flex-shrink: 1;
         width: -webkit-fill-available;
     }
+    .button.no-label {
+        padding-inline: $spacing-1_5;
+    }
 }
 
 @layer state {

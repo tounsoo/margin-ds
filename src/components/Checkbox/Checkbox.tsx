@@ -1,9 +1,10 @@
 import { type ChangeEvent, type ComponentPropsWithoutRef, useEffect, useState } from "react";
 import styles from "./Checkbox.module.scss";
 import cx from "classnames";
+import type { Except, RequireAtLeastOne } from "type-fest";
 
-export type CheckboxProps = ComponentPropsWithoutRef<'input'>;
-
+type RequiredProps = 'id' | 'aria-label' | 'aria-labelledby';
+export type CheckboxProps = Except<ComponentPropsWithoutRef<'input'>, RequiredProps> & RequireAtLeastOne<ComponentPropsWithoutRef<'input'>, RequiredProps>;
 export const Checkbox = (props: CheckboxProps) => {
     const { className, defaultChecked, checked, onChange, ...rest } = props;
     const [ checkState, setCheckState ] = useState(checked ?? defaultChecked);

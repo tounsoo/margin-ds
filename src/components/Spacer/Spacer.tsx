@@ -10,8 +10,8 @@ export type SpacerProps = ComponentPropsWithoutRef<'div'> & {
 export const Spacer = (props: SpacerProps) => {
     const { className, minWidth, minHeight, style, ...rest} = props;
     const combinedStyle = {
-		"--min-width": minWidth,
-		"--min-height": minHeight,
+		minWidth,
+		minHeight,
 		...style,
 	};
 	return (

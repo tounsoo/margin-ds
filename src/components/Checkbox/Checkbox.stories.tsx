@@ -1,5 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
+import { Label } from "../Label";
+import { Group } from "../Group";
 
 const meta = {
 	title: "Example/Checkbox",
@@ -15,12 +17,27 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
-        defaultChecked: false
+        defaultChecked: false,
+        "aria-label": 'test1'
 	},
 };
 
 export const Controlled: Story = {
 	args: {
-        checked: false
+        checked: false,
+        "aria-label": 'test2'
 	},
 };
+
+export const Example = {
+    render: function Render() {
+        return (
+            <Group alignItems="start">
+                <Checkbox id="test3" />
+                <Label htmlFor="test3">
+                    Hello World
+                </Label>
+            </Group>
+        )
+    }
+}

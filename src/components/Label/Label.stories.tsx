@@ -20,10 +20,10 @@ export const WithCheckbox: Story = {
 	render: function Render() {
         return (
             <Group alignItems="start">
-            <Checkbox id="test" />
-            <Label htmlFor="test">
-                Hello World
-            </Label>
+                <Checkbox id="test" />
+                <Label htmlFor="test">
+                    Hello World
+                </Label>
             </Group>
         )
     }
@@ -33,10 +33,10 @@ export const WithInput: Story = {
 	render: function Render() {
         return (
             <Group direction="column" alignItems="start">
-            <Label htmlFor="test">
-                Hello World
-            </Label>
-            <Input id="test" />
+                <Label htmlFor="test">
+                    Hello World
+                </Label>
+                <Input id="test" />
             </Group>
         )
     }
