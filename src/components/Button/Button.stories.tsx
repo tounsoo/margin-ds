@@ -22,16 +22,10 @@ export const Default: Story = {
 };
 
 export const WithIcon: Story = {
-	render: function Render() {
-		return (
-			<div style={{ width: 280, border: "1px solid red" }}>
-                <Button>
-                    {/* biome-ignore lint/a11y/noSvgWithoutTitle: <explanation> */}
-                    <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
-                </Button>
-			</div>
-		);
-	},
+    args: {
+        // biome-ignore lint/a11y/noSvgWithoutTitle: <explanation>
+        children: <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="#5f6368"><path d="M382-240 154-468l57-57 171 171 367-367 57 57-424 424Z"/></svg>
+    }
 };
 
 export const Fill: Story = {
@@ -46,20 +40,6 @@ export const Fill: Story = {
 	},
 };
 
-export const FillGroup: Story = {
-	render: function Render() {
-		return (
-			<div style={{ width: 280, border: "1px solid red" }}>
-				<Group fill>
-                    <Button fill>First</Button>
-                    <Button fill>Second</Button>
-                    <Button fill>Third</Button>
-                </Group>
-			</div>
-		);
-	},
-};
-
 export const Grouping: Story = {
 	render: function Render() {
 		return (
@@ -68,6 +48,20 @@ export const Grouping: Story = {
                     <Button>First</Button>
                     <Button>Second</Button>
                     <Button>Third</Button>
+                </Group>
+			</div>
+		);
+	},
+};
+
+export const FillInGroup: Story = {
+	render: function Render() {
+		return (
+			<div style={{ width: 280, border: "1px solid red" }}>
+				<Group fill>
+                    <Button fill>First</Button>
+                    <Button fill>Second</Button>
+                    <Button fill>Third</Button>
                 </Group>
 			</div>
 		);
