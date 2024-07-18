@@ -1,0 +1,27 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .label {
+        all: unset;
+    }
+}
+
+@layer base {
+    .label {
+        color-scheme: light dark;
+        
+        display: inline-flex;
+        align-items: baseline;
+        box-sizing: border-box;
+        cursor: default;
+        
+        margin-block: var(--safety-margin, $spacing-1);
+        margin-inline: var(--safety-margin, $spacing-1);
+        font-family: $font-family;
+        font-size: $font-size-sm;
+        line-height: $font-size-xs--line-height;
+        
+        color: light-dark($color-gray-950, $color-gray-50);
+    }
+}

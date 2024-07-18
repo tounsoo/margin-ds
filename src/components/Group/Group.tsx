@@ -6,19 +6,23 @@ export type GroupProps = ComponentPropsWithoutRef<'div'> & {
 	direction?: CSSProperties["flexDirection"];
 	wrap?: CSSProperties["flexWrap"];
 	justifyContent?: CSSProperties["justifyContent"];
+	alignItems?: CSSProperties["alignItems"];
+	gap?: CSSProperties["gap"];
     fill?: boolean;
 };
 
 
 export const Group = (props: GroupProps) => {
-	const { fill, direction, wrap, justifyContent, style, ...rest } = props;
+	const { fill, direction, wrap, justifyContent, alignItems, gap, style, ...rest } = props;
 	const classNames = cx(styles.group, {
         [styles.fill]: fill
     });
 	const combinedStyle = {
-		"--direction": direction,
-		"--justify-content": justifyContent,
-		"--wrap": wrap,
+		"flex-direction": direction,
+		"justify-content": justifyContent,
+		"align-items": alignItems,
+		"flex-wrap": wrap,
+        "gap": gap,
 		...style,
 	};
 

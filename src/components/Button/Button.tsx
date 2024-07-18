@@ -1,6 +1,7 @@
 import type { ComponentPropsWithoutRef } from "react";
 import styles from "./Button.module.scss";
 import cx from "classnames";
+import { getLabel } from "../../functions";
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 	/**
@@ -11,9 +12,17 @@ export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 };
 
 export const Button = (props: ButtonProps) => {
-	const { appearance = "default", fill, ...rest } = props;
+	const { appearance = "default", fill, children, ...rest } = props;
 	const classNames = cx(styles.button, styles[appearance], {
         [styles.fill]: fill
     });
-	return <button className={classNames} {...rest} />;
+
+    const noLabel = getLabel(children).length === 0;
+    if (noLabel && !(rest["aria-label"] || rest['aria-labelledby'])) {
+        console.error(
+            '[A11y Violation: wcag412] Button needs discernible text. Alternatively, use aria-label or aria-labelledby. More Info: https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html'
+        )
+    }
+
+	return <button className={classNames} {...rest}>{children}</button>;
 };

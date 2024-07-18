@@ -17,16 +17,16 @@
         align-items: center;
         flex-shrink: 0;
         box-sizing: border-box;
-        cursor: pointer;
+        cursor: default;
         position: relative;
 
         margin-block: var(--safety-margin, $spacing-1);
         margin-inline: var(--safety-margin, $spacing-1);
-        border-radius: $radius-md;
+        border-radius: $radius-lg/2;
         border-width: 0.0625rem;
         border-style: solid;
-        height: $font-size-sm--line-height;
-        width: $font-size-sm--line-height;
+        height: 1rem;
+        width: 1rem;
 
         appearance: none;
         outline-style: solid;

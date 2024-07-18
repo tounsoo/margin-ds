@@ -11,13 +11,8 @@
     .group {
         --safety-margin: #{$spacing-1};
         box-sizing: border-box;
-        align-items: center;
-        justify-content: var(--justify-content);
-        flex-direction: var(--direction);
-        flex-wrap: var(--wrap);
         margin-inline-start: calc(-1 * var(--safety-margin));
         margin-inline-end: calc(-1 * var(--safety-margin));
-        
         display: inline-flex;
     }
 }

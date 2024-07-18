@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Input } from "./Input";
 import { Button } from "../Button";
 import { Group } from "../Group";
-// import { Spacer } from "../Spacer";
+import { Label } from "../Label";
 
 const meta = {
 	title: "Example/Input",
@@ -23,13 +23,31 @@ export const Default: Story = {
 	},
 };
 
-export const WithButton: Story = {
+export const WithButton = {
 	render: function Render() {
 		return (
 			<Group>
                 <Input aria-label="Test Input 2" />
                 <Button>Action</Button>
 			</Group>
+		);
+	},
+};
+
+export const Accessible = {
+	render: function Render() {
+		return (
+            <Group direction="column" gap="1rem">
+                <Input aria-label="using-aria-label" defaultValue="Using aria-label"/>
+                <Group direction="column">
+                    <Label id="using-aria-labelledby">Using aria-labelledby</Label>
+                    <Input aria-labelledby="using-aria-labelledby" defaultValue="Using aria-labelledby"/>
+                </Group>
+                <Group direction="column">
+                    <Label htmlFor="using-htmlFor">Using htmlFor</Label>
+                    <Input id="using-htmlFor" />
+                </Group>
+            </Group>
 		);
 	},
 };

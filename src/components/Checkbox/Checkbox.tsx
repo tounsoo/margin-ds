@@ -16,7 +16,6 @@ export const Checkbox = (props: CheckboxProps) => {
             return; 
         }
         onChange?.(e);
-        setCheckState(e.target.checked);
     }
 
     useEffect(() => {

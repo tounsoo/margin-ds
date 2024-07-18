@@ -33,6 +33,7 @@
 		"classnames": "^2.5.1",
 		"storybook": "^8.2.4",
 		"storybook-react-rsbuild": "^0.0.7",
+		"type-fest": "^4.22.1",
 		"typescript": "^5.5.3"
 	}
 }
