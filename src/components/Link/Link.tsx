@@ -1,12 +1,13 @@
-import type { ElementType, HTMLAttributes } from "react";
+import type { ElementType, ComponentPropsWithoutRef } from "react";
 import styles from "./Link.module.scss";
 import cx from "classnames";
 
-export type LinkProps = HTMLAttributes<HTMLAnchorElement> & {
+export type LinkProps = ComponentPropsWithoutRef<'a'> & {
 	/**
 	 * @default default
 	 */
 	appearance?: "default" | "underlined";
+    // TODO: make sure below is typed correctly
     component?: ElementType;
 };
 

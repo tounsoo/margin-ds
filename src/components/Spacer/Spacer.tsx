@@ -1,8 +1,8 @@
-import type { CSSProperties, HTMLAttributes } from "react";
+import type { CSSProperties, ComponentPropsWithoutRef } from "react";
 import styles from "./Spacer.module.scss";
 import cx from "classnames";
 
-export type SpacerProps = HTMLAttributes<HTMLDivElement> & {
+export type SpacerProps = ComponentPropsWithoutRef<'div'> & {
     minWidth?: CSSProperties['minWidth'];
     minHeight?: CSSProperties['minHeight'];
 };

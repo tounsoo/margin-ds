@@ -1,8 +1,8 @@
-import type { HTMLAttributes } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import styles from "./Input.module.scss";
 import cx from "classnames";
 
-export type InputProps = HTMLAttributes<HTMLInputElement>;
+export type InputProps = ComponentPropsWithoutRef<'input'>;
 
 
 export const Input = (props: InputProps) => {

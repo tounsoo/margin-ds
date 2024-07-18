@@ -1,8 +1,8 @@
-import type { CSSProperties, HTMLAttributes } from "react";
+import type { CSSProperties, ComponentPropsWithoutRef } from "react";
 import styles from "./Group.module.scss";
 import cx from "classnames";
 
-export type GroupProps = HTMLAttributes<HTMLDivElement> & {
+export type GroupProps = ComponentPropsWithoutRef<'div'> & {
 	direction?: CSSProperties["flexDirection"];
 	wrap?: CSSProperties["flexWrap"];
 	justifyContent?: CSSProperties["justifyContent"];

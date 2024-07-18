@@ -1,8 +1,8 @@
-import type { HTMLAttributes } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import styles from "./Button.module.scss";
 import cx from "classnames";
 
-export type ButtonProps = HTMLAttributes<HTMLButtonElement> & {
+export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 	/**
 	 * @default default
 	 */

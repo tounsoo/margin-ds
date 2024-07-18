@@ -1,0 +1,72 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .checkbox {
+        all: unset;
+    }
+}
+
+@layer base {
+    .checkbox {
+        color-scheme: light dark;
+        
+        overflow: hidden;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        cursor: pointer;
+        position: relative;
+
+        margin-block: var(--safety-margin, $spacing-1);
+        margin-inline: var(--safety-margin, $spacing-1);
+        border-radius: $radius-md;
+        border-width: 0.0625rem;
+        border-style: solid;
+        height: $font-size-sm--line-height;
+        width: $font-size-sm--line-height;
+
+        appearance: none;
+        outline-style: solid;
+        outline-color: transparent;
+        outline-offset: 0;
+        outline-width: 0;
+        transition: background-color outline $default-transition-duration $transition-timing-function-out;
+        transition-behavior: allow-discrete;
+
+        color: light-dark($color-gray-950, $color-gray-50);
+        background-color: transparent;
+    }
+}
+
+@layer state {
+    .checkbox:checked {
+        background-color: light-dark($color-gray-950, $color-gray-50);
+        &::after {
+            content: '';
+            position: absolute;
+            border-color: light-dark($color-gray-50, $color-gray-950);
+            border-style: solid;
+            border-width: 0 0.15em 0.15em 0;
+            box-sizing: border-box;
+            aspect-ratio: 1 / 1.8;
+            rotate: 45deg;
+            width: 0.375em;
+            margin-block-start: -0.125rem;
+        }
+    }
+
+    .checkbox:focus-visible {
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+        outline-color: light-dark($color-gray-950, $color-gray-50)
+    }
+    
+    @media (prefers-reduced-motion) {
+        .checkbox {
+            transition: outline-offset 0.1ms;
+        }
+    }
+}
