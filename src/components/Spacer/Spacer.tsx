@@ -1,12 +1,20 @@
-import type { HTMLAttributes } from "react";
+import type { CSSProperties, HTMLAttributes } from "react";
 import styles from "./Spacer.module.scss";
 import cx from "classnames";
 
-export type SpacerProps = HTMLAttributes<HTMLDivElement>;
+export type SpacerProps = HTMLAttributes<HTMLDivElement> & {
+    minWidth?: CSSProperties['minWidth'];
+    minHeight?: CSSProperties['minHeight'];
+};
 
 export const Spacer = (props: SpacerProps) => {
-    const { className, ...rest} = props;
+    const { className, minWidth, minHeight, style, ...rest} = props;
+    const combinedStyle = {
+		"--min-width": minWidth,
+		"--min-height": minHeight,
+		...style,
+	};
 	return (
-		<div role="presentation" className={cx(styles.spacer, className)} {...rest} />
+		<div role="presentation" style={combinedStyle} className={cx(styles.spacer, className)} {...rest} />
 	);
 };
