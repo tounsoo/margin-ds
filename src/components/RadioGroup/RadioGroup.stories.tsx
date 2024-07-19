@@ -37,3 +37,27 @@ export const Default: Story = {
         )
 	},
 };
+
+export const Example = {
+	render: function Render() {
+        return (
+            <Group direction="column">
+                <Label htmlFor="radiogroup-example"><b>Radiogroup Example</b></Label>
+                <RadioGroup id="radiogroup-example">
+                    <Group>
+                        <RadioGroup.Radio id="test2-01" name="test2" value="First" />
+                        <Label htmlFor="test2-01">First</Label>
+                    </Group>
+                    <Group>
+                        <RadioGroup.Radio id="test2-02" name="test2" value="Second" />
+                        <Label htmlFor="test2-02">Second</Label>
+                    </Group>
+                    <Group>
+                        <RadioGroup.Radio id="test2-03" name="test2" value="Third" />
+                        <Label htmlFor="test2-03">Third</Label>
+                    </Group>
+                </RadioGroup>
+            </Group>
+        )
+	},
+};

@@ -17,8 +17,7 @@
 
         font-family: $font-family;
         font-size: $font-size-sm;
-        line-height: $font-size-sm--line-height;
-        margin-block: var(--safety-margin, $spacing-1);
+        line-height: inherit;
         margin-inline: var(--safety-margin, $spacing-1);
         border-radius: $radius-md;
 
@@ -40,20 +39,16 @@
     }
 }
 
-// @layer state {
-//     .link:hover {
-//         background-color: light-dark($color-gray-200, $color-gray-600)
-//     }
-
-//     .link:focus-visible {
-//         outline-width: 0.125rem;
-//         outline-offset: 0.125rem;
-//         outline-color: light-dark($color-gray-950, $color-gray-50)
-//     }
+@layer state {
+    .link:focus-visible {
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+        outline-color: light-dark($color-gray-950, $color-gray-50)
+    }
     
-//     @media (prefers-reduced-motion) {
-//         .link {
-//             transition: outline-offset 0.1ms;
-//         }
-//     }
-// }
+    @media (prefers-reduced-motion) {
+        .link {
+            transition: outline-offset 0.1ms;
+        }
+    }
+}

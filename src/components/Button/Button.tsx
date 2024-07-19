@@ -22,7 +22,9 @@ export const Button = (props: ButtonProps) => {
     
     if (hasNoLabel && !(rest["aria-label"] || rest['aria-labelledby'])) {
         console.error(
-            '[A11y Violation: wcag412] Button needs discernible text. Alternatively, use aria-label or aria-labelledby. More Info: https://www.w3.org/WAI/WCAG21/Understanding/name-role-value.html'
+            "[A11y Violation] Button needs discernible text\n", 
+            "• aria-label is missing\n",
+            "• aria-labelledby is missing\n",
         )
     }
 
