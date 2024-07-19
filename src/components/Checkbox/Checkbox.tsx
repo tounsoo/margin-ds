@@ -10,6 +10,22 @@ export const Checkbox = (props: CheckboxProps) => {
     const [ checkState, setCheckState ] = useState(checked);
     const classNames = cx(styles.checkbox, className);
 
+    useEffect(() => {
+        setCheckState(checked)
+    }, [checked])
+
+    useEffect(() => {
+        if (rest['aria-label'] || rest['aria-labelledby']) return;
+        if (!document.querySelectorAll(`[for='${rest.id}']`).length) {
+            console.error(
+                "[A11y Violation] Form element needs proper label\n", 
+                "• aria-label is missing\n",
+                "• aria-labelledby is missing\n",
+                "• use id with htmlFor\n",
+            )
+        }
+    }, [rest.id, rest['aria-label'], rest['aria-labelledby']])
+
     function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
         if (typeof checked !== 'undefined') {
             e.target.checked = checked
@@ -18,10 +34,6 @@ export const Checkbox = (props: CheckboxProps) => {
         }
         onChange?.(e);
     }
-
-    useEffect(() => {
-        setCheckState(checked)
-    }, [checked])
-
+   
 	return <input type="checkbox" className={classNames} checked={checkState} onChange={handleOnChange} {...rest} />;
 };
