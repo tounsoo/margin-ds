@@ -2,15 +2,21 @@
 @layer reset, base, variant, state, component;
 
 @layer reset {
-    .checkbox {
+    .radio-group,
+    .item {
         all: unset;
     }
 }
 
 @layer base {
-    .checkbox {
+    .radio-group {
         color-scheme: light dark;
-        
+        display: flex;
+        flex-direction: column;
+        gap: $spacing-1;
+    }
+   
+    .item {
         overflow: hidden;
         display: inline-flex;
         justify-content: center;
@@ -22,7 +28,7 @@
 
         margin-block: var(--safety-margin, $spacing-1);
         margin-inline: var(--safety-margin, $spacing-1);
-        border-radius: $radius-lg/2;
+        border-radius: 100%;
         border-width: 0.0625rem;
         border-style: solid;
         height: 1rem;
@@ -44,35 +50,28 @@
 }
 
 @layer state {
-    .checkbox:checked {
+    .item:checked {
         background-color: light-dark($color-gray-950, $color-gray-50);
         &::after {
             content: '';
             position: absolute;
-            border-color: light-dark($color-gray-50, $color-gray-950);
-            border-style: solid;
-            border-width: 0 0.15em 0.15em 0;
             box-sizing: border-box;
-            aspect-ratio: 1 / 1.8;
+            border-radius: 0.375em;
+            background-color: light-dark($color-gray-50, $color-gray-950);
             rotate: 45deg;
             width: 0.375em;
-            margin-block-start: -0.125rem;
+            height: 0.375em;
         }
     }
 
-    .checkbox:focus-visible {
+    .item:focus-visible {
         outline-width: 0.125rem;
         outline-offset: 0.125rem;
         outline-color: light-dark($color-gray-950, $color-gray-50)
     }
-
-    .checkbox:disabled,
-    .checkbox[aria-disabled="true"] {
-        opacity: .8;
-    }
     
     @media (prefers-reduced-motion) {
-        .checkbox {
+        .item {
             transition: outline-offset 0.1ms;
         }
     }

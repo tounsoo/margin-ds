@@ -37,7 +37,9 @@
         outline-color: transparent;
         outline-offset: 0;
         outline-width: 0;
-        transition: outline $default-transition-duration $transition-timing-function-out;
+        transition-property: outline;
+        transition-duration: $default-transition-duration;
+        transition-timing-function: $transition-timing-function-out;
     }
 }
 

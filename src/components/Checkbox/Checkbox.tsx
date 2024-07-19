@@ -6,8 +6,8 @@ import type { Except, RequireAtLeastOne } from "type-fest";
 type RequiredProps = 'id' | 'aria-label' | 'aria-labelledby';
 export type CheckboxProps = Except<ComponentPropsWithoutRef<'input'>, RequiredProps> & RequireAtLeastOne<ComponentPropsWithoutRef<'input'>, RequiredProps>;
 export const Checkbox = (props: CheckboxProps) => {
-    const { className, defaultChecked, checked, onChange, ...rest } = props;
-    const [ checkState, setCheckState ] = useState(checked ?? defaultChecked);
+    const { className, checked, onChange, ...rest } = props;
+    const [ checkState, setCheckState ] = useState(checked);
     const classNames = cx(styles.checkbox, className);
 
     function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
