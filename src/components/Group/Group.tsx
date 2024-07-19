@@ -13,8 +13,8 @@ export type GroupProps = ComponentPropsWithoutRef<'div'> & {
 
 
 export const Group = (props: GroupProps) => {
-	const { fill, direction, wrap, justifyContent, alignItems, gap, style, ...rest } = props;
-	const classNames = cx(styles.group, {
+	const { className, fill, direction, wrap, justifyContent, alignItems, gap, style, ...rest } = props;
+	const classNames = cx(styles.group, className, {
         [styles.fill]: fill
     });
 	const combinedStyle = {

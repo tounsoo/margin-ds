@@ -11,8 +11,6 @@
     .group {
         --safety-margin: #{$spacing-1};
         box-sizing: border-box;
-        margin-inline-start: calc(-1 * var(--safety-margin));
-        margin-inline-end: calc(-1 * var(--safety-margin));
         display: inline-flex;
     }
 }
@@ -21,6 +19,7 @@
     .group {
         &.fill {
             display: flex;
+            flex-grow: 1;
         }
     }
 }

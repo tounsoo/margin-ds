@@ -2,12 +2,13 @@ import type { ComponentPropsWithoutRef } from "react";
 import styles from "./Button.module.scss";
 import cx from "classnames";
 import { getLabel } from "../../functions";
+import { Group, type GroupProps } from "../Group";
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 	/**
 	 * @default default
 	 */
-	appearance?: "default" | "primary" | "text" | "danger";
+	appearance?: "default" | "primary" | "secondary" | "text" | "danger";
     fill?: boolean;
 };
 
@@ -30,3 +31,9 @@ export const Button = (props: ButtonProps) => {
 
 	return <button className={classNames} {...rest}>{children}</button>;
 };
+
+Button.Group = (props: GroupProps) => {
+    const { className, ...rest}= props;
+    const classNames = cx(styles['button-group']);
+    return <Group className={classNames} {...rest} />
+}

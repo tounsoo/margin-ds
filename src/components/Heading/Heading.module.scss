@@ -1,0 +1,52 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .heading {
+        all: unset;
+    }
+}
+
+@layer base {
+    .heading {
+        color-scheme: light dark;
+        
+        align-items: baseline;
+        box-sizing: border-box;
+        cursor: default;
+        
+        margin-block: var(--safety-margin, $spacing-1);
+        margin-inline: var(--safety-margin, $spacing-1);
+        font-family: $font-family;
+        font-weight: 600;
+
+        color: light-dark($color-gray-950, $color-gray-50);
+    }
+}
+
+@layer variant {
+    h1.heading {
+        font-size: $font-size-4xl;
+        line-height: $font-size-4xl--line-height;
+    }
+    h2.heading {
+        font-size: $font-size-3xl;
+        line-height: $font-size-3xl--line-height;
+    }
+    h3.heading {
+        font-size: $font-size-2xl;
+        line-height: $font-size-2xl--line-height;
+    }
+    h4.heading {
+        font-size: $font-size-xl;
+        line-height: $font-size-xl--line-height;
+    }
+    h5.heading {
+        font-size: $font-size-lg;
+        line-height: $font-size-lg--line-height;
+    }
+    h6.heading {
+        font-size: $font-size-base;
+        line-height: $font-size-base--line-height;
+    }
+}

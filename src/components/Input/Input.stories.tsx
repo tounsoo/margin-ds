@@ -40,10 +40,6 @@ export const Accessible = {
             <Group direction="column" gap="1rem">
                 <Input aria-label="using-aria-label" defaultValue="Using aria-label"/>
                 <Group direction="column">
-                    <Label id="using-aria-labelledby">Using aria-labelledby</Label>
-                    <Input aria-labelledby="using-aria-labelledby" defaultValue="Using aria-labelledby"/>
-                </Group>
-                <Group direction="column">
                     <Label htmlFor="using-htmlFor">Using htmlFor</Label>
                     <Input id="using-htmlFor" />
                 </Group>

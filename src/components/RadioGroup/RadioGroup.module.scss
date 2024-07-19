@@ -15,8 +15,8 @@
         flex-direction: column;
         gap: $spacing-1;
         
-        margin-block: var(--safety-margin, $spacing-1);
-        margin-inline: var(--safety-margin, $spacing-1);
+        // margin-block: var(--safety-margin, $spacing-1);
+        // margin-inline: var(--safety-margin, $spacing-1);
     }
    
     .item {
