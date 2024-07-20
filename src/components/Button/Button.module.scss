@@ -23,12 +23,12 @@
         font-size: $font-size-sm;
         line-height: $font-size-sm--line-height;
         gap: $spacing-1;
-        margin-block: var(--safety-margin, $spacing-1);
-        margin-inline: var(--safety-margin, $spacing-1);
+        margin-block: $spacing-1;
         padding-inline: $spacing-3;
         border-radius: $radius-md;
 
         height: $font-size-sm--line-height + $spacing-4;
+        min-width: $font-size-sm--line-height + $spacing-4;
     
         outline-style: solid;
         outline-color: transparent;
@@ -40,12 +40,21 @@
     }
 
     .button-group {
-        margin-inline-start: calc(-1 * var(--safety-margin));
-        margin-inline-end: calc(-1 * var(--safety-margin));
+        gap: $spacing-2;
     }
 }
 
 @layer variant {
+    .button.small {
+        height: $font-size-sm--line-height + $spacing-2;
+        min-width: $font-size-sm--line-height + $spacing-2;
+        margin-block: $spacing-2;
+
+        &.square {
+            margin-inline: $spacing-2;
+        }
+    }
+
     .button.default {
         background-color: light-dark($color-gray-100, $color-gray-700);
         color: light-dark($color-gray-950, $color-gray-50);
@@ -61,7 +70,7 @@
         border-width: 0.0625rem;
         color: light-dark($color-gray-950, $color-gray-50);
     }
-    .button.text {
+    .button.ghost {
         background-color: transparent;
         color: light-dark($color-gray-950, $color-gray-50);
     }
@@ -76,8 +85,10 @@
         flex-shrink: 1;
         width: -webkit-fill-available;
     }
-    .button.no-label {
-        padding-inline: $spacing-1_5;
+    .button.square {
+        aspect-ratio: 1;
+        padding: 0;
+        margin-inline: $spacing-1;
     }
 }
 
@@ -91,7 +102,7 @@
     .button.secondary:hover {
         background-color: light-dark($color-gray-200, $color-gray-800)
     }
-    .button.text:hover {
+    .button.ghost:hover {
         background-color: light-dark($color-gray-200, $color-gray-800)
     }
     .button.danger:hover {

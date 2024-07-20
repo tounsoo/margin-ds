@@ -5,9 +5,10 @@ import cx from "classnames";
 export type CardProps = ComponentPropsWithoutRef<'div'>;
 
 export const Card = (props: CardProps) => {
-	const classNames = cx(styles.card);
+    const { className, ...rest } = props;
+	const classNames = cx(styles.card, className);
 	
-	return <div className={classNames} {...props} />;
+	return <div className={classNames} {...rest} />
 };
 
 

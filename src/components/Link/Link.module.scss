@@ -18,7 +18,7 @@
         font-family: $font-family;
         font-size: $font-size-sm;
         line-height: inherit;
-        margin-inline: var(--safety-margin, $spacing-1);
+        margin-inline: $spacing-1;
         border-radius: $radius-md;
 
         outline-style: solid;

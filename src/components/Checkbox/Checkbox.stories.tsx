@@ -32,7 +32,7 @@ export const Controlled: Story = {
 export const Example = {
     render: function Render() {
         return (
-            <Group alignItems="start">
+            <Group alignItems="start" gap=".25rem">
                 <Checkbox id="test3" />
                 <Label htmlFor="test3">
                     Hello World

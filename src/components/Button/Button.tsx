@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef } from "react";
+import { useEffect, useRef, type ComponentPropsWithoutRef } from "react";
 import styles from "./Button.module.scss";
 import cx from "classnames";
 import { getLabel } from "../../functions";
@@ -8,18 +8,24 @@ export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 	/**
 	 * @default default
 	 */
-	appearance?: "default" | "primary" | "secondary" | "text" | "danger";
+	appearance?: "default" | "primary" | "secondary" | "ghost" | "danger";
+    /**
+     * @default medium
+     */
+    size?: "small" | "medium";
     fill?: boolean;
+    square?: boolean;
 };
 
 export const Button = (props: ButtonProps) => {
-	const { appearance = "default", fill, children, ...rest } = props;
+	const { appearance = "default", size, square, fill, children, ...rest } = props;
+    const buttonRef = useRef<HTMLButtonElement>(null);
     const hasNoLabel = getLabel(children).length === 0;
 	const classNames = cx(styles.button, styles[appearance], {
         [styles.fill]: fill,
-        [styles['no-label']]: hasNoLabel
+        [styles.small]: size === 'small',
+        [styles.square]: square
     });
-
     
     if (hasNoLabel && !(rest["aria-label"] || rest['aria-labelledby'])) {
         console.error(
@@ -29,7 +35,7 @@ export const Button = (props: ButtonProps) => {
         )
     }
 
-	return <button className={classNames} {...rest}>{children}</button>;
+	return <button ref={buttonRef} className={classNames} {...rest}>{children}</button>;
 };
 
 Button.Group = (props: GroupProps) => {

@@ -26,7 +26,7 @@ export const Default: Story = {
 export const WithButton = {
 	render: function Render() {
 		return (
-			<Group>
+			<Group gap=".5rem">
                 <Input aria-label="Test Input 2" />
                 <Button>Action</Button>
 			</Group>

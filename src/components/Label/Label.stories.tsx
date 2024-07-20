@@ -19,7 +19,7 @@ type Story = StoryObj<typeof meta>;
 export const WithCheckbox: Story = {
 	render: function Render() {
         return (
-            <Group alignItems="start">
+            <Group alignItems="start" gap=".5rem">
                 <Checkbox id="test" />
                 <Label htmlFor="test">
                     Hello World

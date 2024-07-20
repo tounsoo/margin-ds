@@ -20,9 +20,9 @@
         cursor: default;
         position: relative;
 
-        margin-block: var(--safety-margin, $spacing-1);
-        margin-inline: var(--safety-margin, $spacing-1);
-        border-radius: $radius-lg/2;
+        margin-block: $spacing-1;
+        margin-inline: $spacing-1;
+        border-radius: calc($radius-lg/2);
         border-width: 0.0625rem;
         border-style: solid;
         height: 1rem;

@@ -15,8 +15,7 @@
         box-sizing: border-box;
         cursor: default;
         
-        margin-block: var(--safety-margin, $spacing-1);
-        margin-inline: var(--safety-margin, $spacing-1);
+        margin-block: $spacing-1;
         font-family: $font-family;
         font-weight: 600;
 

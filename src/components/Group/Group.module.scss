@@ -9,7 +9,6 @@
 
 @layer base {
     .group {
-        --safety-margin: #{$spacing-1};
         box-sizing: border-box;
         display: inline-flex;
     }

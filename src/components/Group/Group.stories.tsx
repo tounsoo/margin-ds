@@ -18,7 +18,7 @@ export const Default: Story = {
 	render: function Render() {
 		return (
 			<div style={{ width: 280, border: "1px solid red" }}>
-				<Group style={{ background: "#00cc0048"}}>
+				<Group style={{ background: "#00cc0048"}} gap=".5rem">
                     <Button fill>First</Button>
                     <Button fill>Second</Button>
                     <Button fill>Third</Button>
@@ -32,7 +32,7 @@ export const Fill: Story = {
 	render: function Render() {
 		return (
 			<div style={{ width: 280, border: "1px solid red" }}>
-				<Group fill style={{ background: "#00cc0048"}}>
+				<Group fill style={{ background: "#00cc0048"}} gap=".5rem">
                     <Button fill>First</Button>
                     <Button fill>Second</Button>
                     <Button fill>Third</Button>

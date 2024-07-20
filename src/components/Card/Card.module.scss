@@ -11,8 +11,6 @@
 @layer base {
     .card {
         color-scheme: light dark;
-
-        --safety-margin: #{$spacing-1};
         box-sizing: border-box;
         display: flex;
         flex-direction: column;
@@ -21,9 +19,8 @@
         font-size: $font-size-sm;
         line-height: $font-size-sm--line-height;
 
-        margin-inline-start: calc(-2 * var(--safety-margin));
-        margin-inline-end: calc(-2 * var(--safety-margin));
-        padding: calc(var(--safety-margin) * 4);
+        padding-block: $spacing-3;
+        padding-inline: $spacing-4;
         border-radius: $radius-xl;
         border-color: light-dark($color-gray-300, $color-gray-500);
         border-style: solid;
@@ -32,9 +29,9 @@
     }
 
     .section {
-        --safety-margin: #{$spacing-1};
         box-sizing: border-box;
         display: flex;
+        margin-left: 12px;
     }
 }
 
