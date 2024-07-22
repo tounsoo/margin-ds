@@ -8,6 +8,9 @@ export default defineConfig({
 	source: {
 		alias: {
 			"@tokens": "./src/tokens",
+			"@hooks": "./src/hooks",
+			"@providers": "./src/provders",
+			"@functions": "./src/functions",
 		},
 	},
 });

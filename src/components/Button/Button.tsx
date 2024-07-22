@@ -1,6 +1,9 @@
-import { useEffect, useRef, type ComponentPropsWithoutRef } from "react";
+import { useRef, type ComponentPropsWithoutRef } from "react";
 import styles from "./Button.module.scss";
 import cx from "classnames";
+import { useA11y } from "../../providers";
+import type { a11yProps } from "../../types";
+import { useAccessibleTarget } from "../../hooks";
 import { getLabel } from "../../functions";
 import { Group, type GroupProps } from "../Group";
 
@@ -14,19 +17,23 @@ export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
      */
     size?: "small" | "medium";
     fill?: boolean;
-    square?: boolean;
+
+    a11y?: a11yProps;
 };
 
 export const Button = (props: ButtonProps) => {
-	const { appearance = "default", size, square, fill, children, ...rest } = props;
+	const { appearance = "default", size, fill, children, style, a11y, ...rest } = props;
     const buttonRef = useRef<HTMLButtonElement>(null);
-    const hasNoLabel = getLabel(children).length === 0;
+    
 	const classNames = cx(styles.button, styles[appearance], {
         [styles.fill]: fill,
         [styles.small]: size === 'small',
-        [styles.square]: square
     });
-    
+
+    const { level } = useA11y();
+    const safetyMargin = useAccessibleTarget({element: buttonRef, level: a11y?.level ?? level, veto: a11y?.veto});
+
+    const hasNoLabel = getLabel(children).length === 0;
     if (hasNoLabel && !(rest["aria-label"] || rest['aria-labelledby'])) {
         console.error(
             "[A11y Violation] Button needs discernible text\n", 
@@ -35,7 +42,21 @@ export const Button = (props: ButtonProps) => {
         )
     }
 
-	return <button ref={buttonRef} className={classNames} {...rest}>{children}</button>;
+    const combinedStyle = {
+        ...safetyMargin,
+        ...style
+    }
+
+	return (
+        <button 
+            ref={buttonRef} 
+            className={classNames} 
+            style={combinedStyle}
+            {...rest}
+        >
+            {children}
+        </button>
+    );
 };
 
 Button.Group = (props: GroupProps) => {
