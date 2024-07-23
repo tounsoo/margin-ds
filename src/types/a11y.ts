@@ -9,7 +9,7 @@ type VetoOption = {
 
 export type a11yProps = {
 	level?: "AA" | "AAA";
-	veto?:
+	clear?:
 		| SetRequired<
 				SetFieldType<VetoOption, "inlineStart", true>,
 				"inlineStart"

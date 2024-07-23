@@ -21,7 +21,7 @@ export const Level: Story = {
 	},
     render: function Render(args) {
         const buttonRef = useRef<HTMLButtonElement>(null);
-        const safetyMargin = useAccessibleTarget({element: buttonRef, level: args.level, veto: args.veto});
+        const safetyMargin = useAccessibleTarget({element: buttonRef, level: args.level, clear: args.clear});
         const combinedStyle = {
             height: args.height,
             ...safetyMargin

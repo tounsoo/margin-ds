@@ -1,7 +1,10 @@
-import  { useEffect, useState, type ChangeEvent, type ComponentPropsWithoutRef } from "react";
+import  { useEffect, useRef, useState, type ChangeEvent, type ComponentPropsWithoutRef } from "react";
 import styles from "./RadioGroup.module.scss";
 import cx from "classnames";
 import type { Except, RequireAtLeastOne, SetRequired } from "type-fest";
+import { useAccessibleTarget } from "../../hooks";
+import { useA11y } from "../../providers";
+import type { a11yProps } from "../../types";
 
 type RequiredProps = 'id' | 'aria-label' | 'aria-labelledby';
 export type RadioGroupProps = Except<ComponentPropsWithoutRef<'div'>, RequiredProps> & RequireAtLeastOne<ComponentPropsWithoutRef<'input'>, RequiredProps> & {
@@ -26,11 +29,17 @@ export const RadioGroup = (props: RadioGroupProps) => {
 	return <div role="radiogroup" className={classNames} {...rest} />;
 };
 
-export type RadioGroupItemProps = SetRequired<ComponentPropsWithoutRef<'input'>, 'name'>;
+export type RadioGroupItemProps = SetRequired<ComponentPropsWithoutRef<'input'>, 'name'> & {
+    a11y?: a11yProps;
+};
 RadioGroup.Radio = (props: RadioGroupItemProps) => {
-    const { className, checked, onChange, ...rest } = props;
+    const { className, checked, onChange, style, a11y, ...rest } = props;
     const [ checkState, setCheckState ] = useState(checked);
     const classNames = cx(styles.item, className);
+    const radioRef = useRef<HTMLInputElement>(null);
+
+    const { level } = useA11y();
+    const safetyMargin = useAccessibleTarget({element: radioRef, level: a11y?.level ?? level, clear: a11y?.clear});
 
     useEffect(() => {
         if (rest['aria-label'] || rest['aria-labelledby']) return;
@@ -57,5 +66,10 @@ RadioGroup.Radio = (props: RadioGroupItemProps) => {
         setCheckState(checked)
     }, [checked])
 
-	return <input type="radio" checked={checkState} className={classNames} onChange={handleOnChange} {...rest} />;
+    const combinedStyle = {
+        ...safetyMargin,
+        ...style
+    }
+
+	return <input type="radio" ref={radioRef} style={combinedStyle} checked={checkState} className={classNames} onChange={handleOnChange} {...rest} />;
 };

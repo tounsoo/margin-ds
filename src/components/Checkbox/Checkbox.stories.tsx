@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
 import { Label } from "../Label";
-import { Group } from "../Group";
+import { Flex } from "../Flex";
 
 const meta = {
 	title: "Example/Checkbox",
@@ -32,12 +32,12 @@ export const Controlled: Story = {
 export const Example = {
     render: function Render() {
         return (
-            <Group alignItems="start" gap=".25rem">
+            <Flex gap=".25rem">
                 <Checkbox id="test3" />
                 <Label htmlFor="test3">
                     Hello World
                 </Label>
-            </Group>
+            </Flex>
         )
     }
 }

@@ -5,13 +5,13 @@ export type useAccessibleTargetProps = {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	element: RefObject<any>;
 	level?: a11yProps["level"];
-	veto?: a11yProps["veto"];
+	clear?: a11yProps["clear"];
 };
 
 export const useAccessibleTarget = ({
 	element,
 	level = "AA",
-	veto,
+	clear,
 }: useAccessibleTargetProps) => {
 	const [safetyMarginInline, setSafetyMarginInline] = useState<
 		number | undefined
@@ -40,20 +40,21 @@ export const useAccessibleTarget = ({
 	}, [element.current, level]);
 
 	return {
-		marginBlockStart: veto?.blockStart
-			? undefined
-			: safetyMarginBlock && safetyMarginBlock / (veto?.blockEnd ? 1 : 2),
-		marginBlockEnd: veto?.blockEnd
+		marginBlockStart: clear?.blockStart
 			? undefined
 			: safetyMarginBlock &&
-				safetyMarginBlock / (veto?.blockStart ? 1 : 2),
-		marginInlineStart: veto?.inlineStart
+				safetyMarginBlock / (clear?.blockEnd ? 1 : 2),
+		marginBlockEnd: clear?.blockEnd
+			? undefined
+			: safetyMarginBlock &&
+				safetyMarginBlock / (clear?.blockStart ? 1 : 2),
+		marginInlineStart: clear?.inlineStart
 			? undefined
 			: safetyMarginInline &&
-				safetyMarginInline / (veto?.inlineEnd ? 1 : 2),
-		marginInlineEnd: veto?.inlineEnd
+				safetyMarginInline / (clear?.inlineEnd ? 1 : 2),
+		marginInlineEnd: clear?.inlineEnd
 			? undefined
 			: safetyMarginInline &&
-				safetyMarginInline / (veto?.inlineStart ? 1 : 2),
+				safetyMarginInline / (clear?.inlineStart ? 1 : 2),
 	};
 };

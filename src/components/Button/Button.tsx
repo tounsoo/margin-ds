@@ -5,7 +5,7 @@ import { useA11y } from "../../providers";
 import type { a11yProps } from "../../types";
 import { useAccessibleTarget } from "../../hooks";
 import { getLabel } from "../../functions";
-import { Group, type GroupProps } from "../Group";
+import { Flex, type FlexProps } from "../Flex";
 
 export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 	/**
@@ -31,7 +31,7 @@ export const Button = (props: ButtonProps) => {
     });
 
     const { level } = useA11y();
-    const safetyMargin = useAccessibleTarget({element: buttonRef, level: a11y?.level ?? level, veto: a11y?.veto});
+    const safetyMargin = useAccessibleTarget({element: buttonRef, level: a11y?.level ?? level, clear: a11y?.clear});
 
     const hasNoLabel = getLabel(children).length === 0;
     if (hasNoLabel && !(rest["aria-label"] || rest['aria-labelledby'])) {
@@ -59,8 +59,8 @@ export const Button = (props: ButtonProps) => {
     );
 };
 
-Button.Group = (props: GroupProps) => {
+Button.Group = (props: FlexProps) => {
     const { className, ...rest}= props;
     const classNames = cx(styles['button-group']);
-    return <Group className={classNames} {...rest} />
+    return <Flex className={classNames} {...rest} />
 }

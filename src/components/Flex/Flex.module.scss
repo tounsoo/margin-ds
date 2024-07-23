@@ -2,20 +2,20 @@
 @layer reset, base, variant, state, component;
 
 @layer reset {
-    .group {
+    .flex {
         all: unset;
     }
 }
 
 @layer base {
-    .group {
+    .flex {
         box-sizing: border-box;
         display: inline-flex;
     }
 }
 
 @layer variant {
-    .group {
+    .flex {
         &.fill {
             display: flex;
             flex-grow: 1;

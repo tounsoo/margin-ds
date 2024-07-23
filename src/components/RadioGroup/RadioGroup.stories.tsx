@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { RadioGroup } from "./RadioGroup";
 import { Label } from "../Label";
-import { Group } from "../Group";
+import { Flex } from "../Flex";
 
 const meta = {
 	title: "Example/RadioGroup",
@@ -20,18 +20,18 @@ export const Default: Story = {
         "aria-label": "test1",
         children: (
             <>
-                <Group>
+                <Flex gap=".25rem">
                     <RadioGroup.Radio id="test1-01" name="test1" value="First" />
                     <Label htmlFor="test1-01">First</Label>
-                </Group>
-                <Group>
+                </Flex>
+                <Flex gap=".25rem">
                     <RadioGroup.Radio id="test1-02" name="test1" value="Second" />
                     <Label htmlFor="test1-02">Second</Label>
-                </Group>
-                <Group>
+                </Flex>
+                <Flex gap=".25rem">
                     <RadioGroup.Radio id="test1-03" name="test1" value="Third" />
                     <Label htmlFor="test1-03">Third</Label>
-                </Group>
+                </Flex>
                 
             </>
         )
@@ -41,23 +41,23 @@ export const Default: Story = {
 export const Example = {
 	render: function Render() {
         return (
-            <Group direction="column">
+            <Flex direction="column">
                 <Label htmlFor="radiogroup-example"><b>Radiogroup Example</b></Label>
                 <RadioGroup id="radiogroup-example">
-                    <Group>
+                    <Flex gap=".25rem">
                         <RadioGroup.Radio id="test2-01" name="test2" value="First" />
                         <Label htmlFor="test2-01">First</Label>
-                    </Group>
-                    <Group>
+                    </Flex>
+                    <Flex gap=".25rem">
                         <RadioGroup.Radio id="test2-02" name="test2" value="Second" />
                         <Label htmlFor="test2-02">Second</Label>
-                    </Group>
-                    <Group>
+                    </Flex>
+                    <Flex gap=".25rem">
                         <RadioGroup.Radio id="test2-03" name="test2" value="Third" />
                         <Label htmlFor="test2-03">Third</Label>
-                    </Group>
+                    </Flex>
                 </RadioGroup>
-            </Group>
+            </Flex>
         )
 	},
 };

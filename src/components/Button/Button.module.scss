@@ -23,7 +23,6 @@
         font-size: $font-size-sm;
         line-height: $font-size-sm--line-height;
         gap: $spacing-1;
-        // margin-block: $spacing-1;
         padding-inline: $spacing-3;
         border-radius: $radius-md;
 
@@ -48,31 +47,30 @@
     .button.small {
         height: $font-size-sm--line-height + $spacing-2;
         min-width: $font-size-sm--line-height + $spacing-2;
-        // margin-block: $spacing-2;
     }
 
     .button.default {
         background-color: light-dark($color-gray-100, $color-gray-700);
-        color: light-dark($color-gray-950, $color-gray-50);
+        color: light-dark($color-black, $color-white);
     }
     .button.primary {
         background-color: light-dark($color-gray-900, $color-gray-200);
-        color: light-dark($color-gray-50, $color-gray-900);
+        color: light-dark($color-white, $color-black);
     }
     .button.secondary {
         background-color: transparent;
         border-color: light-dark($color-gray-200, $color-gray-600);
         border-style: solid;
         border-width: 0.0625rem;
-        color: light-dark($color-gray-950, $color-gray-50);
+        color: light-dark($color-black, $color-white);
     }
     .button.ghost {
         background-color: transparent;
-        color: light-dark($color-gray-950, $color-gray-50);
+        color: light-dark($color-black, $color-white);
     }
     .button.danger {
         background-color: light-dark($color-red-600, $color-red-400);
-        color: light-dark($color-gray-50, $color-gray-950);
+        color: light-dark($color-white, $color-black);
     }
 
     .button.fill {

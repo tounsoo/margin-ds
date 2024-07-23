@@ -19,8 +19,7 @@
         font-size: $font-size-sm;
         line-height: $font-size-sm--line-height;
 
-        padding-block: $spacing-3;
-        padding-inline: $spacing-4;
+        padding: $spacing-4;
         border-radius: $radius-xl;
         border-color: light-dark($color-gray-300, $color-gray-500);
         border-style: solid;

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Input } from "./Input";
 import { Button } from "../Button";
-import { Group } from "../Group";
+import { Flex } from "../Flex";
 import { Label } from "../Label";
 
 const meta = {
@@ -26,10 +26,10 @@ export const Default: Story = {
 export const WithButton = {
 	render: function Render() {
 		return (
-			<Group gap=".5rem">
+			<Flex gap=".5rem">
                 <Input aria-label="Test Input 2" />
                 <Button>Action</Button>
-			</Group>
+			</Flex>
 		);
 	},
 };
@@ -37,13 +37,13 @@ export const WithButton = {
 export const Accessible = {
 	render: function Render() {
 		return (
-            <Group direction="column" gap="1rem">
+            <Flex direction="column" gap="1rem">
                 <Input aria-label="using-aria-label" defaultValue="Using aria-label"/>
-                <Group direction="column">
+                <Flex direction="column">
                     <Label htmlFor="using-htmlFor">Using htmlFor</Label>
                     <Input id="using-htmlFor" />
-                </Group>
-            </Group>
+                </Flex>
+            </Flex>
 		);
 	},
 };

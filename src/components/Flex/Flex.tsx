@@ -1,8 +1,8 @@
 import type { CSSProperties, ComponentPropsWithoutRef } from "react";
-import styles from "./Group.module.scss";
+import styles from "./Flex.module.scss";
 import cx from "classnames";
 
-export type GroupProps = ComponentPropsWithoutRef<'div'> & {
+export type FlexProps = ComponentPropsWithoutRef<'div'> & {
 	direction?: CSSProperties["flexDirection"];
 	wrap?: CSSProperties["flexWrap"];
 	justifyContent?: CSSProperties["justifyContent"];
@@ -12,9 +12,9 @@ export type GroupProps = ComponentPropsWithoutRef<'div'> & {
 };
 
 
-export const Group = (props: GroupProps) => {
+export const Flex = (props: FlexProps) => {
 	const { className, fill, direction, wrap, justifyContent, alignItems, gap, style, ...rest } = props;
-	const classNames = cx(styles.group, className, {
+	const classNames = cx(styles.flex, className, {
         [styles.fill]: fill
     });
 	const combinedStyle = {

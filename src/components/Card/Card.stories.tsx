@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Card } from "./Card";
 import { Button } from "../Button";
-import { Group } from "../Group";
+import { Flex } from "../Flex";
 import { RadioGroup } from "../RadioGroup";
 import { Label } from "../Label";
 import { Heading } from "../Heading";
@@ -23,30 +23,26 @@ export const Default: Story = {
 		return (
 			<div style={{ width: 280 }}>
 				<Card>
-                    <Card.Section>
-                        <Heading as="h3">Card Title</Heading>
-                    </Card.Section>
-                    <Card.Section direction="column">
-                        <Label htmlFor="radiogroup-example">Radiogroup Example</Label>
-                        <RadioGroup id="radiogroup-example">
-                            <Group>
-                                <RadioGroup.Radio id="test2-01" name="test2" value="First" />
-                                <Label htmlFor="test2-01">First</Label>
-                            </Group>
-                            <Group>
-                                <RadioGroup.Radio id="test2-02" name="test2" value="Second" />
-                                <Label htmlFor="test2-02">Second</Label>
-                            </Group>
-                            <Group>
-                                <RadioGroup.Radio id="test2-03" name="test2" value="Third" />
-                                <Label htmlFor="test2-03">Third</Label>
-                            </Group>
-                        </RadioGroup>
-                    </Card.Section>
-                    <Card.Section justifyContent="end">
+                    <Heading as="h3">Card Title</Heading>
+                    <Label htmlFor="radiogroup-example">Radiogroup Example</Label>
+                    <RadioGroup id="radiogroup-example">
+                        <Flex>
+                            <RadioGroup.Radio id="test2-01" name="test2" value="First" />
+                            <Label htmlFor="test2-01">First</Label>
+                        </Flex>
+                        <Flex>
+                            <RadioGroup.Radio id="test2-02" name="test2" value="Second" />
+                            <Label htmlFor="test2-02">Second</Label>
+                        </Flex>
+                        <Flex>
+                            <RadioGroup.Radio id="test2-03" name="test2" value="Third" />
+                            <Label htmlFor="test2-03">Third</Label>
+                        </Flex>
+                    </RadioGroup>
+                    <Button.Group justifyContent="end">
                         <Button>First</Button>
                         <Button>First</Button>
-                    </Card.Section>
+                    </Button.Group>
                 </Card>
 			</div>
 		);
@@ -61,18 +57,18 @@ export const Tester: Story = {
                     <Heading as="h3">Card Title</Heading>
                     <Label htmlFor="radiogroup-example">Radiogroup Example</Label>
                     <RadioGroup id="radiogroup-example">
-                        <Group>
+                        <Flex>
                             <RadioGroup.Radio id="test2-01" name="test2" value="First" />
                             <Label htmlFor="test2-01">First</Label>
-                        </Group>
-                        <Group>
+                        </Flex>
+                        <Flex>
                             <RadioGroup.Radio id="test2-02" name="test2" value="Second" />
                             <Label htmlFor="test2-02">Second</Label>
-                        </Group>
-                        <Group>
+                        </Flex>
+                        <Flex>
                             <RadioGroup.Radio id="test2-03" name="test2" value="Third" />
                             <Label htmlFor="test2-03">Third</Label>
-                        </Group>
+                        </Flex>
                     </RadioGroup>
                     <Button.Group justifyContent="end">
                         <Button>First</Button>
