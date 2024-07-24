@@ -32,6 +32,7 @@ export const RadioGroup = (props: RadioGroupProps) => {
 export type RadioGroupItemProps = SetRequired<ComponentPropsWithoutRef<'input'>, 'name'> & {
     a11y?: a11yProps;
 };
+
 RadioGroup.Radio = (props: RadioGroupItemProps) => {
     const { className, checked, onChange, style, a11y, ...rest } = props;
     const [ checkState, setCheckState ] = useState(checked);
