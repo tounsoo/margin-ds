@@ -31,8 +31,8 @@ jobs:
     steps:
       - name: Checkout
         uses: pnpm/action-setup@v4
-        with:
-          version: 9
+          with:
+            version: 9
       - run: pnpm i
       - run: pnpm build-storybook
       - name: Setup Pages
