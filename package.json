@@ -5,6 +5,7 @@
 	"type": "module",
 	"scripts": {
 		"dev": "storybook dev -p 6006",
+		"build-storybook": "storybook build",
 		"build": "rsbuild build",
 		"preview": "rsbuild preview"
 	},
