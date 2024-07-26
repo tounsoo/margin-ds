@@ -17,8 +17,8 @@ export const Example: Story = {
 	render: function Render() {
 		return (
 			<DatePicker
-				// value={Temporal.Now.plainDate('gregory')}
-				defaultValue={Temporal.Now.plainDate("gregory")}
+				value={Temporal.Now.plainDate('gregory')}
+				// defaultValue={Temporal.Now.plainDate("gregory")}
 				disabled={{
 					dates: [
 						Temporal.Now.plainDate("gregory").subtract({ days: 2 }),

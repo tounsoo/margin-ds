@@ -108,30 +108,21 @@ export const DatePicker = (props: DatePickerProps) => {
 			calendar: calendar as string,
 		});
 
-	const onDateCellClick = (date: Temporal.PlainDate) => {
-		if (value) return;
-		setCurrentDate(date);
-		setFocusedDate(date);
-	};
-
 	const updateFocus = (date: Temporal.PlainDate) => {
+        // Safari sometimes does not apply focus ring
+        // might need to use document.queryselect().click()
+        // to force this if the issue persists
+        
 		setTimeout(() => {
 			const targetElement = gridRef.current?.querySelector(
 				`[data-value="${date.toString()}"]`,
 			) as HTMLButtonElement;
 			targetElement?.focus();
-		}, 1);
+		}, 100);
 	};
 
-	console.log(
-		getClosestDate({
-			date: Temporal.Now.plainDate("gregory").add({ days: 2 }),
-			disabled,
-		}),
-	);
-
 	const onKeyboardDown = (
-		date: Temporal.PlainDate,
+		// date: Temporal.PlainDate,
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
 		const overrides = [
@@ -148,50 +139,50 @@ export const DatePicker = (props: DatePickerProps) => {
 			e.preventDefault();
 			e.stopPropagation();
 
-			let targetDate = date;
+			let targetDate = focusedDate;
 
 			switch (e.key) {
 				case "ArrowDown":
-					targetDate = date.add({ weeks: 1 });
+					targetDate = focusedDate.add({ weeks: 1 });
 					break;
 
 				case "ArrowUp":
-					targetDate = date.subtract({ weeks: 1 });
+					targetDate = focusedDate.subtract({ weeks: 1 });
 					break;
 
 				case "ArrowRight":
-					targetDate = date.add({ days: 1 });
+					targetDate = focusedDate.add({ days: 1 });
 					break;
 
 				case "ArrowLeft":
-					targetDate = date.subtract({ days: 1 });
+					targetDate = focusedDate.subtract({ days: 1 });
 					break;
 
 				case "PageUp":
 					if (e.shiftKey) {
-						targetDate = date.subtract({ years: 1 });
+						targetDate = focusedDate.subtract({ years: 1 });
 						break;
 					}
-					targetDate = date.subtract({ months: 1 });
+					targetDate = focusedDate.subtract({ months: 1 });
 					break;
 
 				case "PageDown":
 					if (e.shiftKey) {
-						targetDate = date.add({ years: 1 });
+						targetDate = focusedDate.add({ years: 1 });
 						break;
 					}
-					targetDate = date.add({ months: 1 });
+					targetDate = focusedDate.add({ months: 1 });
 					break;
 
 				case "Home":
-					targetDate = date.subtract({
-						days: getFirstOfWeek({ date, weekStartDay }),
+					targetDate = focusedDate.subtract({
+						days: getFirstOfWeek({ date:focusedDate, weekStartDay }),
 					});
 					break;
 
 				case "End":
-					targetDate = date.add({
-						days: getLastOfWeek({ date, weekStartDay }),
+					targetDate = focusedDate.add({
+						days: getLastOfWeek({ date:focusedDate, weekStartDay }),
 					});
 					break;
 
@@ -200,7 +191,7 @@ export const DatePicker = (props: DatePickerProps) => {
 			}
 
 			if (isDisabledDate({ date: targetDate, disabled })) {
-				const diff = Temporal.PlainDate.compare(targetDate, date);
+				const diff = Temporal.PlainDate.compare(targetDate, focusedDate);
 
 				if (disabled?.after && diff === 1) {
 					const prevPossibleDate = getPrevClosestDate({
@@ -297,7 +288,13 @@ export const DatePicker = (props: DatePickerProps) => {
 						className={styles.controller}
 						aria-label={`Go to ${nextMonth.toLocaleString(locale, { month: "long", year: "numeric", calendar: calendar as string })}`}
 						appearance="ghost"
-						disabled={isDisabledDate({ date: nextMonth, disabled })}
+						disabled={
+							disabled?.after &&
+							Temporal.PlainDate.compare(
+								prevMonth.with({ day: 1 }),
+								disabled?.after,
+							) === 1
+						}
 						onClick={() => setFocusedDate(nextMonth)}
 						a11y={a11y}
 					>
@@ -403,14 +400,15 @@ export const DatePicker = (props: DatePickerProps) => {
 											.join(", "),
 										onKeyDown: (
 											e: KeyboardEvent<HTMLButtonElement>,
-										) => onKeyboardDown(date, e),
+										) => onKeyboardDown(e),
 										onClick: (
 											e: MouseEvent<HTMLElement>,
 										) => {
 											onSelect?.({ date, e });
-											if ("value" in rest) return;
+											if (props.value) return;
 											if (isDisabled) return;
-											onDateCellClick(date);
+                                            setCurrentDate(date);
+                                            setFocusedDate(date);
 										},
 									};
 
