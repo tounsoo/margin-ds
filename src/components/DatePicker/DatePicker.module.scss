@@ -1,0 +1,32 @@
+@use '@tokens/global.scss' as *;
+
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .datepicker,
+    .date-grid {
+        all: unset;
+    }
+}
+@layer base {
+    .date-grid {
+        border-spacing: $spacing-1;
+        display: table;
+    }
+    .header {
+        padding-inline-start: $spacing-3_5;
+        padding-inline-end: $spacing-1;
+    }
+    .hidden {
+        visibility: hidden;
+    }
+    .controller {
+        width: $spacing-11;
+    }
+}
+
+@layer component { 
+    .button {
+        min-width: $spacing-11;
+    }
+}

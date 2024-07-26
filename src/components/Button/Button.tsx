@@ -22,10 +22,10 @@ export type ButtonProps = ComponentPropsWithoutRef<'button'> & {
 };
 
 export const Button = (props: ButtonProps) => {
-	const { appearance = "default", size, fill, children, style, a11y, ...rest } = props;
+	const { appearance = "default", size, fill, children, className, style, a11y, ...rest } = props;
     const buttonRef = useRef<HTMLButtonElement>(null);
     
-	const classNames = cx(styles.button, styles[appearance], {
+	const classNames = cx(styles.button, styles[appearance], className, {
         [styles.fill]: fill,
         [styles.small]: size === 'small',
     });
@@ -61,6 +61,6 @@ export const Button = (props: ButtonProps) => {
 
 Button.Group = (props: FlexProps) => {
     const { className, ...rest}= props;
-    const classNames = cx(styles['button-group']);
+    const classNames = cx(styles['button-group'], className);
     return <Flex className={classNames} {...rest} />
 }

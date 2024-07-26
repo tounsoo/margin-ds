@@ -8,12 +8,14 @@ export type FlexProps = ComponentPropsWithoutRef<'div'> & {
 	justifyContent?: CSSProperties["justifyContent"];
 	alignItems?: CSSProperties["alignItems"];
 	gap?: CSSProperties["gap"];
+	grow?: CSSProperties["flexGrow"];
+	shrink?: CSSProperties["flexShrink"];
     fill?: boolean;
 };
 
 
 export const Flex = (props: FlexProps) => {
-	const { className, fill, direction, wrap, justifyContent, alignItems, gap, style, ...rest } = props;
+	const { className, fill, direction, wrap, justifyContent, grow, shrink, alignItems, gap, style, ...rest } = props;
 	const classNames = cx(styles.flex, className, {
         [styles.fill]: fill
     });
@@ -22,7 +24,9 @@ export const Flex = (props: FlexProps) => {
 		justifyContent: justifyContent,
 		alignItems: alignItems,
 		flexWrap: wrap,
-        gap,
+		flexGrow: grow,
+		flexShrink: shrink,
+        gap: gap,
 		...style,
 	};
 

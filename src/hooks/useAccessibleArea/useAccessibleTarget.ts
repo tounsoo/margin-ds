@@ -21,8 +21,8 @@ export const useAccessibleTarget = ({
 	>(undefined);
 
 	useEffect(() => {
-		if (!element.current) return;
 		const resizeObserver = new ResizeObserver(() => {
+			if (!element.current) return;
 			const height = element.current.offsetHeight;
 			const width = element.current.offsetWidth;
 

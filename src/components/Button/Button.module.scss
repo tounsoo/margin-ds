@@ -87,21 +87,29 @@
 }
 
 @layer state {
-    .button.default:hover {
-        background-color: light-dark($color-gray-200, $color-gray-600)
+    .button:not(:disabled):not([aria-disabled="true"]) {
+        &.default:hover {
+            background-color: light-dark($color-gray-200, $color-gray-600)
+        }
+        &.primary:hover {
+            background-color: light-dark($color-gray-700, $color-gray-100)
+        }
+        &.secondary:hover {
+            background-color: light-dark($color-gray-200, $color-gray-800)
+        }
+        &.ghost:hover {
+            background-color: light-dark($color-gray-200, $color-gray-800)
+        }
+        &.danger:hover {
+            background-color: light-dark($color-red-700, $color-red-300)
+        } 
     }
-    .button.primary:hover {
-        background-color: light-dark($color-gray-700, $color-gray-100)
+
+    .button:disabled,
+    .button[aria-disabled="true"] {
+        opacity: .4;
+        cursor: default;
     }
-    .button.secondary:hover {
-        background-color: light-dark($color-gray-200, $color-gray-800)
-    }
-    .button.ghost:hover {
-        background-color: light-dark($color-gray-200, $color-gray-800)
-    }
-    .button.danger:hover {
-        background-color: light-dark($color-red-700, $color-red-300)
-    } 
 
     .button:focus-visible {
         outline-width: 0.125rem;
