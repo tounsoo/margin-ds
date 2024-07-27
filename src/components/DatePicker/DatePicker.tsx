@@ -22,7 +22,7 @@ import {
 	getLastOfWeek,
 	getNextClosestDate,
 	getPrevClosestDate,
-	isDisabledDate,
+	isInvalidDate,
 } from "./utils";
 import { DatePickerCell } from "./DatePickerCell";
 
@@ -39,7 +39,7 @@ export type DatePickerProps = Omit<
 	"defaultValue"
 > &
 	Omit<UseMonthProps, "date"> & {
-		disabled?: {
+		invalid?: {
 			dates?: Temporal.PlainDate[];
 			dayOfWeeks?: Array<1 | 2 | 3 | 4 | 5 | 6 | 7>;
 			after?: Temporal.PlainDate;
@@ -48,6 +48,7 @@ export type DatePickerProps = Omit<
 		locale?: string;
 		value?: Temporal.PlainDate;
 		defaultValue?: Temporal.PlainDate;
+        defaultFocused?: Temporal.PlainDate;
 		calendar?: Temporal.CalendarLike;
 		onSelect?: ({
 			date,
@@ -61,12 +62,13 @@ export const DatePicker = (props: DatePickerProps) => {
 	const {
 		value,
 		defaultValue,
+        defaultFocused,
 		weekStartDay,
 		onSelect,
 		cell,
 		locale: localeProp,
 		a11y,
-		disabled,
+		invalid,
 		calendar = "gregory",
 		...rest
 	} = props;
@@ -78,6 +80,7 @@ export const DatePicker = (props: DatePickerProps) => {
 	);
 	const [focusedDate, setFocusedDate] = useState(
 		value?.withCalendar(calendar) ??
+        defaultFocused?.withCalendar(calendar) ??
 			defaultValue?.withCalendar(calendar) ??
 			Temporal.Now.plainDate(calendar),
 	);
@@ -87,12 +90,13 @@ export const DatePicker = (props: DatePickerProps) => {
 		const closestDateAvailable = getClosestDate({
 			date:
 				value?.withCalendar(calendar) ??
+                defaultFocused?.withCalendar(calendar) ??
 				defaultValue?.withCalendar(calendar) ??
 				Temporal.Now.plainDate(calendar),
-			disabled,
+			invalid,
 		});
 		setFocusedDate(closestDateAvailable);
-	}, [value, calendar, disabled]);
+	}, [value, calendar, invalid]);
 
 	const gridRef = useRef<HTMLTableElement>(null);
 	const monthArr = useMonth({ date: focusedDate, weekStartDay, calendar });
@@ -112,7 +116,7 @@ export const DatePicker = (props: DatePickerProps) => {
         // Safari sometimes does not apply focus ring
         // might need to use document.queryselect().click()
         // to force this if the issue persists
-        
+
 		setTimeout(() => {
 			const targetElement = gridRef.current?.querySelector(
 				`[data-value="${date.toString()}"]`,
@@ -190,23 +194,23 @@ export const DatePicker = (props: DatePickerProps) => {
 					break;
 			}
 
-			if (isDisabledDate({ date: targetDate, disabled })) {
+			if (isInvalidDate({ date: targetDate, invalid })) {
 				const diff = Temporal.PlainDate.compare(targetDate, focusedDate);
 
-				if (disabled?.after && diff === 1) {
+				if (invalid?.after && diff === 1) {
 					const prevPossibleDate = getPrevClosestDate({
-						date: disabled.after.withCalendar(calendar),
-						disabled,
+						date: invalid.after.withCalendar(calendar),
+						invalid,
 					});
 					prevPossibleDate && setFocusedDate(prevPossibleDate);
 					prevPossibleDate && updateFocus(prevPossibleDate);
 					return;
 				}
 
-				if (disabled?.before && diff === -1) {
+				if (invalid?.before && diff === -1) {
 					const nextPossibleDate = getPrevClosestDate({
-						date: disabled.before.withCalendar(calendar),
-						disabled,
+						date: invalid.before.withCalendar(calendar),
+						invalid,
 					});
 					nextPossibleDate && setFocusedDate(nextPossibleDate);
 					nextPossibleDate && updateFocus(nextPossibleDate);
@@ -216,7 +220,7 @@ export const DatePicker = (props: DatePickerProps) => {
 				if (diff === 1) {
 					const nextDate = getNextClosestDate({
 						date: targetDate,
-						disabled,
+						invalid,
 					});
 
 					if (nextDate) {
@@ -229,7 +233,7 @@ export const DatePicker = (props: DatePickerProps) => {
 				if (diff === -1) {
 					const prevDate = getPrevClosestDate({
 						date: targetDate,
-						disabled,
+						invalid,
 					});
 
 					if (prevDate) {
@@ -273,10 +277,10 @@ export const DatePicker = (props: DatePickerProps) => {
 						aria-label={`Go to ${prevMonth.toLocaleString(locale, { month: "long", year: "numeric", calendar: calendar as string })}`}
 						appearance="ghost"
 						disabled={
-							disabled?.before &&
+							invalid?.before &&
 							Temporal.PlainDate.compare(
 								prevMonth.with({ day: Number.MAX_VALUE }),
-								disabled?.before,
+								invalid?.before,
 							) === -1
 						}
 						onClick={() => setFocusedDate(prevMonth)}
@@ -289,10 +293,10 @@ export const DatePicker = (props: DatePickerProps) => {
 						aria-label={`Go to ${nextMonth.toLocaleString(locale, { month: "long", year: "numeric", calendar: calendar as string })}`}
 						appearance="ghost"
 						disabled={
-							disabled?.after &&
+							invalid?.after &&
 							Temporal.PlainDate.compare(
 								prevMonth.with({ day: 1 }),
-								disabled?.after,
+								invalid?.after,
 							) === 1
 						}
 						onClick={() => setFocusedDate(nextMonth)}
@@ -344,28 +348,28 @@ export const DatePicker = (props: DatePickerProps) => {
 									const ariaSelected =
 										Temporal.PlainDate.compare(date, currentDate) === 0;
 
-									const isDisabled = isDisabledDate({
+									const isinvalid = isInvalidDate({
 										date,
-										disabled,
+										invalid,
 									});
 
 									const firstAvailableDate = () => {
-										if (!disabled?.before) return;
+										if (!invalid?.before) return;
 										return getNextClosestDate({
-											date: disabled.before.withCalendar(
+											date: invalid.before.withCalendar(
 												calendar,
 											),
-											disabled,
+											invalid,
 										});
 									};
 
 									const lastAvailableDate = () => {
-										if (!disabled?.after) return;
+										if (!invalid?.after) return;
 										return getPrevClosestDate({
-											date: disabled.after.withCalendar(
+											date: invalid.after.withCalendar(
 												calendar,
 											),
-											disabled,
+											invalid,
 										});
 									};
 
@@ -379,7 +383,7 @@ export const DatePicker = (props: DatePickerProps) => {
 										children: date.day,
 										"data-value": date.toString(),
 										"aria-hidden": ariaHidden,
-										"aria-disabled": isDisabled,
+										"aria-invalid": isinvalid,
 										"aria-selected": ariaSelected,
 										"aria-label": [
 											date.toLocaleString(locale, {
@@ -406,7 +410,7 @@ export const DatePicker = (props: DatePickerProps) => {
 										) => {
 											onSelect?.({ date, e });
 											if (props.value) return;
-											if (isDisabled) return;
+											if (isinvalid) return;
                                             setCurrentDate(date);
                                             setFocusedDate(date);
 										},

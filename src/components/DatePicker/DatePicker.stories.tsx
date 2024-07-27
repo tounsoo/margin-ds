@@ -23,6 +23,17 @@ export const Default: Story = {
 	},
 };
 
+export const DefaultFocused: Story = {
+	render: function Render() {
+		return (
+			<DatePicker
+				defaultValue={Temporal.Now.plainDate("gregory")}
+                defaultFocused={Temporal.Now.plainDate("gregory").add({months: 1})}
+			/>
+		);
+	},
+};
+
 export const Controlled: Story = {
 	render: function Render() {
 		return (
@@ -38,7 +49,7 @@ export const DisableWeekend: Story = {
 		return (
 			<DatePicker
 				defaultValue={Temporal.Now.plainDate("gregory")}
-				disabled={{
+				invalid={{
 					dayOfWeeks: [7, 6],
 				}}
 				onSelect={console.log}
@@ -53,7 +64,7 @@ export const DisableDates: Story = {
 		return (
 			<DatePicker
 				defaultValue={Temporal.Now.plainDate("gregory")}
-				disabled={{
+				invalid={{
 					dates: [
 						Temporal.Now.plainDate("gregory").subtract({ days: 3 }),
 						Temporal.Now.plainDate("gregory").subtract({ days: 2 }),
@@ -73,7 +84,7 @@ export const DisableLimit: Story = {
 		return (
 			<DatePicker
 				defaultValue={Temporal.Now.plainDate("gregory")}
-				disabled={{
+				invalid={{
 					after: Temporal.Now.plainDate('gregory').add({days: 2}),
 					before: Temporal.Now.plainDate('gregory').subtract({days: 2})
 				}}

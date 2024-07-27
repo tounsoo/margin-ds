@@ -1,35 +1,33 @@
 import { Temporal } from "temporal-polyfill";
 import type { DatePickerProps } from "./DatePicker";
 
-type IsDisabledDateType = {
+type IsInvalidDateType = {
 	date: Temporal.PlainDate;
-	disabled: DatePickerProps["disabled"];
+	invalid: DatePickerProps["invalid"];
 };
 
-export const isDisabledDate = ({ date, disabled }: IsDisabledDateType) => {
-	if (disabled?.after) {
-		if (Temporal.PlainDate.compare(date, disabled.after) === 1) {
+export const isInvalidDate = ({ date, invalid }: IsInvalidDateType) => {
+	if (invalid?.after) {
+		if (Temporal.PlainDate.compare(date, invalid.after) === 1) {
 			console.log("after");
 			return true;
 		}
 	}
-	if (disabled?.before) {
-		if (Temporal.PlainDate.compare(date, disabled.before) === -1) {
+	if (invalid?.before) {
+		if (Temporal.PlainDate.compare(date, invalid.before) === -1) {
 			console.log("before");
 			return true;
 		}
 	}
 	if (
-		disabled?.dayOfWeeks &&
-		(disabled.dayOfWeeks as Array<number>).includes(date.dayOfWeek)
+		invalid?.dayOfWeeks &&
+		(invalid.dayOfWeeks as Array<number>).includes(date.dayOfWeek)
 	) {
 		return true;
 	}
-	if (disabled?.dates) {
-		for (const disableDate of disabled.dates) {
-			// console.log(disableDate.toPlainDateTime() compare(date, disableDate);
-			if (Temporal.PlainDate.compare(date, disableDate) === 0)
-				return true;
+	if (invalid?.dates) {
+		for (const invalidate of invalid.dates) {
+			if (Temporal.PlainDate.compare(date, invalidate) === 0) return true;
 		}
 	}
 	return false;
@@ -55,42 +53,42 @@ export const getLastOfWeek = ({
 	return offset;
 };
 
-export const getNextClosestDate = ({ date, disabled }: IsDisabledDateType) => {
+export const getNextClosestDate = ({ date, invalid }: IsInvalidDateType) => {
 	const trys = 3_650;
 	for (let i = 0; i < trys; i++) {
 		if (i === trys) break;
 		const nextDate = date.add({ days: i });
-		if (!isDisabledDate({ date: nextDate, disabled })) {
+		if (!isInvalidDate({ date: nextDate, invalid })) {
 			return nextDate;
 		}
 	}
 	return;
 };
 
-export const getPrevClosestDate = ({ date, disabled }: IsDisabledDateType) => {
+export const getPrevClosestDate = ({ date, invalid }: IsInvalidDateType) => {
 	const trys = 3_650;
 	for (let i = 0; i < trys; i++) {
 		if (i === trys) break;
 		const prevDate = date.subtract({ days: i });
-		if (!isDisabledDate({ date: prevDate, disabled })) {
+		if (!isInvalidDate({ date: prevDate, invalid })) {
 			return prevDate;
 		}
 	}
 	return;
 };
 
-export const getClosestDate = ({ date, disabled }: IsDisabledDateType) => {
+export const getClosestDate = ({ date, invalid }: IsInvalidDateType) => {
 	const trys = 3_650 / 2;
 	for (let i = 0; i < trys; i++) {
 		if (i === trys) break;
 		const prevDate = date.subtract({ days: i });
 		const nextDate = date.add({ days: i });
-		const prevDisabled = isDisabledDate({ date: prevDate, disabled });
-		const nextDisabled = isDisabledDate({ date: nextDate, disabled });
-		if (prevDisabled === false) {
+		const previnvalid = isInvalidDate({ date: prevDate, invalid });
+		const nextinvalid = isInvalidDate({ date: nextDate, invalid });
+		if (previnvalid === false) {
 			return prevDate;
 		}
-		if (nextDisabled === false) {
+		if (nextinvalid === false) {
 			return nextDate;
 		}
 	}

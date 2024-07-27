@@ -40,6 +40,10 @@
 }
 
 @layer state {
+    .link:hover {
+        text-decoration: underline;
+    }
+
     .link:focus-visible {
         outline-width: 0.125rem;
         outline-offset: 0.125rem;
