@@ -1,0 +1,26 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer base {
+    .dialog {
+        color-scheme: light dark;
+        box-sizing: border-box;
+
+        font-family: $font-family;
+        font-size: $font-size-sm;
+        line-height: $font-size-sm--line-height;
+
+        padding: $spacing-4;
+        border-radius: $radius-xl;
+        border-color: light-dark($color-gray-300, $color-gray-500);
+        border-width: 0.0625rem;
+        background-color: light-dark($color-white, $color-gray-950);
+        max-width: 90svw;
+        max-height: 90svh;
+        overscroll-behavior: contain;
+        &::backdrop {
+            backdrop-filter: blur(10px);
+            overscroll-behavior: contain;
+        }
+    }
+}

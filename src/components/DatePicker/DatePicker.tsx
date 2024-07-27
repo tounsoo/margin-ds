@@ -382,8 +382,7 @@ export const DatePicker = (props: DatePickerProps) => {
 										}),
 										children: date.day,
 										"data-value": date.toString(),
-										"aria-hidden": ariaHidden,
-										"aria-invalid": isinvalid,
+										"aria-disabled": isinvalid,
 										"aria-selected": ariaSelected,
 										"aria-label": [
 											date.toLocaleString(locale, {
@@ -408,12 +407,13 @@ export const DatePicker = (props: DatePickerProps) => {
 										onClick: (
 											e: MouseEvent<HTMLElement>,
 										) => {
-											onSelect?.({ date, e });
-											if (props.value) return;
+                                            if (props.value) return;
 											if (isinvalid) return;
+											onSelect?.({ date, e });
                                             setCurrentDate(date);
                                             setFocusedDate(date);
 										},
+                                        a11y,
 									};
 
 									return (
@@ -432,7 +432,6 @@ export const DatePicker = (props: DatePickerProps) => {
 															? "primary"
 															: "ghost"
 													}
-													a11y={a11y}
 													{...returnProps}
 												/>
 											)}

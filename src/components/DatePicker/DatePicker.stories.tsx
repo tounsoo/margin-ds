@@ -122,7 +122,19 @@ export const CellOverride: Story = {
 		return (
 			<DatePicker
 				defaultValue={Temporal.Now.plainDate("gregory")}
-				cell={(props) => <DatePicker.Cell {...props} />}
+				cell={(props) => <DatePicker.Cell size="small" {...props} />}
+			/>
+		);
+	},
+};
+
+export const A11y: Story = {
+	render: function Render() {
+		return (
+			<DatePicker
+				defaultValue={Temporal.Now.plainDate("gregory")}
+				cell={(props) => <DatePicker.Cell  {...props} />}
+                a11y={{level: 'AAA'}}
 			/>
 		);
 	},
