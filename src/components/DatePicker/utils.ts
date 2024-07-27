@@ -9,13 +9,11 @@ type IsInvalidDateType = {
 export const isInvalidDate = ({ date, invalid }: IsInvalidDateType) => {
 	if (invalid?.after) {
 		if (Temporal.PlainDate.compare(date, invalid.after) === 1) {
-			console.log("after");
 			return true;
 		}
 	}
 	if (invalid?.before) {
 		if (Temporal.PlainDate.compare(date, invalid.before) === -1) {
-			console.log("before");
 			return true;
 		}
 	}

@@ -425,15 +425,7 @@ export const DatePicker = (props: DatePickerProps) => {
 											{cell ? (
 												cell?.(returnProps)
 											) : (
-												<Button
-													fill
-													appearance={
-														ariaSelected
-															? "primary"
-															: "ghost"
-													}
-													{...returnProps}
-												/>
+                                                <DatePickerCell {...returnProps} />
 											)}
 										</td>
 									);
