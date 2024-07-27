@@ -103,6 +103,29 @@
         &.danger:hover {
             background-color: light-dark($color-red-700, $color-red-300)
         } 
+        
+        &.default:active {
+            background-color: light-dark($color-gray-300, $color-gray-500)
+        }
+        &.primary:active {
+            background-color: light-dark($color-gray-900, $color-gray-50)
+        }
+        &.secondary:active {
+            background-color: light-dark($color-gray-300, $color-gray-600)
+        }
+        &.ghost:active {
+            background-color: light-dark($color-gray-300, $color-gray-600)
+        }
+        &.danger:active {
+            background-color: light-dark($color-red-900, $color-red-200)
+        } 
+    }
+
+    .button[aria-pressed="true"] {
+        background-color: light-dark($color-gray-100, $color-gray-700);
+        border-color: light-dark($color-gray-200, $color-gray-600);
+        border-style: solid;
+        border-width: 0.0625rem;
     }
 
     .button:disabled,

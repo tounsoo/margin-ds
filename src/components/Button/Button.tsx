@@ -1,4 +1,4 @@
-import { useRef, type ComponentPropsWithoutRef } from "react";
+import { useEffect, useRef, useState, type ComponentPropsWithoutRef, type MouseEvent } from "react";
 import styles from "./Button.module.scss";
 import cx from "classnames";
 import { useA11y } from "../../providers";
@@ -63,4 +63,32 @@ Button.Group = (props: FlexProps) => {
     const { className, ...rest}= props;
     const classNames = cx(styles['button-group'], className);
     return <Flex className={classNames} {...rest} />
+}
+
+export type ButtonToggleProps = Omit<ButtonProps, 'appearance'> & {
+    pressed?: boolean;
+    defaultPressed?: boolean;
+    onPressedChange?: (pressed: boolean) => void;
+};
+
+Button.Toggle = (props: ButtonToggleProps) => {
+    const {onClick, pressed, defaultPressed, onPressedChange, ...rest} = props;
+    const [isPressed, setIsPressed] = useState(pressed ?? defaultPressed ?? false);
+    const onClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
+        if (typeof pressed === 'undefined') {
+            onPressedChange?.(!isPressed)
+            setIsPressed(!isPressed);
+        };
+
+        onClick?.(e);
+    }
+
+    // biome-ignore lint/correctness/useExhaustiveDependencies: onPressedChange should not trigger rerender
+    useEffect(() => {
+        if (typeof pressed === 'undefined') return;
+        setIsPressed(pressed);
+        onPressedChange?.(pressed)
+    }, [pressed])
+
+    return <Button appearance="ghost" onClick={onClickHandler} aria-pressed={isPressed} {...rest} />
 }

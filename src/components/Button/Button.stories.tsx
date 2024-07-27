@@ -1,6 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Button } from "./Button";
 import { Spacer } from "../Spacer";
+import { useState } from "react";
 
 const meta = {
 	title: "Example/Button",
@@ -48,6 +49,27 @@ export const Fill: Story = {
                     First
                 </Button>
 			</div>
+		);
+	},
+};
+
+export const ToggleUncontrolled: Story = {
+	render: function Render() {
+		return (
+                <Button.Toggle aria-label="toggle A" onPressedChange={console.log}>
+                    Toggle A
+                </Button.Toggle>
+		);
+	},
+};
+
+export const ToggleControlled: Story = {
+	render: function Render() {
+        const [pressed, setPressed] = useState(false);
+		return (
+                <Button.Toggle pressed={pressed} onClick={() => setPressed(!pressed)} aria-label="toggle A" onPressedChange={console.log}>
+                    Toggle A
+                </Button.Toggle>
 		);
 	},
 };

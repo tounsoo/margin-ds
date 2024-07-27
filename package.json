@@ -12,8 +12,7 @@
 	"dependencies": {
 		"react": "18.3.1",
 		"react-dom": "18.3.1",
-		"temporal-polyfill": "^0.2.5",
-		"tinycolor2": "^1.6.0"
+		"temporal-polyfill": "^0.2.5"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
