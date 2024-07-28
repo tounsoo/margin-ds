@@ -5,9 +5,7 @@ import cx from "classnames";
 export type LabelProps = ComponentPropsWithoutRef<"label">;
 
 export const Label = (props: LabelProps) => {
-    const { className, ...rest} = props;
-    
-	return (
-		<label className={cx(styles.label, className)} {...rest} />
-	);
+	const { className, ...rest } = props;
+
+	return <label className={cx(styles.label, className)} {...rest} />;
 };

@@ -33,7 +33,7 @@ export const Default: Story = {
 							<Heading as="h3">Dialog Title</Heading>
 							<Button
 								onClick={() => setOpen(false)}
-                                appearance="ghost"
+								appearance="ghost"
 								aria-label="Close dialog"
 							>
 								&times;
@@ -73,17 +73,17 @@ export const ContentChanging: Story = {
 							<Heading as="h3">Dialog Title</Heading>
 							<Button
 								onClick={() => setOpen(false)}
-                                appearance="ghost"
+								appearance="ghost"
 								aria-label="Close dialog"
 							>
 								&times;
 							</Button>
 						</Flex>
-                        
 						Officia incididunt fugiat cillum esse minim mollit enim
 						sunt laboris nostrud ipsum esse eu. Ut ea in deserunt
 						culpa sunt anim tempor elit nisi exercitation.
-                        {expand ? `Commodo
+						{expand
+							? `Commodo
 						proident aliquip duis reprehenderit esse sunt eu
 						reprehenderit culpa esse sint laborum commodo id.
 						Ullamco duis dolor ullamco irure laborum tempor non
@@ -93,8 +93,11 @@ export const ContentChanging: Story = {
 						proident aliquip duis reprehenderit esse sunt eu
 						reprehenderit culpa esse sint laborum commodo id.
 						Ullamco duis dolor ullamco irure laborum tempor non
-						enim. Nisi duis labore in nulla et anim est.` : null}
-                        <Button onClick={() => setExpand(!expand)}>Expand Toggle</Button>
+						enim. Nisi duis labore in nulla et anim est.`
+							: null}
+						<Button onClick={() => setExpand(!expand)}>
+							Expand Toggle
+						</Button>
 						<Button onClick={() => setOpen(false)}>
 							Close Dialog
 						</Button>

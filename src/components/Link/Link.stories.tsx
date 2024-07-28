@@ -16,13 +16,13 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	args: {
 		children: "Link",
-        href: ""
+		href: "",
 	},
 };
 
 export const Underlined: Story = {
 	args: {
 		children: "Link",
-        appearance: "underlined",
+		appearance: "underlined",
 	},
 };

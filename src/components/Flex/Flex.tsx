@@ -2,7 +2,7 @@ import type { CSSProperties, ComponentPropsWithoutRef } from "react";
 import styles from "./Flex.module.scss";
 import cx from "classnames";
 
-export type FlexProps = ComponentPropsWithoutRef<'div'> & {
+export type FlexProps = ComponentPropsWithoutRef<"div"> & {
 	direction?: CSSProperties["flexDirection"];
 	wrap?: CSSProperties["flexWrap"];
 	justifyContent?: CSSProperties["justifyContent"];
@@ -10,15 +10,26 @@ export type FlexProps = ComponentPropsWithoutRef<'div'> & {
 	gap?: CSSProperties["gap"];
 	grow?: CSSProperties["flexGrow"];
 	shrink?: CSSProperties["flexShrink"];
-    fill?: boolean;
+	fill?: boolean;
 };
 
-
 export const Flex = (props: FlexProps) => {
-	const { className, fill, direction, wrap, justifyContent, grow, shrink, alignItems, gap, style, ...rest } = props;
+	const {
+		className,
+		fill,
+		direction,
+		wrap,
+		justifyContent,
+		grow,
+		shrink,
+		alignItems,
+		gap,
+		style,
+		...rest
+	} = props;
 	const classNames = cx(styles.flex, className, {
-        [styles.fill]: fill
-    });
+		[styles.fill]: fill,
+	});
 	const combinedStyle = {
 		flexDirection: direction,
 		justifyContent: justifyContent,
@@ -26,7 +37,7 @@ export const Flex = (props: FlexProps) => {
 		flexWrap: wrap,
 		flexGrow: grow,
 		flexShrink: shrink,
-        gap: gap,
+		gap: gap,
 		...style,
 	};
 

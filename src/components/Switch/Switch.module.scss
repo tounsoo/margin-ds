@@ -1,0 +1,111 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .switch {
+        all: unset;
+    }
+}
+
+$height: calc($spacing-5 + $spacing-0_5);
+@layer base {
+    .switch {
+        color-scheme: light dark;
+        width: $spacing-9;
+        height: $height;
+        background-color: light-dark($color-gray-200, $color-gray-600);
+        border-radius: $height;
+        padding: $spacing-0_5;
+        position: relative;
+        appearance: none;
+        outline-style: solid;
+        outline-color: transparent;
+        outline-offset: 0;
+        outline-width: 0;
+        transition-property: background-color, outline;
+        transition-duration: $default-transition-duration;
+        transition-timing-function: $transition-timing-function-out;
+        transition-behavior: allow-discrete;
+        display: inline-flex;
+
+    }
+
+    .toggle{
+        overflow: hidden;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        flex-shrink: 0;
+        box-sizing: border-box;
+        cursor: default;
+        position: absolute;
+        left: $spacing-0_5;
+        border-radius: 100%;
+        height: $height;
+        width: $height;
+
+        background-color: light-dark($color-white, $color-black);
+        box-shadow: $shadow-md;
+
+        transition-property: left;
+        transition-duration: $default-transition-duration;
+        transition-timing-function: $transition-timing-function-out;
+    }
+}
+
+@layer state {
+    .switch[aria-checked="true"] {
+        background-color: light-dark($color-black, $color-white);
+
+    }
+    .switch[aria-checked="true"] .toggle{
+        left: calc($spacing-9 - $height + $spacing-0_5);
+
+        &::after {
+            content: '';
+            position: absolute;
+            border-color: light-dark($color-black, $color-white);
+            border-style: solid;
+            border-width: 0 0.1em 0.1em 0;
+            box-sizing: border-box;
+            aspect-ratio: 1 / 1.8;
+            rotate: 45deg;
+            width: 0.375em;
+            margin-block-start: -0.125rem;
+        }
+    }
+
+    .switch:focus-visible{
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+        outline-color: light-dark($color-gray-950, $color-gray-50)
+    }
+
+    .switch:not(:disabled):not([aria-disabled="true"]) {
+        &:hover {
+            background-color: light-dark($color-gray-300, $color-gray-500)
+        }
+        &[aria-checked="true"]:hover {
+            background-color: light-dark($color-gray-700, $color-gray-100)
+        }
+    }
+
+    .switch:disabled,
+    .switch[aria-disabled="true"] {
+        background-color: light-dark($color-gray-400, $color-gray-400);
+        
+        .toggle {
+            background-color: light-dark($color-gray-100, $color-gray-800);
+            &::after {
+                border-color: light-dark($color-gray-400, $color-gray-500);
+            }
+        }
+        cursor: not-allowed;
+    }
+
+    @media (prefers-reduced-motion) {
+        .switch {
+            transition: outline-offset 0.1ms;
+        }
+    }
+}

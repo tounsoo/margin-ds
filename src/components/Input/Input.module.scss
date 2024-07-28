@@ -48,6 +48,12 @@
         outline-color: light-dark($color-gray-950, $color-gray-50)
     }
 
+    .input:disabled,
+    .input[aria-disabled="true"] {
+        opacity: .4;
+        cursor: not-allowed;
+    }
+
     @media (prefers-reduced-motion) {
         .button {
             transition: outline-offset 0.1ms;

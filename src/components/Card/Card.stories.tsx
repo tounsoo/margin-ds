@@ -23,27 +23,41 @@ export const Default: Story = {
 		return (
 			<div style={{ width: 280 }}>
 				<Card>
-                    <Heading as="h3">Card Title</Heading>
-                    <Label htmlFor="radiogroup-example">Radiogroup Example</Label>
-                    <RadioGroup id="radiogroup-example">
-                        <Flex>
-                            <RadioGroup.Radio id="test2-01" name="test2" value="First" />
-                            <Label htmlFor="test2-01">First</Label>
-                        </Flex>
-                        <Flex>
-                            <RadioGroup.Radio id="test2-02" name="test2" value="Second" />
-                            <Label htmlFor="test2-02">Second</Label>
-                        </Flex>
-                        <Flex>
-                            <RadioGroup.Radio id="test2-03" name="test2" value="Third" />
-                            <Label htmlFor="test2-03">Third</Label>
-                        </Flex>
-                    </RadioGroup>
-                    <Button.Group justifyContent="end">
-                        <Button>First</Button>
-                        <Button>First</Button>
-                    </Button.Group>
-                </Card>
+					<Heading as="h3">Card Title</Heading>
+					<Label htmlFor="radiogroup-example">
+						Radiogroup Example
+					</Label>
+					<RadioGroup id="radiogroup-example">
+						<Flex>
+							<RadioGroup.Item
+								id="test2-01"
+								name="test2"
+								value="First"
+							/>
+							<Label htmlFor="test2-01">First</Label>
+						</Flex>
+						<Flex>
+							<RadioGroup.Item
+								id="test2-02"
+								name="test2"
+								value="Second"
+							/>
+							<Label htmlFor="test2-02">Second</Label>
+						</Flex>
+						<Flex>
+							<RadioGroup.Item
+								id="test2-03"
+								name="test2"
+								value="Third"
+							/>
+							<Label htmlFor="test2-03">Third</Label>
+						</Flex>
+					</RadioGroup>
+					<Button.Group justifyContent="end">
+						<Button>First</Button>
+						<Button>First</Button>
+					</Button.Group>
+				</Card>
 			</div>
 		);
 	},
@@ -54,27 +68,41 @@ export const Tester: Story = {
 		return (
 			<div style={{ width: 280 }}>
 				<Card>
-                    <Heading as="h3">Card Title</Heading>
-                    <Label htmlFor="radiogroup-example">Radiogroup Example</Label>
-                    <RadioGroup id="radiogroup-example">
-                        <Flex>
-                            <RadioGroup.Radio id="test2-01" name="test2" value="First" />
-                            <Label htmlFor="test2-01">First</Label>
-                        </Flex>
-                        <Flex>
-                            <RadioGroup.Radio id="test2-02" name="test2" value="Second" />
-                            <Label htmlFor="test2-02">Second</Label>
-                        </Flex>
-                        <Flex>
-                            <RadioGroup.Radio id="test2-03" name="test2" value="Third" />
-                            <Label htmlFor="test2-03">Third</Label>
-                        </Flex>
-                    </RadioGroup>
-                    <Button.Group justifyContent="end">
-                        <Button>First</Button>
-                        <Button>First</Button>
-                    </Button.Group>
-                </Card>
+					<Heading as="h3">Card Title</Heading>
+					<Label htmlFor="radiogroup-example">
+						Radiogroup Example
+					</Label>
+					<RadioGroup id="radiogroup-example">
+						<Flex>
+							<RadioGroup.Item
+								id="test2-01"
+								name="test2"
+								value="First"
+							/>
+							<Label htmlFor="test2-01">First</Label>
+						</Flex>
+						<Flex>
+							<RadioGroup.Item
+								id="test2-02"
+								name="test2"
+								value="Second"
+							/>
+							<Label htmlFor="test2-02">Second</Label>
+						</Flex>
+						<Flex>
+							<RadioGroup.Item
+								id="test2-03"
+								name="test2"
+								value="Third"
+							/>
+							<Label htmlFor="test2-03">Third</Label>
+						</Flex>
+					</RadioGroup>
+					<Button.Group justifyContent="end">
+						<Button>First</Button>
+						<Button>First</Button>
+					</Button.Group>
+				</Card>
 			</div>
 		);
 	},

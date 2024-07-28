@@ -48,7 +48,7 @@ export type DatePickerProps = Omit<
 		locale?: string;
 		value?: Temporal.PlainDate;
 		defaultValue?: Temporal.PlainDate;
-        defaultFocused?: Temporal.PlainDate;
+		defaultFocused?: Temporal.PlainDate;
 		calendar?: Temporal.CalendarLike;
 		onSelect?: ({
 			date,
@@ -62,7 +62,7 @@ export const DatePicker = (props: DatePickerProps) => {
 	const {
 		value,
 		defaultValue,
-        defaultFocused,
+		defaultFocused,
 		weekStartDay,
 		onSelect,
 		cell,
@@ -80,7 +80,7 @@ export const DatePicker = (props: DatePickerProps) => {
 	);
 	const [focusedDate, setFocusedDate] = useState(
 		value?.withCalendar(calendar) ??
-        defaultFocused?.withCalendar(calendar) ??
+			defaultFocused?.withCalendar(calendar) ??
 			defaultValue?.withCalendar(calendar) ??
 			Temporal.Now.plainDate(calendar),
 	);
@@ -90,7 +90,7 @@ export const DatePicker = (props: DatePickerProps) => {
 		const closestDateAvailable = getClosestDate({
 			date:
 				value?.withCalendar(calendar) ??
-                defaultFocused?.withCalendar(calendar) ??
+				defaultFocused?.withCalendar(calendar) ??
 				defaultValue?.withCalendar(calendar) ??
 				Temporal.Now.plainDate(calendar),
 			invalid,
@@ -113,9 +113,9 @@ export const DatePicker = (props: DatePickerProps) => {
 		});
 
 	const updateFocus = (date: Temporal.PlainDate) => {
-        // Safari sometimes does not apply focus ring
-        // might need to use document.queryselect().click()
-        // to force this if the issue persists
+		// Safari sometimes does not apply focus ring
+		// might need to use document.queryselect().click()
+		// to force this if the issue persists
 
 		setTimeout(() => {
 			const targetElement = gridRef.current?.querySelector(
@@ -180,13 +180,19 @@ export const DatePicker = (props: DatePickerProps) => {
 
 				case "Home":
 					targetDate = focusedDate.subtract({
-						days: getFirstOfWeek({ date:focusedDate, weekStartDay }),
+						days: getFirstOfWeek({
+							date: focusedDate,
+							weekStartDay,
+						}),
 					});
 					break;
 
 				case "End":
 					targetDate = focusedDate.add({
-						days: getLastOfWeek({ date:focusedDate, weekStartDay }),
+						days: getLastOfWeek({
+							date: focusedDate,
+							weekStartDay,
+						}),
 					});
 					break;
 
@@ -195,7 +201,10 @@ export const DatePicker = (props: DatePickerProps) => {
 			}
 
 			if (isInvalidDate({ date: targetDate, invalid })) {
-				const diff = Temporal.PlainDate.compare(targetDate, focusedDate);
+				const diff = Temporal.PlainDate.compare(
+					targetDate,
+					focusedDate,
+				);
 
 				if (invalid?.after && diff === 1) {
 					const prevPossibleDate = getPrevClosestDate({
@@ -346,7 +355,10 @@ export const DatePicker = (props: DatePickerProps) => {
 										.equals(focusedDate.toPlainYearMonth());
 
 									const ariaSelected =
-										Temporal.PlainDate.compare(date, currentDate) === 0;
+										Temporal.PlainDate.compare(
+											date,
+											currentDate,
+										) === 0;
 
 									const isinvalid = isInvalidDate({
 										date,
@@ -407,13 +419,13 @@ export const DatePicker = (props: DatePickerProps) => {
 										onClick: (
 											e: MouseEvent<HTMLElement>,
 										) => {
-                                            if (props.value) return;
+											if (props.value) return;
 											if (isinvalid) return;
 											onSelect?.({ date, e });
-                                            setCurrentDate(date);
-                                            setFocusedDate(date);
+											setCurrentDate(date);
+											setFocusedDate(date);
 										},
-                                        a11y,
+										a11y,
 									};
 
 									return (
@@ -425,7 +437,9 @@ export const DatePicker = (props: DatePickerProps) => {
 											{cell ? (
 												cell?.(returnProps)
 											) : (
-                                                <DatePickerCell {...returnProps} />
+												<DatePickerCell
+													{...returnProps}
+												/>
 											)}
 										</td>
 									);

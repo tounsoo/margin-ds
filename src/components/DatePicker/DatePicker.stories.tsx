@@ -15,11 +15,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	render: function Render() {
-		return (
-			<DatePicker
-				defaultValue={Temporal.Now.plainDate("gregory")}
-			/>
-		);
+		return <DatePicker defaultValue={Temporal.Now.plainDate("gregory")} />;
 	},
 };
 
@@ -28,7 +24,9 @@ export const DefaultFocused: Story = {
 		return (
 			<DatePicker
 				defaultValue={Temporal.Now.plainDate("gregory")}
-                defaultFocused={Temporal.Now.plainDate("gregory").add({months: 1})}
+				defaultFocused={Temporal.Now.plainDate("gregory").add({
+					months: 1,
+				})}
 			/>
 		);
 	},
@@ -36,11 +34,7 @@ export const DefaultFocused: Story = {
 
 export const Controlled: Story = {
 	render: function Render() {
-		return (
-			<DatePicker
-				value={Temporal.Now.plainDate('gregory')}
-			/>
-		);
+		return <DatePicker value={Temporal.Now.plainDate("gregory")} />;
 	},
 };
 
@@ -85,8 +79,10 @@ export const DisableLimit: Story = {
 			<DatePicker
 				defaultValue={Temporal.Now.plainDate("gregory")}
 				invalid={{
-					after: Temporal.Now.plainDate('gregory').add({days: 2}),
-					before: Temporal.Now.plainDate('gregory').subtract({days: 2})
+					after: Temporal.Now.plainDate("gregory").add({ days: 2 }),
+					before: Temporal.Now.plainDate("gregory").subtract({
+						days: 2,
+					}),
 				}}
 				onSelect={console.log}
 				cell={(props) => <DatePicker.Cell {...props} />}
@@ -128,13 +124,13 @@ export const CellOverride: Story = {
 	},
 };
 
-export const A11y: Story = {
+export const AAA: Story = {
 	render: function Render() {
 		return (
 			<DatePicker
 				defaultValue={Temporal.Now.plainDate("gregory")}
-				cell={(props) => <DatePicker.Cell  {...props} />}
-                a11y={{level: 'AAA'}}
+				cell={(props) => <DatePicker.Cell {...props} />}
+				a11y={{ level: "AAA" }}
 			/>
 		);
 	},

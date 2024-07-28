@@ -2,6 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
 import { Label } from "../Label";
 import { Flex } from "../Flex";
+import { A11yProvider } from "../../providers";
 
 const meta = {
 	title: "Example/Checkbox",
@@ -17,27 +18,38 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
 	args: {
-        defaultChecked: false,
-        "aria-label": 'test1'
+		defaultChecked: false,
+		"aria-label": "test1",
 	},
 };
 
 export const Controlled: Story = {
 	args: {
-        checked: false,
-        "aria-label": 'test2'
+		checked: false,
+		"aria-label": "test2",
 	},
 };
 
 export const Example = {
-    render: function Render() {
-        return (
-            <Flex gap=".25rem">
-                <Checkbox id="test3" />
-                <Label htmlFor="test3">
-                    Hello World
-                </Label>
-            </Flex>
-        )
-    }
-}
+	render: function Render() {
+		return (
+			<Flex gap=".25rem">
+				<Checkbox id="test3" />
+				<Label htmlFor="test3">Hello World</Label>
+			</Flex>
+		);
+	},
+};
+
+export const AAA = {
+	render: function Render() {
+		return (
+			<A11yProvider level="AAA">
+				<Flex gap=".25rem">
+					<Checkbox id="test3" />
+					<Label htmlFor="test3">Hello World</Label>
+				</Flex>
+			</A11yProvider>
+		);
+	},
+};

@@ -18,8 +18,15 @@ export const Default: Story = {
 	render: function Render() {
 		return (
 			<Paragraph>
-                Voluptate <Code>dolore</Code> incididunt est et. Fugiat Lorem proident dolore laborum officia amet est. Sunt ex officia reprehenderit nisi nostrud aliquip occaecat dolor consequat incididunt eiusmod incididunt amet ipsum. Proident duis nostrud Lorem ex tempor cillum Lorem consectetur anim aute cillum magna nisi ut. Exercitation magna qui pariatur sunt amet id duis ut adipisicing non dolor nostrud in. Do fugiat enim Lorem commodo commodo ea voluptate elit elit.
-            </Paragraph>
+				Voluptate <Code>dolore</Code> incididunt est et. Fugiat Lorem
+				proident dolore laborum officia amet est. Sunt ex officia
+				reprehenderit nisi nostrud aliquip occaecat dolor consequat
+				incididunt eiusmod incididunt amet ipsum. Proident duis nostrud
+				Lorem ex tempor cillum Lorem consectetur anim aute cillum magna
+				nisi ut. Exercitation magna qui pariatur sunt amet id duis ut
+				adipisicing non dolor nostrud in. Do fugiat enim Lorem commodo
+				commodo ea voluptate elit elit.
+			</Paragraph>
 		);
 	},
 };
