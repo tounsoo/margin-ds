@@ -1,4 +1,4 @@
-import type { ComponentPropsWithoutRef, CSSProperties } from "react";
+import type { ComponentPropsWithoutRef } from "react";
 import styles from "./Card.module.scss";
 import cx from "classnames";
 
@@ -9,31 +9,4 @@ export const Card = (props: CardProps) => {
 	const classNames = cx(styles.card, className);
 	
 	return <div className={classNames} {...rest} />
-};
-
-
-export type CardSectionProps = ComponentPropsWithoutRef<'div'> & {
-	direction?: CSSProperties["flexDirection"];
-	wrap?: CSSProperties["flexWrap"];
-	justifyContent?: CSSProperties["justifyContent"];
-	alignItems?: CSSProperties["alignItems"];
-	gap?: CSSProperties["gap"];
-    fill?: boolean;
-};
-
-Card.Section = (props: CardSectionProps) => {
-	const { fill, direction, wrap, justifyContent, alignItems, gap, style, ...rest } = props;
-	const classNames = cx(styles.section, {
-        [styles.fill]: fill
-    });
-	const combinedStyle = {
-		flexDirection: direction,
-		justifyContent: justifyContent,
-		alignItems: alignItems,
-		flexWrap: wrap,
-        gap,
-		...style,
-	};
-
-	return <div className={classNames} style={combinedStyle} {...rest} />;
 };

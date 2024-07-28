@@ -1,0 +1,49 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .paragraph {
+        all: unset;
+    }
+}
+
+@layer base {
+    .paragraph {
+        color-scheme: light dark;
+        box-sizing: border-box;
+        display: inline;
+
+        font-family: $font-family;
+        font-weight: 400;
+        color: light-dark($color-black, $color-white);
+    }
+}
+
+@layer variant {
+    .paragraph {
+        &.x-small {
+            font-size: $font-size-xs;
+            line-height: $font-size-xs--line-height;
+        }
+        &.small {
+            font-size: $font-size-sm;
+            line-height: $font-size-sm--line-height;
+        }
+        &.medium {
+            font-size: $font-size-base;
+            line-height: $font-size-base--line-height;
+        }
+        &.large {
+            font-size: $font-size-lg;
+            line-height: $font-size-lg--line-height;
+        }
+        &.x-large {
+            font-size: $font-size-xl;
+            line-height: $font-size-xl--line-height;
+        }
+        &.xx-large {
+            font-size: $font-size-2xl;
+            line-height: $font-size-2xl--line-height;
+        }
+    }
+}

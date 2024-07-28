@@ -1,0 +1,24 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .code {
+        all: unset;
+    }
+}
+
+@layer base {
+    .code {
+        color-scheme: light dark;
+        box-sizing: border-box;
+        display: inline;
+
+        font-family: monospace;
+        font-size: inherit;
+        line-height: inherit;
+
+        padding: calc($spacing-1_5 / 2);
+        border-radius: $radius-md;
+        background-color: light-dark($color-gray-200, $color-gray-950);
+    }
+}
