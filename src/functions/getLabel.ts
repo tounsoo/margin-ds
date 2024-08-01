@@ -1,4 +1,4 @@
-import { isValidElement, type ReactNode } from "react";
+import { isValidElement, type ReactElement, type ReactNode } from "react";
 
 export function getLabel(node: ReactNode | object): string {
 	if (
@@ -17,7 +17,7 @@ export function getLabel(node: ReactNode | object): string {
 	}
 
 	if (isValidElement(node)) {
-		const children = node.props?.children;
+		const { children } = (node as ReactElement<HTMLElement>).props;
 		if (!children) return "";
 		return getLabel(children);
 	}

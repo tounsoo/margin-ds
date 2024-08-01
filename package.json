@@ -10,34 +10,38 @@
 		"preview": "rsbuild preview"
 	},
 	"dependencies": {
-		"react": "18.3.1",
-		"react-dom": "18.3.1",
+		"@types/react": "npm:types-react@rc",
+		"@types/react-dom": "npm:types-react-dom@rc",
 		"temporal-polyfill": "^0.2.5"
 	},
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
 		"@chromatic-com/storybook": "^1.6.1",
-		"@rsbuild/core": "^1.0.1-beta.3",
-		"@rsbuild/plugin-babel": "^1.0.1-beta.3",
-		"@rsbuild/plugin-lightningcss": "^1.0.1-beta.3",
-		"@rsbuild/plugin-react": "^1.0.1-beta.3",
-		"@rsbuild/plugin-sass": "1.0.1-beta.1",
-		"@storybook/addon-a11y": "^8.2.4",
-		"@storybook/addon-essentials": "^8.2.4",
-		"@storybook/addon-interactions": "^8.2.4",
-		"@storybook/addon-links": "^8.2.4",
-		"@storybook/addon-onboarding": "^8.2.4",
-		"@storybook/addon-storysource": "^8.2.6",
-		"@storybook/blocks": "^8.2.4",
-		"@storybook/react": "^8.2.4",
-		"@storybook/test": "^8.2.4",
+		"@rsbuild/core": "^1.0.1-beta.8",
+		"@rsbuild/plugin-babel": "^1.0.1-beta.8",
+		"@rsbuild/plugin-lightningcss": "^1.0.1-beta.6",
+		"@rsbuild/plugin-react": "^1.0.1-beta.8",
+		"@rsbuild/plugin-sass": "1.0.1-beta.8",
+		"@storybook/addon-a11y": "^8.2.7",
+		"@storybook/addon-essentials": "^8.2.7",
+		"@storybook/addon-interactions": "^8.2.7",
+		"@storybook/addon-links": "^8.2.7",
+		"@storybook/addon-onboarding": "^8.2.7",
+		"@storybook/addon-storysource": "^8.2.7",
+		"@storybook/blocks": "^8.2.7",
+		"@storybook/react": "^8.2.7",
+		"@storybook/test": "^8.2.7",
 		"@types/react": "^18.3.3",
 		"@types/react-dom": "^18.3.0",
 		"@types/tinycolor2": "^1.4.6",
 		"classnames": "^2.5.1",
-		"storybook": "^8.2.4",
-		"storybook-react-rsbuild": "^0.0.7",
-		"type-fest": "^4.22.1",
-		"typescript": "^5.5.3"
+		"storybook": "^8.2.7",
+		"storybook-react-rsbuild": "^0.0.10",
+		"type-fest": "^4.23.0",
+		"typescript": "^5.5.4"
+	},
+	"overrides": {
+		"@types/react": "npm:types-react@rc",
+		"@types/react-dom": "npm:types-react-dom@rc"
 	}
 }

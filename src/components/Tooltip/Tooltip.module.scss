@@ -1,0 +1,14 @@
+.tooltip {
+    background: red;
+
+    &[popover]:popover-open {
+        opacity: 1;
+    }
+
+}
+@starting-style {
+    .tooltip[popover]:popover-open {
+      opacity: 0;
+      transform: scaleX(0);
+    }
+  }
