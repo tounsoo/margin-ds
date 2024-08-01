@@ -10,8 +10,8 @@
 		"preview": "rsbuild preview"
 	},
 	"dependencies": {
-		"@types/react": "npm:types-react@rc",
-		"@types/react-dom": "npm:types-react-dom@rc",
+		"@types/react": "^18.3.3",
+		"@types/react-dom": "^18.3.0",
 		"temporal-polyfill": "^0.2.5"
 	},
 	"devDependencies": {
@@ -39,9 +39,5 @@
 		"storybook-react-rsbuild": "^0.0.10",
 		"type-fest": "^4.23.0",
 		"typescript": "^5.5.4"
-	},
-	"overrides": {
-		"@types/react": "npm:types-react@rc",
-		"@types/react-dom": "npm:types-react-dom@rc"
 	}
 }
