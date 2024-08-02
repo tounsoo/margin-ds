@@ -268,9 +268,7 @@ export const DatePicker = (props: DatePickerProps) => {
 			key={monthYearLocaleString}
 			{...rest}
 		>
-			<div
-				className={styles.header}
-			>
+			<div className={styles.header}>
 				<Heading as="h5">
 					<span role="status">{monthYearLocaleString}</span>
 				</Heading>

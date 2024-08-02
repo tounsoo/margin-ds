@@ -20,7 +20,13 @@ export const Default: Story = {
 	render: function Render() {
 		return (
 			<List style={{ width: 200 }}>
-				<List.Item id="01">Duis anim Lorem aliquip et esse culpa velit mollit ea ad eu dolor in. Fugiat eu quis nisi excepteur. Exercitation commodo minim nisi voluptate laborum occaecat ex labore. Consectetur aliquip anim nostrud occaecat esse sunt amet. Nostrud elit proident officia ipsum.</List.Item>
+				<List.Item id="01">
+					Duis anim Lorem aliquip et esse culpa velit mollit ea ad eu
+					dolor in. Fugiat eu quis nisi excepteur. Exercitation
+					commodo minim nisi voluptate laborum occaecat ex labore.
+					Consectetur aliquip anim nostrud occaecat esse sunt amet.
+					Nostrud elit proident officia ipsum.
+				</List.Item>
 				<List.Item id="02">02</List.Item>
 				<List.Item id="03">03</List.Item>
 			</List>

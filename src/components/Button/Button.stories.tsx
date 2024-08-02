@@ -126,7 +126,7 @@ export const AAA: Story = {
 		return (
 			<A11yProvider level="AAA">
 				<div style={{ width: 280, border: "1px solid red" }}>
-                <Button.Group flexGrow={1}>
+					<Button.Group flexGrow={1}>
 						<Button>Default</Button>
 						<Button>Small</Button>
 					</Button.Group>

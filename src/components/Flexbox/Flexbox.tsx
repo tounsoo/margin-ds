@@ -16,60 +16,60 @@ export type FlexboxProps = ComponentPropsWithoutRef<"div"> & {
 	alignContent?: CSSProperties["alignContent"];
 	alignItems?: CSSProperties["alignItems"];
 	alignSelf?: CSSProperties["alignSelf"];
-    placeContent?: CSSProperties["placeContent"];
-    placeItems?: CSSProperties["placeItems"];
-    placeSelf?: CSSProperties["placeSelf"];
+	placeContent?: CSSProperties["placeContent"];
+	placeItems?: CSSProperties["placeItems"];
+	placeSelf?: CSSProperties["placeSelf"];
 	gap?: CSSProperties["gap"];
-    inline?: boolean;
+	inline?: boolean;
 };
 
 export const Flexbox = (props: FlexboxProps) => {
 	const {
 		className,
 		flex,
-        flexBasis,
-        flexDirection,
-        flexFlow,
-        flexGrow,
-        flexShrink,
-        flexWrap,
-        justifyContent,
-        justifyItems,
-        justifySelf,
-        alignContent,
-        alignItems,
-        alignSelf,
-        placeContent,
-        placeItems,
-        placeSelf,
-        gap,
-        inline,
+		flexBasis,
+		flexDirection,
+		flexFlow,
+		flexGrow,
+		flexShrink,
+		flexWrap,
+		justifyContent,
+		justifyItems,
+		justifySelf,
+		alignContent,
+		alignItems,
+		alignSelf,
+		placeContent,
+		placeItems,
+		placeSelf,
+		gap,
+		inline,
 		style,
 		...rest
 	} = props;
 	const classNames = cx(styles.flexbox, className, {
-        [styles.inline]: inline
-    });
+		[styles.inline]: inline,
+	});
 	const combinedStyle = {
-        //shorthands
-        flex,
-        flexFlow,
-        placeContent,
-        placeItems,
-        placeSelf,
+		//shorthands
+		flex,
+		flexFlow,
+		placeContent,
+		placeItems,
+		placeSelf,
 
-        flexBasis,
-        flexDirection,
-        flexGrow,
-        flexShrink,
-        flexWrap,
-        justifyContent,
-        justifyItems,
-        justifySelf,
-        alignContent,
-        alignItems,
-        alignSelf,
-        gap,
+		flexBasis,
+		flexDirection,
+		flexGrow,
+		flexShrink,
+		flexWrap,
+		justifyContent,
+		justifyItems,
+		justifySelf,
+		alignContent,
+		alignItems,
+		alignSelf,
+		gap,
 		...style,
 	};
 

@@ -21,7 +21,7 @@ type ListContextType = {
 	selectedItem?: string | null;
 	setSelectedItem?: Dispatch<SetStateAction<string | null | undefined>>;
 	selectable?: boolean;
-    controlled?: boolean;
+	controlled?: boolean;
 	onSelectionChange?: ListProps["onSelectionChange"];
 };
 
@@ -34,16 +34,16 @@ export type ListProps = ComponentProps<"ul"> &
 				defaultSelected?: never;
 				selected?: never;
 				onSelectionChange?: never;
-                focusedItem?: never;
-                pseudoFocusVisible?: never;
+				focusedItem?: never;
+				pseudoFocusVisible?: never;
 		  }
 		| {
 				selectable: true;
 				defaultSelected?: string;
 				selected?: string;
-				onSelectionChange?: (data?: {selection?: string}) => void;
-                focusedItem?: string;
-                pseudoFocusVisible?: boolean;
+				onSelectionChange?: (data?: { selection?: string }) => void;
+				focusedItem?: string;
+				pseudoFocusVisible?: boolean;
 		  }
 	);
 
@@ -52,12 +52,12 @@ export const List = (props: ListProps) => {
 		children,
 		className,
 		defaultSelected,
-        selected,
+		selected,
 		onSelectionChange,
 		selectable,
 		onKeyDown,
-        pseudoFocusVisible,
-        focusedItem: focusedItemProp,
+		pseudoFocusVisible,
+		focusedItem: focusedItemProp,
 		...rest
 	} = props;
 	const elRef = useRef<HTMLUListElement>(null);
@@ -65,9 +65,9 @@ export const List = (props: ListProps) => {
 	const [focusedItem, setFocusedItem] = useState<string | null>();
 	const [selectedItem, setSelectedItem] = useState<string | null>();
 	const classNames = cx(styles.list, className, {
-        [styles['pseudo-focus-visible']]: pseudoFocusVisible,
-        [styles.selectable]: selectable
-    });
+		[styles["pseudo-focus-visible"]]: pseudoFocusVisible,
+		[styles.selectable]: selectable,
+	});
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Inital render
 	useEffect(() => {
@@ -83,14 +83,14 @@ export const List = (props: ListProps) => {
 		setFocusedItem(focusedItemProp ?? defaultSelected ?? itemValues[0]);
 	}, []);
 
-    useEffect(() => {
-        if (typeof focusedItemProp === 'undefined') return;
-        setFocusedItem(focusedItemProp);
-    }, [focusedItemProp])
-   
-    useEffect(() => {
-        setSelectedItem(selected);
-    }, [selected])
+	useEffect(() => {
+		if (typeof focusedItemProp === "undefined") return;
+		setFocusedItem(focusedItemProp);
+	}, [focusedItemProp]);
+
+	useEffect(() => {
+		setSelectedItem(selected);
+	}, [selected]);
 
 	const contextValue = useMemo(() => {
 		return {
@@ -100,20 +100,27 @@ export const List = (props: ListProps) => {
 			setSelectedItem,
 			selectable,
 			onSelectionChange,
-            controlled: !!selected || !!focusedItemProp
+			controlled: !!selected || !!focusedItemProp,
 		};
-	}, [focusedItem, focusedItemProp, selectedItem, selected, selectable, onSelectionChange]);
+	}, [
+		focusedItem,
+		focusedItemProp,
+		selectedItem,
+		selected,
+		selectable,
+		onSelectionChange,
+	]);
 
 	const thisIndex = (focusedItem && itemArr?.indexOf(focusedItem)) || 0;
 	const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
 		onKeyDown?.(e);
 		if (!selectable) return;
-        if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.code)) {
-            e.preventDefault();
+		if (["ArrowDown", "ArrowUp", "Home", "End"].includes(e.code)) {
+			e.preventDefault();
 			e.stopPropagation();
-        }
+		}
 		if (e.code === "ArrowDown") {
-            if (focusedItemProp) return;
+			if (focusedItemProp) return;
 			if (itemArr?.[thisIndex + 1]) {
 				setFocusedItem?.(itemArr[thisIndex + 1]);
 				return;
@@ -121,7 +128,7 @@ export const List = (props: ListProps) => {
 			setFocusedItem?.(itemArr?.[0]);
 		}
 		if (e.code === "ArrowUp") {
-            if (focusedItemProp) return;
+			if (focusedItemProp) return;
 			if (itemArr?.[thisIndex - 1]) {
 				setFocusedItem?.(itemArr[thisIndex - 1]);
 				return;
@@ -129,22 +136,22 @@ export const List = (props: ListProps) => {
 			setFocusedItem?.(itemArr?.[itemArr.length - 1]);
 		}
 		if (e.code === "Home") {
-            if (focusedItemProp) return;
+			if (focusedItemProp) return;
 			setFocusedItem?.(itemArr?.[0]);
 		}
 		if (e.code === "End") {
-            if (focusedItemProp) return;
+			if (focusedItemProp) return;
 			setFocusedItem?.(itemArr?.[thisIndex - 1]);
 		}
 		if (e.code === "Space") {
-            if (selected) return;
+			if (selected) return;
 			if (focusedItem === selectedItem) {
 				setSelectedItem?.(undefined);
 				onSelectionChange?.(undefined);
 				return;
 			}
 			setSelectedItem?.(focusedItem);
-			focusedItem && onSelectionChange?.({selection: focusedItem});
+			focusedItem && onSelectionChange?.({ selection: focusedItem });
 		}
 	};
 	return (
@@ -164,9 +171,12 @@ export const List = (props: ListProps) => {
 	);
 };
 
-export type ListItemProps = Omit<SetRequired<ComponentProps<"li">, "id">, 'onClick' | 'onMouseEnter'> & {
-    onClick?: (data: {id: string}, e: MouseEvent<HTMLLIElement>) => void
-    onMouseEnter?: (data: {id: string}, e: MouseEvent<HTMLLIElement>) => void
+export type ListItemProps = Omit<
+	SetRequired<ComponentProps<"li">, "id">,
+	"onClick" | "onMouseEnter"
+> & {
+	onClick?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;
+	onMouseEnter?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;
 };
 
 List.Item = (props: ListItemProps) => {
@@ -178,14 +188,14 @@ List.Item = (props: ListItemProps) => {
 		setSelectedItem,
 		selectable,
 		onSelectionChange,
-        controlled,
+		controlled,
 	} = useContext(ListContext);
 	const classNames = cx(styles["list-item"], className);
 
 	const handleClick = (e: MouseEvent<HTMLLIElement>) => {
 		onClick?.({ id }, e);
 		if (!selectable) return;
-        if (controlled) return;
+		if (controlled) return;
 		if (selectedItem === id) {
 			setFocusedItem?.(undefined);
 			setSelectedItem?.(undefined);
@@ -194,7 +204,7 @@ List.Item = (props: ListItemProps) => {
 		}
 		setFocusedItem?.(id);
 		setSelectedItem?.(id);
-		onSelectionChange?.({selection: id});
+		onSelectionChange?.({ selection: id });
 	};
 
 	return (
@@ -202,7 +212,9 @@ List.Item = (props: ListItemProps) => {
 			className={classNames}
 			data-focused={focusedItem === id}
 			onClick={handleClick}
-			onMouseEnter={(e: MouseEvent<HTMLLIElement>) => onMouseEnter?.({id}, e)}
+			onMouseEnter={(e: MouseEvent<HTMLLIElement>) =>
+				onMouseEnter?.({ id }, e)
+			}
 			aria-selected={selectable && selectedItem === id}
 			id={id}
 			{...rest}
