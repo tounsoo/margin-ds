@@ -1,0 +1,28 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .list {
+        all: unset;
+    }
+}
+
+@layer base {
+    .list {
+       list-style: none;
+
+       .list-item {
+            background: gray;
+
+            &[aria-selected="true"] {
+                background: red;
+            }
+       }
+
+       &:focus-visible {
+        .list-item[data-focused="true"] {
+            outline: 1px solid blue;
+        }
+       }
+    }
+}
