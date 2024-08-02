@@ -11,7 +11,7 @@ import { useA11y } from "../../providers";
 import type { a11yProps } from "../../types";
 import { useAccessibleTarget } from "../../hooks";
 import { getLabel } from "../../functions";
-import { Flex, type FlexProps } from "../Flex";
+import { Flexbox, type FlexboxProps } from "../Flexbox";
 
 export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
 	/**
@@ -78,10 +78,10 @@ export const Button = (props: ButtonProps) => {
 	);
 };
 
-Button.Group = (props: FlexProps) => {
+Button.Group = (props: FlexboxProps) => {
 	const { className, ...rest } = props;
 	const classNames = cx(styles["button-group"], className);
-	return <Flex className={classNames} {...rest} />;
+	return <Flexbox className={classNames} {...rest} />;
 };
 
 export type ButtonToggleProps = Omit<ButtonProps, "appearance"> & {

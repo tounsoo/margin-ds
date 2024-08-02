@@ -12,7 +12,6 @@ import { Temporal } from "temporal-polyfill";
 import cx from "classnames";
 import styles from "./DatePicker.module.scss";
 import { Button } from "../Button";
-import { Flex } from "../Flex";
 import { Heading } from "../Heading";
 import { Label } from "../Label";
 import type { a11yProps } from "../../types";
@@ -264,25 +263,20 @@ export const DatePicker = (props: DatePickerProps) => {
 	const nextMonth = focusedDate.add({ months: 1 });
 
 	return (
-		<Flex
-			direction="column"
+		<div
 			className={styles.datepicker}
 			key={monthYearLocaleString}
-			gap=".5rem"
 			{...rest}
 		>
-			<Flex
+			<div
 				className={styles.header}
-				alignItems="center"
-				justifyContent="space-between"
-				grow="1"
 			>
 				<Heading as="h5">
 					<span role="status">{monthYearLocaleString}</span>
 				</Heading>
-				<Flex gap=".5rem">
+				<div className={styles.controls}>
 					<Button
-						className={styles.controller}
+						className={styles.control}
 						aria-label={`Go to ${prevMonth.toLocaleString(locale, { month: "long", year: "numeric", calendar: calendar as string })}`}
 						appearance="ghost"
 						disabled={
@@ -298,7 +292,7 @@ export const DatePicker = (props: DatePickerProps) => {
 						&larr;
 					</Button>
 					<Button
-						className={styles.controller}
+						className={styles.control}
 						aria-label={`Go to ${nextMonth.toLocaleString(locale, { month: "long", year: "numeric", calendar: calendar as string })}`}
 						appearance="ghost"
 						disabled={
@@ -313,8 +307,8 @@ export const DatePicker = (props: DatePickerProps) => {
 					>
 						&rarr;
 					</Button>
-				</Flex>
-			</Flex>
+				</div>
+			</div>
 			<table
 				role="grid"
 				className={styles["date-grid"]}
@@ -449,7 +443,7 @@ export const DatePicker = (props: DatePickerProps) => {
 					})}
 				</tbody>
 			</table>
-		</Flex>
+		</div>
 	);
 };
 

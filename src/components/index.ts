@@ -4,7 +4,7 @@ export * from "./Checkbox";
 export * from "./Code";
 export * from "./DatePicker";
 export * from "./Dialog";
-export * from "./Flex";
+export * from "./Flexbox";
 export * from "./Heading";
 export * from "./Input";
 export * from "./Label";

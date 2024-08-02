@@ -82,7 +82,7 @@ export const Grouping: Story = {
 	render: function Render() {
 		return (
 			<div style={{ width: 280, border: "1px solid red" }}>
-				<Button.Group fill>
+				<Button.Group flexGrow={1}>
 					<Button>First</Button>
 					<Button>Second</Button>
 					<Button>Third</Button>
@@ -96,7 +96,7 @@ export const FillInGroup: Story = {
 	render: function Render() {
 		return (
 			<div style={{ width: 280, border: "1px solid red" }}>
-				<Button.Group fill>
+				<Button.Group flexGrow={1}>
 					<Button fill>First</Button>
 					<Button fill>Second</Button>
 					<Button fill>Third</Button>
@@ -110,7 +110,7 @@ export const Spacing: Story = {
 	render: function Render() {
 		return (
 			<div style={{ width: 280, border: "1px solid red" }}>
-				<Button.Group fill>
+				<Button.Group flexGrow={1}>
 					<Button>First</Button>
 					<Spacer />
 					<Button>Second</Button>
@@ -126,7 +126,7 @@ export const AAA: Story = {
 		return (
 			<A11yProvider level="AAA">
 				<div style={{ width: 280, border: "1px solid red" }}>
-					<Button.Group fill>
+                <Button.Group flexGrow={1}>
 						<Button>Default</Button>
 						<Button>Small</Button>
 					</Button.Group>

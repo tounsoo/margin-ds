@@ -9,18 +9,34 @@
     }
 }
 @layer base {
+    .datepicker {
+        display: inline-flex;
+        gap: .5rem;
+        flex-direction: column;
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-inline-start: $spacing-3_5;
+            padding-inline-end: $spacing-1;
+
+            .controls {
+                display: flex;
+                gap: .5rem;
+                .control {
+                    width: $spacing-11;
+                }
+            }
+        }
+    }
     .date-grid {
         border-spacing: $spacing-1;
         display: table;
     }
-    .header {
-        padding-inline-start: $spacing-3_5;
-        padding-inline-end: $spacing-1;
-    }
+    
     .hidden {
         visibility: hidden;
     }
-    .controller {
-        width: $spacing-11;
-    }
+    
 }

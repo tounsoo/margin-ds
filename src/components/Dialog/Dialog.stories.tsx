@@ -3,7 +3,7 @@ import { Button } from "../Button";
 import { Dialog } from "./Dialog";
 import { useState } from "react";
 import { Heading } from "../Heading";
-import { Flex } from "../Flex";
+import { Flexbox } from "../Flexbox";
 
 const meta = {
 	title: "Example/Dialog",
@@ -24,12 +24,12 @@ export const Default: Story = {
 			<div>
 				<Button onClick={() => setOpen(true)}>Open Dialog</Button>
 				<Dialog open={open} onClose={() => setOpen(false)}>
-					<Flex
-						direction="column"
+					<Flexbox
+						flexDirection="column"
 						gap="1rem"
 						style={{ width: "clamp(200px, 400px, 90svw)" }}
 					>
-						<Flex justifyContent="space-between">
+						<Flexbox justifyContent="space-between">
 							<Heading as="h3">Dialog Title</Heading>
 							<Button
 								onClick={() => setOpen(false)}
@@ -38,7 +38,7 @@ export const Default: Story = {
 							>
 								&times;
 							</Button>
-						</Flex>
+						</Flexbox>
 						Officia incididunt fugiat cillum esse minim mollit enim
 						sunt laboris nostrud ipsum esse eu. Ut ea in deserunt
 						culpa sunt anim tempor elit nisi exercitation. Commodo
@@ -49,7 +49,7 @@ export const Default: Story = {
 						<Button onClick={() => setOpen(false)}>
 							Close Dialog
 						</Button>
-					</Flex>
+					</Flexbox>
 				</Dialog>
 			</div>
 		);
@@ -64,12 +64,12 @@ export const ContentChanging: Story = {
 			<div>
 				<Button onClick={() => setOpen(true)}>Open Dialog</Button>
 				<Dialog open={open} onClose={() => setOpen(false)}>
-					<Flex
-						direction="column"
+					<Flexbox
+						flexDirection="column"
 						gap="1rem"
 						style={{ width: "clamp(200px, 400px, 90svw)" }}
 					>
-						<Flex justifyContent="space-between">
+						<Flexbox justifyContent="space-between">
 							<Heading as="h3">Dialog Title</Heading>
 							<Button
 								onClick={() => setOpen(false)}
@@ -78,7 +78,7 @@ export const ContentChanging: Story = {
 							>
 								&times;
 							</Button>
-						</Flex>
+						</Flexbox>
 						Officia incididunt fugiat cillum esse minim mollit enim
 						sunt laboris nostrud ipsum esse eu. Ut ea in deserunt
 						culpa sunt anim tempor elit nisi exercitation.
@@ -101,7 +101,7 @@ export const ContentChanging: Story = {
 						<Button onClick={() => setOpen(false)}>
 							Close Dialog
 						</Button>
-					</Flex>
+					</Flexbox>
 				</Dialog>
 			</div>
 		);

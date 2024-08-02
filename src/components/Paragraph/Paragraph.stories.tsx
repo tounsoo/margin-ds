@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Paragraph } from "./Paragraph";
-import { Flex } from "../Flex";
+import { Flexbox } from "../Flexbox";
 
 const meta = {
 	title: "Example/Paragraph",
@@ -34,7 +34,7 @@ export const Default: Story = {
 export const Sizes: Story = {
 	render: function Render() {
 		return (
-			<Flex direction="column">
+			<Flexbox flexDirection="column">
 				<Paragraph size="x-small">
 					Excepteur quis do esse quis.
 				</Paragraph>
@@ -47,7 +47,7 @@ export const Sizes: Story = {
 				<Paragraph size="xx-large">
 					Excepteur quis do esse quis.
 				</Paragraph>
-			</Flex>
+			</Flexbox>
 		);
 	},
 };

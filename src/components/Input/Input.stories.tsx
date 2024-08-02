@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Input } from "./Input";
 import { Button } from "../Button";
-import { Flex } from "../Flex";
+import { Flexbox } from "../Flexbox";
 import { Label } from "../Label";
 import { A11yProvider } from "../../providers";
 
@@ -27,10 +27,10 @@ export const Default: Story = {
 export const WithButton = {
 	render: function Render() {
 		return (
-			<Flex gap=".5rem">
+			<Flexbox gap=".5rem">
 				<Input aria-label="Test Input 2" disabled />
 				<Button>Action</Button>
-			</Flex>
+			</Flexbox>
 		);
 	},
 };
@@ -38,16 +38,16 @@ export const WithButton = {
 export const Accessible = {
 	render: function Render() {
 		return (
-			<Flex direction="column" gap="1rem">
+			<Flexbox flexDirection="column" gap="1rem">
 				<Input
 					aria-label="using-aria-label"
 					defaultValue="Using aria-label"
 				/>
-				<Flex direction="column">
+				<Flexbox flexDirection="column">
 					<Label htmlFor="using-htmlFor">Using htmlFor</Label>
 					<Input id="using-htmlFor" />
-				</Flex>
-			</Flex>
+				</Flexbox>
+			</Flexbox>
 		);
 	},
 };
@@ -55,10 +55,10 @@ export const AAA = {
 	render: function Render() {
 		return (
 			<A11yProvider level="AAA">
-				<Flex gap=".5rem">
+				<Flexbox gap=".5rem">
 					<Input aria-label="Test Input 2" disabled />
 					<Button>Action</Button>
-				</Flex>
+				</Flexbox>
 			</A11yProvider>
 		);
 	},

@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Checkbox } from "./Checkbox";
 import { Label } from "../Label";
-import { Flex } from "../Flex";
+import { Flexbox } from "../Flexbox";
 import { A11yProvider } from "../../providers";
 
 const meta = {
@@ -33,10 +33,10 @@ export const Controlled: Story = {
 export const Example = {
 	render: function Render() {
 		return (
-			<Flex gap=".25rem">
+			<Flexbox gap=".25rem">
 				<Checkbox id="test3" />
 				<Label htmlFor="test3">Hello World</Label>
-			</Flex>
+			</Flexbox>
 		);
 	},
 };
@@ -45,10 +45,10 @@ export const AAA = {
 	render: function Render() {
 		return (
 			<A11yProvider level="AAA">
-				<Flex gap=".25rem">
+				<Flexbox alignItems="center">
 					<Checkbox id="test3" />
 					<Label htmlFor="test3">Hello World</Label>
-				</Flex>
+				</Flexbox>
 			</A11yProvider>
 		);
 	},

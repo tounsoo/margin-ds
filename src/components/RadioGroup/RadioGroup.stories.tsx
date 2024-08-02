@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { RadioGroup } from "./RadioGroup";
 import { Label } from "../Label";
-import { Flex } from "../Flex";
+import { Flexbox } from "../Flexbox";
 import { A11yProvider } from "../../providers";
 
 const meta = {
@@ -21,11 +21,11 @@ export const Default: Story = {
 		"aria-label": "test1",
 		children: (
 			<>
-				<Flex gap=".25rem">
+				<Flexbox gap=".25rem">
 					<RadioGroup.Item id="test1-01" name="test1" value="First" />
 					<Label htmlFor="test1-01">First</Label>
-				</Flex>
-				<Flex gap=".25rem">
+				</Flexbox>
+				<Flexbox gap=".25rem">
 					<RadioGroup.Item
 						id="test1-02"
 						name="test1"
@@ -35,11 +35,11 @@ export const Default: Story = {
 					<Label htmlFor="test1-02" aria-disabled>
 						Second
 					</Label>
-				</Flex>
-				<Flex gap=".25rem">
+				</Flexbox>
+				<Flexbox gap=".25rem">
 					<RadioGroup.Item id="test1-03" name="test1" value="Third" />
 					<Label htmlFor="test1-03">Third</Label>
-				</Flex>
+				</Flexbox>
 			</>
 		),
 	},
@@ -48,37 +48,37 @@ export const Default: Story = {
 export const Example = {
 	render: function Render() {
 		return (
-			<Flex direction="column">
+			<Flexbox flexDirection="column">
 				<Label htmlFor="radiogroup-example">
 					<b>Radiogroup Example</b>
 				</Label>
 				<RadioGroup id="radiogroup-example">
-					<Flex gap=".25rem">
+					<Flexbox gap=".25rem">
 						<RadioGroup.Item
 							id="test2-01"
 							name="test2"
 							value="First"
 						/>
 						<Label htmlFor="test2-01">First</Label>
-					</Flex>
-					<Flex gap=".25rem">
+					</Flexbox>
+					<Flexbox gap=".25rem">
 						<RadioGroup.Item
 							id="test2-02"
 							name="test2"
 							value="Second"
 						/>
 						<Label htmlFor="test2-02">Second</Label>
-					</Flex>
-					<Flex gap=".25rem">
+					</Flexbox>
+					<Flexbox gap=".25rem">
 						<RadioGroup.Item
 							id="test2-03"
 							name="test2"
 							value="Third"
 						/>
 						<Label htmlFor="test2-03">Third</Label>
-					</Flex>
+					</Flexbox>
 				</RadioGroup>
-			</Flex>
+			</Flexbox>
 		);
 	},
 };
@@ -88,11 +88,11 @@ export const AAA: Story = {
 		"aria-label": "test1",
 		children: (
 			<A11yProvider level="AAA">
-				<Flex gap=".25rem">
+				<Flexbox gap=".25rem">
 					<RadioGroup.Item id="test1-01" name="test1" value="First" />
 					<Label htmlFor="test1-01">First</Label>
-				</Flex>
-				<Flex gap=".25rem">
+				</Flexbox>
+				<Flexbox gap=".25rem">
 					<RadioGroup.Item
 						id="test1-02"
 						name="test1"
@@ -102,11 +102,11 @@ export const AAA: Story = {
 					<Label htmlFor="test1-02" aria-disabled>
 						Second
 					</Label>
-				</Flex>
-				<Flex gap=".25rem">
+				</Flexbox>
+				<Flexbox gap=".25rem">
 					<RadioGroup.Item id="test1-03" name="test1" value="Third" />
 					<Label htmlFor="test1-03">Third</Label>
-				</Flex>
+				</Flexbox>
 			</A11yProvider>
 		),
 	},

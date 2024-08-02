@@ -39,6 +39,7 @@
     }
 
     .button-group {
+        display: inline-flex;
         gap: $spacing-2;
     }
 }
