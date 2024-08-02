@@ -9,7 +9,7 @@ export * from "./Heading";
 export * from "./Input";
 export * from "./Label";
 export * from "./Link";
-export * from "./List";
+export * from "./Listbox";
 export * from "./Paragraph";
 export * from "./RadioGroup";
 export * from "./Spacer";

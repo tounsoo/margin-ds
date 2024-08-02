@@ -1,0 +1,108 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .listbox {
+        all: unset;
+    }
+}
+
+@layer base {
+    .listbox {
+        color-scheme: light dark;
+        list-style: none;
+        
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box;
+
+        font-family: $font-family;
+        font-size: $font-size-sm;
+        line-height: $font-size-sm--line-height;
+        gap: $spacing-1;
+        padding-inline: $spacing-3;
+       
+        border-radius: $radius-md;
+
+       .listbox-item {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            justify-content: center;
+            box-sizing: border-box;
+            position: relative;
+            cursor: pointer;
+            
+
+            font-family: $font-family;
+            font-size: $font-size-sm;
+            line-height: $font-size-sm--line-height;
+            gap: $spacing-1;
+            padding-block: $spacing-2;
+            padding-inline-start: $spacing-3;
+            padding-inline-end: $spacing-9;
+            border-radius: $radius-md;
+
+            min-height: $font-size-sm--line-height + $spacing-4;
+            min-width: $font-size-sm--line-height + $spacing-4;
+
+            outline-style: solid;
+            outline-color: transparent;
+            outline-width: 0;
+            transition-property: outline;
+            transition-duration: $default-transition-duration;
+            transition-timing-function: $transition-timing-function-out;
+       }
+
+    }
+}
+
+@layer state {
+    .listbox-item:not(:disabled):not([aria-disabled="true"]) {
+        &:hover {
+            background-color: light-dark($color-gray-200, $color-gray-600)
+        }
+        
+        &:active {
+            background-color: light-dark($color-gray-300, $color-gray-500)
+        }
+
+        &[aria-selected="true"] {
+            &::after {
+                content: '';
+                position: absolute;
+                border-color: light-dark($color-black, $color-white);
+                border-style: solid;
+                border-width: 0 0.15em 0.15em 0;
+                box-sizing: border-box;
+                aspect-ratio: 1 / 1.8;
+                rotate: 45deg;
+                width: 0.375em;
+                margin-block-start: -0.125rem;
+                inset-inline-end: 1rem;
+            }
+        }
+        
+    }
+
+    .listbox-item:disabled,
+    .listbox-item[aria-disabled="true"] {
+        opacity: .4;
+        cursor: not-allowed;
+    }
+
+    .listbox:focus-visible,
+    .listbox.pseudo-focus-visible {
+        .listbox-item[data-focused="true"] {
+            background-color: light-dark($color-gray-200, $color-gray-600);
+            outline-width: 0.125rem;
+            outline-color: light-dark($color-gray-300, $color-gray-500)
+        }
+    }
+    
+    @media (prefers-reduced-motion) {
+        .listbox-item {
+            transition: outline-offset 0.1ms;
+        }
+    }
+}

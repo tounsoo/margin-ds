@@ -1,17 +1,17 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import { List } from "./List";
+import { Listbox } from "./Listbox";
 import { useState } from "react";
 import { Button } from "../Button";
 import { Flexbox } from "../Flexbox";
 
 const meta = {
-	title: "Example/List",
-	component: List,
+	title: "Example/Listbox",
+	component: Listbox,
 	parameters: {
 		layout: "centered",
 	},
 	tags: ["autodocs"],
-} satisfies Meta<typeof List>;
+} satisfies Meta<typeof Listbox>;
 
 export default meta;
 type Story = StoryObj<typeof meta>;
@@ -19,33 +19,15 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: function Render() {
 		return (
-			<List style={{ width: 200 }}>
-				<List.Item id="01">
-					Duis anim Lorem aliquip et esse culpa velit mollit ea ad eu
-					dolor in. Fugiat eu quis nisi excepteur. Exercitation
-					commodo minim nisi voluptate laborum occaecat ex labore.
-					Consectetur aliquip anim nostrud occaecat esse sunt amet.
-					Nostrud elit proident officia ipsum.
-				</List.Item>
-				<List.Item id="02">02</List.Item>
-				<List.Item id="03">03</List.Item>
-			</List>
-		);
-	},
-};
-
-export const Selectable: Story = {
-	render: function Render() {
-		return (
-			<List
-				selectable
+			<Listbox
+				defaultSelected="01"
 				onSelectionChange={console.log}
 				style={{ width: 200 }}
 			>
-				<List.Item id="01">01</List.Item>
-				<List.Item id="02">02</List.Item>
-				<List.Item id="03">03</List.Item>
-			</List>
+				<Listbox.Item id="01">01</Listbox.Item>
+				<Listbox.Item id="02">02</Listbox.Item>
+				<Listbox.Item id="03">03</Listbox.Item>
+			</Listbox>
 		);
 	},
 };
@@ -53,7 +35,7 @@ export const Selectable: Story = {
 export const FocusControlled: Story = {
 	render: function Render() {
 		const idArr = ["01", "02", "03"];
-		const [selected, setSelected] = useState<string>();
+		const [selected, setSelected] = useState<string | null>();
 		const [focusIndex, setFocusIndex] = useState(0);
 		const [focusVisible, setFocusVisible] = useState(false);
 		return (
@@ -76,7 +58,7 @@ export const FocusControlled: Story = {
 					<Button
 						onClick={() => {
 							if (selected === idArr[focusIndex]) {
-								setSelected(undefined);
+								setSelected(null);
 							} else {
 								setSelected(idArr[focusIndex]);
 							}
@@ -85,14 +67,13 @@ export const FocusControlled: Story = {
 						Select
 					</Button>
 				</Button.Group>
-				<List
-					selectable
+				<Listbox
 					pseudoFocusVisible={focusVisible}
 					focusedItem={idArr[focusIndex]}
 					selected={selected}
 				>
 					{idArr.map((id) => (
-						<List.Item
+						<Listbox.Item
 							key={id}
 							id={id}
 							onClick={({ id }) => {
@@ -103,9 +84,9 @@ export const FocusControlled: Story = {
 							}}
 						>
 							{id}
-						</List.Item>
+						</Listbox.Item>
 					))}
-				</List>
+				</Listbox>
 			</Flexbox>
 		);
 	},
