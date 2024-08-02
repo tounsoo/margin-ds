@@ -9,7 +9,7 @@ import {
 	type SetStateAction,
 	type ComponentProps,
 	type KeyboardEvent,
-    type MouseEvent,
+	type MouseEvent,
 } from "react";
 import styles from "./List.module.scss";
 import cx from "classnames";
@@ -21,36 +21,52 @@ type ListContextType = {
 	selectedItem?: string | null;
 	setSelectedItem?: Dispatch<SetStateAction<string | null | undefined>>;
 	selectable?: boolean;
+    controlled?: boolean;
 	onSelectionChange?: ListProps["onSelectionChange"];
 };
 
 const ListContext = createContext<ListContextType>({});
 
-export type ListProps = ComponentProps<"ul"> & ({
-	selectable?: never;
-	defaultSelected?: never;
-	onSelectionChange?: never;
-} | {
-	selectable: true;
-	defaultSelected?: string;
-	onSelectionChange?: (value?: string) => void;
-})
+export type ListProps = ComponentProps<"ul"> &
+	(
+		| {
+				selectable?: never;
+				defaultSelected?: never;
+				selected?: never;
+				onSelectionChange?: never;
+                focusedItem?: never;
+                pseudoFocus?: never;
+		  }
+		| {
+				selectable: true;
+				defaultSelected?: string;
+				selected?: string;
+				onSelectionChange?: (value?: string) => void;
+                focusedItem?: string;
+                pseudoFocus?: boolean;
+		  }
+	);
 
 export const List = (props: ListProps) => {
 	const {
 		children,
 		className,
 		defaultSelected,
+        selected,
 		onSelectionChange,
 		selectable,
-        onKeyDown,
+		onKeyDown,
+        pseudoFocus,
+        focusedItem: focusedItemProp,
 		...rest
 	} = props;
 	const elRef = useRef<HTMLUListElement>(null);
 	const [itemArr, setItemArr] = useState<(string | null)[]>();
 	const [focusedItem, setFocusedItem] = useState<string | null>();
 	const [selectedItem, setSelectedItem] = useState<string | null>();
-	const classNames = cx(styles.list, className);
+	const classNames = cx(styles.list, className, {
+        [styles['pseudo-focus']]: pseudoFocus
+    });
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Inital render
 	useEffect(() => {
@@ -63,8 +79,18 @@ export const List = (props: ListProps) => {
 			item.getAttribute("id"),
 		);
 		setItemArr(itemValues);
-		setFocusedItem(defaultSelected ?? itemValues[0] ?? undefined);
+		setFocusedItem(focusedItemProp ?? defaultSelected ?? itemValues[0]);
 	}, []);
+
+    useEffect(() => {
+        if (typeof focusedItemProp === 'undefined') return;
+        setFocusedItem(focusedItemProp);
+    }, [focusedItemProp])
+   
+    useEffect(() => {
+        // if (typeof selected === 'undefined') return;
+        setSelectedItem(selected);
+    }, [selected])
 
 	const contextValue = useMemo(() => {
 		return {
@@ -74,83 +100,58 @@ export const List = (props: ListProps) => {
 			setSelectedItem,
 			selectable,
 			onSelectionChange,
+            controlled: !!selected
 		};
-	}, [focusedItem, selectedItem, selectable, onSelectionChange]);
+	}, [focusedItem, selectedItem, selected, selectable, onSelectionChange]);
 
-    const thisIndex = focusedItem && itemArr?.indexOf(focusedItem) || 0;
-    const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
-        onKeyDown?.(e);
-        if (!selectable) return;
-        e.preventDefault();
-        e.stopPropagation();
-        if (e.code === 'ArrowDown') {
-           		if (itemArr?.[thisIndex + 1]) {
-				const target = elRef.current?.querySelector(
-					`li[id="${itemArr[thisIndex + 1]}"]`,
-				) as HTMLLIElement;
+	const thisIndex = (focusedItem && itemArr?.indexOf(focusedItem)) || 0;
+	const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
+		onKeyDown?.(e);
+		if (!selectable) return;
 
-				target.focus();
+        if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.code)) {
+            e.preventDefault();
+			e.stopPropagation();
+        }
+		if (e.code === "ArrowDown") {
+			if (itemArr?.[thisIndex + 1]) {
 				setFocusedItem?.(itemArr[thisIndex + 1]);
 				return;
 			}
-
-			const target = elRef.current?.querySelector(
-				`li[id="${itemArr?.[0]}"]`,
-			) as HTMLLIElement;
-
-			target.focus();
 			setFocusedItem?.(itemArr?.[0]);
-        }
-        	if (e.code === "ArrowUp") {
+		}
+		if (e.code === "ArrowUp") {
 			if (itemArr?.[thisIndex - 1]) {
-				const target = elRef.current?.querySelector(
-					`li[id="${itemArr[thisIndex - 1]}"]`,
-				) as HTMLLIElement;
-				target.focus();
 				setFocusedItem?.(itemArr[thisIndex - 1]);
 				return;
 			}
-
-			const target = elRef.current?.querySelector(
-				`li[id="${itemArr?.[itemArr.length - 1]}"]`,
-			) as HTMLLIElement;
-			target.focus();
 			setFocusedItem?.(itemArr?.[itemArr.length - 1]);
 		}
 		if (e.code === "Home") {
-			const target = elRef.current?.querySelector(
-				`li[id="${itemArr?.[0]}"]`,
-			) as HTMLLIElement;
-
-			target.focus();
 			setFocusedItem?.(itemArr?.[0]);
 		}
 		if (e.code === "End") {
-			const target = elRef.current?.querySelector(
-				`li[id="${itemArr?.[thisIndex - 1]}"]`,
-			) as HTMLLIElement;
-
-			target.focus();
 			setFocusedItem?.(itemArr?.[thisIndex - 1]);
 		}
 		if (e.code === "Space") {
-            if (focusedItem === selectedItem) {
-                setSelectedItem?.(undefined);
-                onSelectionChange?.(undefined);
-                return;
-            }
+            if (selected) return;
+			if (focusedItem === selectedItem) {
+				setSelectedItem?.(undefined);
+				onSelectionChange?.(undefined);
+				return;
+			}
 			setSelectedItem?.(focusedItem);
 			focusedItem && onSelectionChange?.(focusedItem);
 		}
-    }
+	};
 	return (
 		<ul
-            role={selectable ? "listbox" : "list"}
+			role={selectable ? "listbox" : "list"}
 			className={classNames}
-            onKeyDown={handleKeyDown}
+			onKeyDown={handleKeyDown}
 			ref={elRef}
-            tabIndex={0}
-            aria-activedescendant={focusedItem ?? undefined}
+			tabIndex={0}
+			aria-activedescendant={focusedItem ?? undefined}
 			{...rest}
 		>
 			<ListContext.Provider value={contextValue}>
@@ -165,33 +166,35 @@ export type ListItemProps = SetRequired<ComponentProps<"li">, "id">;
 List.Item = (props: ListItemProps) => {
 	const { children, className, id, onClick, ...rest } = props;
 	const {
-        focusedItem,
-        setFocusedItem,
+		focusedItem,
+		setFocusedItem,
 		selectedItem,
-        setSelectedItem,
+		setSelectedItem,
 		selectable,
-        onSelectionChange
+		onSelectionChange,
+        controlled
 	} = useContext(ListContext);
 	const classNames = cx(styles["list-item"], className);
 
-    const handleClick = (e: MouseEvent<HTMLLIElement>) => {
-        onClick?.(e);
-        if (!selectable) return;
-        if (selectedItem === id) {
-            setFocusedItem?.(undefined);
-            setSelectedItem?.(undefined); 
-            onSelectionChange?.(undefined)
-            return;
-        }
-        setFocusedItem?.(id);
-        setSelectedItem?.(id);
-        onSelectionChange?.(id)
-    }
+	const handleClick = (e: MouseEvent<HTMLLIElement>) => {
+		onClick?.(e);
+		if (!selectable) return;
+        if (controlled) return;
+		if (selectedItem === id) {
+			setFocusedItem?.(undefined);
+			setSelectedItem?.(undefined);
+			onSelectionChange?.(undefined);
+			return;
+		}
+		setFocusedItem?.(id);
+		setSelectedItem?.(id);
+		onSelectionChange?.(id);
+	};
 
 	return (
 		<li
 			className={classNames}
-            data-focused={focusedItem === id}
+			data-focused={focusedItem === id}
 			onClick={handleClick}
 			aria-selected={selectable && selectedItem === id}
 			id={id}
