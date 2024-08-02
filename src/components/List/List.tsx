@@ -35,15 +35,15 @@ export type ListProps = ComponentProps<"ul"> &
 				selected?: never;
 				onSelectionChange?: never;
                 focusedItem?: never;
-                pseudoFocus?: never;
+                pseudoFocusVisible?: never;
 		  }
 		| {
 				selectable: true;
 				defaultSelected?: string;
 				selected?: string;
-				onSelectionChange?: (value?: string) => void;
+				onSelectionChange?: (data?: {selection?: string}) => void;
                 focusedItem?: string;
-                pseudoFocus?: boolean;
+                pseudoFocusVisible?: boolean;
 		  }
 	);
 
@@ -56,7 +56,7 @@ export const List = (props: ListProps) => {
 		onSelectionChange,
 		selectable,
 		onKeyDown,
-        pseudoFocus,
+        pseudoFocusVisible,
         focusedItem: focusedItemProp,
 		...rest
 	} = props;
@@ -65,7 +65,8 @@ export const List = (props: ListProps) => {
 	const [focusedItem, setFocusedItem] = useState<string | null>();
 	const [selectedItem, setSelectedItem] = useState<string | null>();
 	const classNames = cx(styles.list, className, {
-        [styles['pseudo-focus']]: pseudoFocus
+        [styles['pseudo-focus-visible']]: pseudoFocusVisible,
+        [styles.selectable]: selectable
     });
 
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Inital render
@@ -88,7 +89,6 @@ export const List = (props: ListProps) => {
     }, [focusedItemProp])
    
     useEffect(() => {
-        // if (typeof selected === 'undefined') return;
         setSelectedItem(selected);
     }, [selected])
 
@@ -100,20 +100,20 @@ export const List = (props: ListProps) => {
 			setSelectedItem,
 			selectable,
 			onSelectionChange,
-            controlled: !!selected
+            controlled: !!selected || !!focusedItemProp
 		};
-	}, [focusedItem, selectedItem, selected, selectable, onSelectionChange]);
+	}, [focusedItem, focusedItemProp, selectedItem, selected, selectable, onSelectionChange]);
 
 	const thisIndex = (focusedItem && itemArr?.indexOf(focusedItem)) || 0;
 	const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
 		onKeyDown?.(e);
 		if (!selectable) return;
-
         if (['ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.code)) {
             e.preventDefault();
 			e.stopPropagation();
         }
 		if (e.code === "ArrowDown") {
+            if (focusedItemProp) return;
 			if (itemArr?.[thisIndex + 1]) {
 				setFocusedItem?.(itemArr[thisIndex + 1]);
 				return;
@@ -121,6 +121,7 @@ export const List = (props: ListProps) => {
 			setFocusedItem?.(itemArr?.[0]);
 		}
 		if (e.code === "ArrowUp") {
+            if (focusedItemProp) return;
 			if (itemArr?.[thisIndex - 1]) {
 				setFocusedItem?.(itemArr[thisIndex - 1]);
 				return;
@@ -128,9 +129,11 @@ export const List = (props: ListProps) => {
 			setFocusedItem?.(itemArr?.[itemArr.length - 1]);
 		}
 		if (e.code === "Home") {
+            if (focusedItemProp) return;
 			setFocusedItem?.(itemArr?.[0]);
 		}
 		if (e.code === "End") {
+            if (focusedItemProp) return;
 			setFocusedItem?.(itemArr?.[thisIndex - 1]);
 		}
 		if (e.code === "Space") {
@@ -141,7 +144,7 @@ export const List = (props: ListProps) => {
 				return;
 			}
 			setSelectedItem?.(focusedItem);
-			focusedItem && onSelectionChange?.(focusedItem);
+			focusedItem && onSelectionChange?.({selection: focusedItem});
 		}
 	};
 	return (
@@ -150,7 +153,7 @@ export const List = (props: ListProps) => {
 			className={classNames}
 			onKeyDown={handleKeyDown}
 			ref={elRef}
-			tabIndex={0}
+			tabIndex={focusedItemProp ? -1 : 0}
 			aria-activedescendant={focusedItem ?? undefined}
 			{...rest}
 		>
@@ -161,10 +164,13 @@ export const List = (props: ListProps) => {
 	);
 };
 
-export type ListItemProps = SetRequired<ComponentProps<"li">, "id">;
+export type ListItemProps = Omit<SetRequired<ComponentProps<"li">, "id">, 'onClick' | 'onMouseEnter'> & {
+    onClick?: (data: {id: string}, e: MouseEvent<HTMLLIElement>) => void
+    onMouseEnter?: (data: {id: string}, e: MouseEvent<HTMLLIElement>) => void
+};
 
 List.Item = (props: ListItemProps) => {
-	const { children, className, id, onClick, ...rest } = props;
+	const { children, className, id, onClick, onMouseEnter, ...rest } = props;
 	const {
 		focusedItem,
 		setFocusedItem,
@@ -172,12 +178,12 @@ List.Item = (props: ListItemProps) => {
 		setSelectedItem,
 		selectable,
 		onSelectionChange,
-        controlled
+        controlled,
 	} = useContext(ListContext);
 	const classNames = cx(styles["list-item"], className);
 
 	const handleClick = (e: MouseEvent<HTMLLIElement>) => {
-		onClick?.(e);
+		onClick?.({ id }, e);
 		if (!selectable) return;
         if (controlled) return;
 		if (selectedItem === id) {
@@ -188,7 +194,7 @@ List.Item = (props: ListItemProps) => {
 		}
 		setFocusedItem?.(id);
 		setSelectedItem?.(id);
-		onSelectionChange?.(id);
+		onSelectionChange?.({selection: id});
 	};
 
 	return (
@@ -196,6 +202,7 @@ List.Item = (props: ListItemProps) => {
 			className={classNames}
 			data-focused={focusedItem === id}
 			onClick={handleClick}
+			onMouseEnter={(e: MouseEvent<HTMLLIElement>) => onMouseEnter?.({id}, e)}
 			aria-selected={selectable && selectedItem === id}
 			id={id}
 			{...rest}
