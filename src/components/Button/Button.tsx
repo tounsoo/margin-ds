@@ -2,7 +2,7 @@ import {
 	useEffect,
 	useRef,
 	useState,
-	type ComponentPropsWithoutRef,
+	type ComponentPropsWithRef,
 	type MouseEvent,
 } from "react";
 import styles from "./Button.module.scss";
@@ -13,7 +13,7 @@ import { useAccessibleTarget } from "../../hooks";
 import { getLabel } from "../../functions";
 import { Flexbox, type FlexboxProps } from "../Flexbox";
 
-export type ButtonProps = ComponentPropsWithoutRef<"button"> & {
+export type ButtonProps = ComponentPropsWithRef<"button"> & {
 	/**
 	 * @default default
 	 */

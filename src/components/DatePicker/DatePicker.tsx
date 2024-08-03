@@ -1,7 +1,7 @@
 import {
 	useRef,
 	useState,
-	type ComponentPropsWithoutRef,
+	type ComponentPropsWithRef,
 	type ReactElement,
 	type MouseEvent,
 	type KeyboardEvent,
@@ -34,7 +34,7 @@ export type DatePickerCellProps = {
 };
 
 export type DatePickerProps = Omit<
-	ComponentPropsWithoutRef<"div">,
+	ComponentPropsWithRef<"div">,
 	"defaultValue"
 > &
 	Omit<UseMonthProps, "date"> & {

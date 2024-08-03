@@ -2,7 +2,7 @@ import {
 	type MouseEvent,
 	useEffect,
 	useState,
-	type ComponentPropsWithoutRef,
+	type ComponentPropsWithRef,
 	useRef,
 } from "react";
 import styles from "./Switch.module.scss";
@@ -11,25 +11,20 @@ import { useA11y } from "../../providers";
 import { useAccessibleTarget } from "../../hooks";
 import type { a11yProps } from "../../types";
 import type { Except, RequireAtLeastOne } from "type-fest";
+import { mergeRefs } from "../../functions";
 
 type RequiredProps = "id" | "aria-label" | "aria-labelledby";
-// export type CheckboxProps =
-//     Except<ComponentPropsWithoutRef<'input'>, RequiredProps>
-//     & RequireAtLeastOne<ComponentPropsWithoutRef<'input'>, RequiredProps>
-//     & {
-//         a11y?: a11yProps
-//     };
 
 export type SwitchProps = Except<
 	Omit<
-		ComponentPropsWithoutRef<"button">,
+		ComponentPropsWithRef<"button">,
 		"checked" | "defaultChecked" | "onChange" | "children"
 	>,
 	RequiredProps
 > &
 	RequireAtLeastOne<
 		Omit<
-			ComponentPropsWithoutRef<"button">,
+			ComponentPropsWithRef<"button">,
 			"checked" | "defaultChecked" | "onChange" | "children"
 		>,
 		RequiredProps
@@ -49,6 +44,7 @@ export const Switch = (props: SwitchProps) => {
 		onChange,
 		a11y,
 		style,
+        ref,
 		...rest
 	} = props;
 	const switchRef = useRef<HTMLButtonElement>(null);
@@ -118,7 +114,7 @@ export const Switch = (props: SwitchProps) => {
 	return (
 		<button
 			type="button"
-			ref={switchRef}
+			ref={mergeRefs(ref, switchRef)}
 			role="switch"
 			aria-checked={checkState}
 			onClick={onClickHandler}

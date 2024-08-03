@@ -1,8 +1,8 @@
-import type { CSSProperties, ComponentPropsWithoutRef } from "react";
+import type { CSSProperties, ComponentPropsWithRef } from "react";
 import styles from "./Flexbox.module.scss";
 import cx from "classnames";
 
-export type FlexboxProps = ComponentPropsWithoutRef<"div"> & {
+export type FlexboxProps = ComponentPropsWithRef<"div"> & {
 	flex?: CSSProperties["flex"];
 	flexBasis?: CSSProperties["flexBasis"];
 	flexDirection?: CSSProperties["flexDirection"];

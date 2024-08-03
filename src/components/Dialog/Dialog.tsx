@@ -1,5 +1,5 @@
 import {
-	type ComponentPropsWithoutRef,
+	type ComponentPropsWithRef,
 	type KeyboardEvent,
 	type MouseEvent,
 	useCallback,
@@ -8,8 +8,9 @@ import {
 } from "react";
 import styles from "./Dialog.module.scss";
 import cx from "classnames";
+import { mergeRefs } from "../../functions";
 
-export type DialogProps = Omit<ComponentPropsWithoutRef<"dialog">, "open"> & {
+export type DialogProps = Omit<ComponentPropsWithRef<"dialog">, "open"> & {
 	open?: boolean;
 	onClose?: () => void;
 };
@@ -27,7 +28,7 @@ const dialogCountDown = () => {
 };
 
 export const Dialog = (props: DialogProps) => {
-	const { children, className, open, onClose, onClick, ...rest } = props;
+	const { children, className, open, onClose, onClick, ref, ...rest } = props;
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
 	const closeDialog = useCallback(() => {
@@ -80,7 +81,7 @@ export const Dialog = (props: DialogProps) => {
 		<dialog
 			onClick={onClickHandler}
 			className={cx(styles.dialog, className)}
-			ref={dialogRef}
+			ref={ mergeRefs(ref, dialogRef) }
 			onKeyDown={onKeyDownHandler}
 			{...rest}
 		>

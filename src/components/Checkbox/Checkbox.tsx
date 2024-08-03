@@ -1,6 +1,6 @@
 import {
 	type ChangeEvent,
-	type ComponentPropsWithoutRef,
+	type ComponentPropsWithRef,
 	useEffect,
 	useRef,
 	useState,
@@ -11,17 +11,18 @@ import type { Except, RequireAtLeastOne } from "type-fest";
 import { useAccessibleTarget } from "../../hooks";
 import { useA11y } from "../../providers";
 import type { a11yProps } from "../../types";
+import { mergeRefs } from "../../functions";
 
 type RequiredProps = "id" | "aria-label" | "aria-labelledby";
 export type CheckboxProps = Except<
-	ComponentPropsWithoutRef<"input">,
+	ComponentPropsWithRef<"input">,
 	RequiredProps
 > &
-	RequireAtLeastOne<ComponentPropsWithoutRef<"input">, RequiredProps> & {
+	RequireAtLeastOne<ComponentPropsWithRef<"input">, RequiredProps> & {
 		a11y?: a11yProps;
 	};
 export const Checkbox = (props: CheckboxProps) => {
-	const { className, checked, style, a11y, onChange, ...rest } = props;
+	const { className, checked, style, a11y, onChange, ref, ...rest } = props;
 	const checkboxRef = useRef<HTMLInputElement>(null);
 	const [checkState, setCheckState] = useState(checked);
 	const classNames = cx(styles.checkbox, className);
@@ -88,7 +89,7 @@ export const Checkbox = (props: CheckboxProps) => {
 			type="checkbox"
 			className={classNames}
 			style={combinedStyle}
-			ref={checkboxRef}
+			ref={mergeRefs(ref, checkboxRef)}
 			checked={checkState}
 			onChange={handleOnChange}
 			{...rest}

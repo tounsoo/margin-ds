@@ -7,13 +7,14 @@ import {
 	useMemo,
 	type Dispatch,
 	type SetStateAction,
-	type ComponentProps,
+	type ComponentPropsWithRef,
 	type KeyboardEvent,
 	type MouseEvent,
 } from "react";
 import styles from "./Listbox.module.scss";
 import cx from "classnames";
 import type { SetRequired } from "type-fest";
+import { mergeRefs } from "../../functions";
 
 type ListboxContextType = {
 	focusedItem?: string | null;
@@ -27,7 +28,7 @@ type ListboxContextType = {
 
 const ListContext = createContext<ListboxContextType>({});
 
-export type ListboxProps = ComponentProps<"ul"> & {
+export type ListboxProps = ComponentPropsWithRef<"ul"> & {
 	defaultSelected?: string;
 	selected?: string | null;
 	onSelectionChange?: (data?: { selection?: string }) => void;
@@ -45,6 +46,7 @@ export const Listbox = (props: ListboxProps) => {
 		onKeyDown,
 		pseudoFocusVisible,
 		focusedItem: focusedItemProp,
+        ref,
 		...rest
 	} = props;
 	const elRef = useRef<HTMLUListElement>(null);
@@ -145,7 +147,7 @@ export const Listbox = (props: ListboxProps) => {
 			role="listbox"
 			className={classNames}
 			onKeyDown={handleKeyDown}
-			ref={elRef}
+			ref={mergeRefs(ref, elRef)}
 			tabIndex={focusedItemProp ? -1 : 0}
 			aria-activedescendant={focusedItem ?? undefined}
 			{...rest}
@@ -158,7 +160,7 @@ export const Listbox = (props: ListboxProps) => {
 };
 
 export type ListboxItemProps = Omit<
-	SetRequired<ComponentProps<"li">, "id">,
+	SetRequired<ComponentPropsWithRef<"li">, "id">,
 	"onClick" | "onMouseEnter"
 > & {
 	onClick?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;

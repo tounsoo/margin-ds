@@ -3,7 +3,7 @@ import {
 	useRef,
 	useState,
 	type ChangeEvent,
-	type ComponentPropsWithoutRef,
+	type ComponentPropsWithRef,
 } from "react";
 import styles from "./RadioGroup.module.scss";
 import cx from "classnames";
@@ -11,13 +11,14 @@ import type { Except, RequireAtLeastOne, SetRequired } from "type-fest";
 import { useAccessibleTarget } from "../../hooks";
 import { useA11y } from "../../providers";
 import type { a11yProps } from "../../types";
+import { mergeRefs } from "../../functions";
 
 type RequiredProps = "id" | "aria-label" | "aria-labelledby";
 export type RadioGroupProps = Except<
-	ComponentPropsWithoutRef<"div">,
+	ComponentPropsWithRef<"div">,
 	RequiredProps
 > &
-	RequireAtLeastOne<ComponentPropsWithoutRef<"input">, RequiredProps> & {};
+	RequireAtLeastOne<ComponentPropsWithRef<"input">, RequiredProps> & {};
 export const RadioGroup = (props: RadioGroupProps) => {
 	const { className, defaultValue, ...rest } = props;
 	const classNames = cx(styles["radio-group"], className);
@@ -59,14 +60,14 @@ export const RadioGroup = (props: RadioGroupProps) => {
 };
 
 export type RadioGroupItemProps = SetRequired<
-	ComponentPropsWithoutRef<"input">,
+	ComponentPropsWithRef<"input">,
 	"name"
 > & {
 	a11y?: a11yProps;
 };
 
 RadioGroup.Item = (props: RadioGroupItemProps) => {
-	const { className, checked, onChange, style, a11y, ...rest } = props;
+	const { className, checked, onChange, style, a11y, ref, ...rest } = props;
 	const [checkState, setCheckState] = useState(checked);
 	const classNames = cx(styles.item, className);
 	const radioRef = useRef<HTMLInputElement>(null);
@@ -132,7 +133,7 @@ RadioGroup.Item = (props: RadioGroupItemProps) => {
 	return (
 		<input
 			type="radio"
-			ref={radioRef}
+			ref={mergeRefs(ref, radioRef)}
 			style={combinedStyle}
 			checked={checkState}
 			className={classNames}
