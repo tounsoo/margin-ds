@@ -5,7 +5,7 @@ import { Flexbox } from "../Flexbox";
 import { A11yProvider } from "../../providers";
 
 const meta = {
-	title: "Example/RadioGroup",
+	title: "Component/RadioGroup",
 	component: RadioGroup,
 	parameters: {
 		layout: "centered",

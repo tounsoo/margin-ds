@@ -3,7 +3,7 @@ import { Button } from "../Button";
 import { Flexbox } from "./Flexbox";
 
 const meta = {
-	title: "Example/Flexbox",
+	title: "Component/Flexbox",
 	component: Flexbox,
 	parameters: {
 		layout: "centered",

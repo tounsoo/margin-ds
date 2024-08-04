@@ -5,7 +5,7 @@ import { Label } from "../Label";
 import { A11yProvider } from "../../providers";
 
 const meta = {
-	title: "Example/Switch",
+	title: "Component/Switch",
 	component: Switch,
 	parameters: {
 		layout: "centered",

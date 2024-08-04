@@ -7,7 +7,7 @@ import { Label } from "../Label";
 import { Heading } from "../Heading";
 
 const meta = {
-	title: "Example/Card",
+	title: "Component/Card",
 	component: Card,
 	parameters: {
 		layout: "centered",

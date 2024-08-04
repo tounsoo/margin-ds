@@ -6,7 +6,7 @@ import { Heading } from "../Heading";
 import { Flexbox } from "../Flexbox";
 
 const meta = {
-	title: "Example/Dialog",
+	title: "Component/Dialog",
 	component: Dialog,
 	parameters: {
 		layout: "centered",

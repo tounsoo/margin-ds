@@ -148,7 +148,7 @@ export const Listbox = (props: ListboxProps) => {
 			className={classNames}
 			onKeyDown={handleKeyDown}
 			ref={mergeRefs(ref, elRef)}
-			tabIndex={focusedItemProp ? -1 : 0}
+			tabIndex={0}
 			aria-activedescendant={focusedItem ?? undefined}
 			{...rest}
 		>

@@ -33,15 +33,17 @@
 //     "description",
 // ]);
 
-type WithRelevance<T> = T & { relevance?: number };
+export type WithRelevance<T> = T & { relevance?: number };
 
-export function rankFilterByKey<T>(
-	arr: WithRelevance<T>[],
-	searchString: string,
-	keys: (keyof T)[],
-): T[] {
+export type RankFilterByKeyProps<T> = {
+	data: WithRelevance<T>[];
+	searchString: string;
+	keys: (keyof T)[];
+	preserveOrder?: boolean;
+};
+export function rankFilterByKey<T>(props: RankFilterByKeyProps<T>): T[] {
+	const { data, searchString, keys, preserveOrder } = props;
 	const searchPattern = new RegExp(searchString, "i");
-
 	function computeRelevance(item: WithRelevance<T>): number {
 		let score = 0;
 		keys.forEach((key, index) => {
@@ -63,16 +65,20 @@ export function rankFilterByKey<T>(
 		return score;
 	}
 
-	for (const item of arr) {
+	for (const item of data) {
 		item.relevance = computeRelevance(item);
 	}
 
+	const filteredArr = data.filter((item) => (item.relevance ?? 0) > 0);
+
+	if (preserveOrder) {
+		return filteredArr;
+	}
 	// Filter out items with relevance score of 0
-	const filteredArr = arr.filter((item) => (item.relevance ?? 0) > 0);
 
 	// Sort by relevance in descending order
-	filteredArr.sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0));
+	return filteredArr.sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0));
 
 	// Return items without the relevance property
-	return filteredArr.map(({ relevance, ...rest }) => rest as T);
+	// return filteredArr.map(({ relevance, ...rest }) => rest as T);
 }

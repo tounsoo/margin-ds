@@ -5,7 +5,7 @@ import { Flexbox } from "../Flexbox";
 import { Input } from "../Input";
 
 const meta = {
-	title: "Example/Label",
+	title: "Component/Label",
 	component: Label,
 	parameters: {
 		layout: "centered",

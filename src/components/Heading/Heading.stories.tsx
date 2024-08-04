@@ -3,7 +3,7 @@ import { Heading } from ".";
 import { Flexbox } from "../Flexbox";
 
 const meta = {
-	title: "Example/Heading",
+	title: "Component/Heading",
 	component: Heading,
 	parameters: {
 		layout: "centered",

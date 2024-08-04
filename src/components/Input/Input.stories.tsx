@@ -6,7 +6,7 @@ import { Label } from "../Label";
 import { A11yProvider } from "../../providers";
 
 const meta = {
-	title: "Example/Input",
+	title: "Component/Input",
 	component: Input,
 	parameters: {
 		layout: "centered",

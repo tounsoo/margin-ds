@@ -5,7 +5,7 @@ import { Flexbox } from "../Flexbox";
 import { A11yProvider } from "../../providers";
 
 const meta = {
-	title: "Example/Checkbox",
+	title: "Component/Checkbox",
 	component: Checkbox,
 	parameters: {
 		layout: "centered",

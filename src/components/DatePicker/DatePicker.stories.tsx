@@ -3,7 +3,7 @@ import { DatePicker } from "./DatePicker";
 import { Temporal } from "temporal-polyfill";
 
 const meta = {
-	title: "Example/DatePicker",
+	title: "Component/DatePicker",
 	parameters: {
 		layout: "centered",
 	},

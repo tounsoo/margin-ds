@@ -6,7 +6,7 @@ import {
 import { useRef } from "react";
 
 const meta = {
-	title: "hooks/useAccessibleTarget",
+	title: "Hook/useAccessibleTarget",
 	parameters: {
 		layout: "centered",
 	},

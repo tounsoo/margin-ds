@@ -1,11 +1,13 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Listbox } from "./Listbox";
-import { useState } from "react";
+import { useState, type KeyboardEvent } from "react";
 import { Button } from "../Button";
 import { Flexbox } from "../Flexbox";
+import { useTypeahead } from "../../hooks";
+import { useList } from "../../hooks/useListbox";
 
 const meta = {
-	title: "Example/Listbox",
+	title: "Component/Listbox",
 	component: Listbox,
 	parameters: {
 		layout: "centered",
@@ -88,6 +90,67 @@ export const FocusControlled: Story = {
 					))}
 				</Listbox>
 			</Flexbox>
+		);
+	},
+};
+
+type User = {
+	id: string;
+	name: string;
+	description: string;
+	age: number;
+};
+export const WithTypeahead = {
+	render: function Render() {
+		const sampleData: User[] = [
+			{
+				id: "1",
+				name: "Alice C.",
+				description: "Software Engineer",
+				age: 30,
+			},
+			{
+				id: "2",
+				name: "Alice D.",
+				description: "Software Engineer",
+				age: 30,
+			},
+			{ id: "3", name: "Bob", description: "Data Scientist", age: 25 },
+			{
+				id: "4",
+				name: "Charlie",
+				description: "Product Manager",
+				age: 35,
+			},
+			{ id: "5", name: "David", description: "UX Designer", age: 28 },
+			{
+				id: "6",
+				name: "Eve",
+				description: "Marketing Specialist",
+				age: 40,
+			},
+		];
+
+		const { focusItem, handleKeyDown } = useList({
+			data: sampleData,
+			keys: ["name", "description", "age"],
+		});
+
+		return (
+			<Listbox
+				onKeyDown={handleKeyDown}
+				focusedItem={
+					sampleData[
+						sampleData.findIndex((obj) => obj.id === focusItem.id)
+					].id
+				}
+			>
+				{sampleData.map((entry) => (
+					<Listbox.Item key={entry.id} id={entry.id}>
+						{`${entry.name} / ${entry.description} / ${entry.age}`}
+					</Listbox.Item>
+				))}
+			</Listbox>
 		);
 	},
 };

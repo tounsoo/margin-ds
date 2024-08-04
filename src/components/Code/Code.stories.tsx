@@ -3,7 +3,7 @@ import { Code } from "./Code";
 import { Paragraph } from "../Paragraph";
 
 const meta = {
-	title: "Example/Code",
+	title: "Component/Code",
 	component: Code,
 	parameters: {
 		layout: "centered",

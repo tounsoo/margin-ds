@@ -3,7 +3,7 @@ import { Paragraph } from "./Paragraph";
 import { Flexbox } from "../Flexbox";
 
 const meta = {
-	title: "Example/Paragraph",
+	title: "Component/Paragraph",
 	component: Paragraph,
 	parameters: {
 		layout: "centered",

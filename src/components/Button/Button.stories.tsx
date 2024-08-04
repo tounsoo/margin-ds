@@ -5,7 +5,7 @@ import { useState } from "react";
 import { A11yProvider } from "../../providers";
 
 const meta = {
-	title: "Example/Button",
+	title: "Component/Button",
 	component: Button,
 	parameters: {
 		layout: "centered",
