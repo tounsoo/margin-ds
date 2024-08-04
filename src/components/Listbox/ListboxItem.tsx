@@ -6,10 +6,11 @@ import { ListContext } from "./Listbox";
 
 export type ListboxItemProps = Omit<
 	SetRequired<ComponentPropsWithRef<"li">, "id">,
-	"onClick" | "onMouseEnter"
+	"onClick" | "onMouseEnter" | "value"
 > & {
 	onClick?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;
 	onMouseEnter?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;
+    value: string;
 };
 
 export const ListboxItem = (props: ListboxItemProps) => {

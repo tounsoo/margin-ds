@@ -4,17 +4,15 @@ import {
 	useRef,
 	useState,
 	useMemo,
-    Children,
 	type Dispatch,
 	type SetStateAction,
 	type ComponentPropsWithRef,
 	type KeyboardEvent,
-    type ReactElement,
 } from "react";
 import styles from "./Listbox.module.scss";
 import cx from "classnames";
-import { getLabel, mergeRefs } from "../../functions";
-import { ListboxItem } from "./ListboxItem";
+import { mergeRefs } from "../../functions";
+import { ListboxItem, type ListboxItemProps } from "./ListboxItem";
 import { isEqualWith } from "lodash";
 
 type ListboxContextType = {
@@ -38,9 +36,9 @@ export type ListboxProps = ComponentPropsWithRef<"ul"> & {
 };
 
 type ItemLabelType = {
-    text: string
-    id: string
-}
+	value: ListboxItemProps["value"];
+	id: string;
+};
 
 export const Listbox = (props: ListboxProps) => {
 	const {
@@ -52,88 +50,74 @@ export const Listbox = (props: ListboxProps) => {
 		onKeyDown,
 		pseudoFocusVisible,
 		focusedItem: focusedItemProp,
-        ref,
+		ref,
 		...rest
 	} = props;
 	const elRef = useRef<HTMLUListElement>(null);
-    const counter = useRef(0);
-	const [itemArr, setItemArr] = useState<(string | null)[]>();
-    const [itemLabelArr, setItemLabelArr] = useState<ItemLabelType[]>();
+	const counter = useRef(0);
 	const [focusedItem, setFocusedItem] = useState<string | null>();
+	const [itemArr, setItemArr] = useState<ItemLabelType[]>();
 	const [selectedItem, setSelectedItem] = useState<string | null | undefined>(
 		defaultSelected,
 	);
-    const [searchString, setSearchString] = useState("");
-    const [result, setResult] = useState<ItemLabelType[]>();
+	const [searchString, setSearchString] = useState("");
+	const [result, setResult] = useState<ItemLabelType[]>();
 
 	const classNames = cx(styles.listbox, className, {
 		[styles["pseudo-focus-visible"]]: pseudoFocusVisible,
 	});
 
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-    useEffect(() => {
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
 		const timer = setTimeout(() => setSearchString(""), 500);
 		return () => clearTimeout(timer);
 	}, [searchString]);
-    
-    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
-    useEffect(() => {
-        if (!itemLabelArr) return;
-        if (!searchString) return;
-        const filteredItems = itemLabelArr.filter(item =>
-            item.text.toLowerCase().startsWith(searchString.toLowerCase())
-        );
-		if (!filteredItems.length) return;
-        const newResult = filteredItems.sort((a, b) => a.text.localeCompare(b.text));
 
-        const sameResult = result?.length === newResult.length && isEqualWith(
-			result,
-			newResult,
+	// biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+	useEffect(() => {
+		if (!itemArr) return;
+		if (!searchString) return;
+		const filteredItems = itemArr.filter((item) =>
+			item.value.toLowerCase().startsWith(searchString.toLowerCase()),
+		);
+		if (!filteredItems.length) return;
+		const newResult = filteredItems.sort((a, b) =>
+			a.value.localeCompare(b.value),
 		);
 
-        if (sameResult && searchString.length === 1) {
-            counter.current++;
-			if (newResult.length === 1) {
-                counter.current = 0;
-                setFocusedItem(newResult[0].id);
-				return;
+		const sameResult =
+			result?.length === newResult.length &&
+			isEqualWith(result, newResult) && searchString.length === 1;
+
+		if (sameResult) {
+			counter.current++;
+			if (newResult.length === 1 || newResult.length <= counter.current) {
+				counter.current = 0;
 			}
-			if (newResult.length <= counter.current) {
-                counter.current = 0;
-				setFocusedItem(newResult[0].id);
-				return;
-			}
-            setFocusedItem(newResult[counter.current].id);
-			return;
+		} else {
+			counter.current = 0;
 		}
-		counter.current = 0;
-        setFocusedItem(newResult[0].id);
+
+		setFocusedItem(newResult[counter.current].id);
 		setResult(newResult);
-    }, [itemLabelArr, searchString])
-    
+	}, [itemArr, searchString]);
+
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Inital render
 	useEffect(() => {
 		if (!elRef.current) return;
 		const items = elRef.current.querySelectorAll(
 			'li:not([aria-disabled="true"])',
 		);
-		const itemValues = Array.from(items).map((item) =>
-			item.getAttribute("id"),
-		);
-        
-		setItemArr(itemValues);
-		setFocusedItem(focusedItemProp ?? defaultSelected ?? itemValues[0]);
-	}, []);
+		const itemArr = Array.from(items).map((item) => {
+			return {
+				id: item.getAttribute("id") ?? "",
+				value: item.getAttribute("value") ?? "",
+			} satisfies ItemLabelType;
+		});
 
-    useEffect(() => {
-        const result = (Children.toArray(children) as ReactElement[]).map((child) => {
-            return {
-                id: (child.props as object & {id: string}).id,
-                text: getLabel(child)
-            };
-        })
-        setItemLabelArr(result);
-    }, [children])
+		setItemArr(itemArr);
+		setFocusedItem(focusedItemProp ?? defaultSelected ?? itemArr[0].id);
+	}, [children]);
 
 	useEffect(() => {
 		if (typeof focusedItemProp === "undefined") return;
@@ -162,10 +146,13 @@ export const Listbox = (props: ListboxProps) => {
 		onSelectionChange,
 	]);
 
-	const thisIndex = (focusedItem && itemArr?.indexOf(focusedItem)) || 0;
+	const thisIndex =
+		(focusedItem &&
+			itemArr?.findIndex((item) => item.id === focusedItem)) ||
+		0;
 	const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
 		onKeyDown?.(e);
-        if (/^[a-zA-Z0-9]$/.test(e.key)) {
+		if (/^[a-zA-Z0-9]$/.test(e.key)) {
 			setSearchString((prev) => prev + e.key);
 		}
 		if (["ArrowDown", "ArrowUp", "Home", "End"].includes(e.code)) {
@@ -175,26 +162,26 @@ export const Listbox = (props: ListboxProps) => {
 		if (e.code === "ArrowDown") {
 			if (focusedItemProp) return;
 			if (itemArr?.[thisIndex + 1]) {
-				setFocusedItem?.(itemArr[thisIndex + 1]);
+				setFocusedItem?.(itemArr[thisIndex + 1].id);
 				return;
 			}
-			setFocusedItem?.(itemArr?.[0]);
+			setFocusedItem?.(itemArr?.[0].id);
 		}
 		if (e.code === "ArrowUp") {
 			if (focusedItemProp) return;
 			if (itemArr?.[thisIndex - 1]) {
-				setFocusedItem?.(itemArr[thisIndex - 1]);
+				setFocusedItem?.(itemArr[thisIndex - 1].id);
 				return;
 			}
-			setFocusedItem?.(itemArr?.[itemArr.length - 1]);
+			setFocusedItem?.(itemArr?.[itemArr.length - 1].id);
 		}
 		if (e.code === "Home") {
 			if (focusedItemProp) return;
-			setFocusedItem?.(itemArr?.[0]);
+			setFocusedItem?.(itemArr?.[0].id);
 		}
 		if (e.code === "End") {
 			if (focusedItemProp) return;
-			setFocusedItem?.(itemArr?.[thisIndex - 1]);
+			setFocusedItem?.(itemArr?.[thisIndex - 1].id);
 		}
 		if (e.code === "Space") {
 			if (selected) return;

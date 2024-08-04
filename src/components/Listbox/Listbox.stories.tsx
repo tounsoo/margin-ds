@@ -24,9 +24,9 @@ export const Default: Story = {
 				onSelectionChange={console.log}
 				style={{ width: 200 }}
 			>
-				<Listbox.Item id="01">01</Listbox.Item>
-				<Listbox.Item id="02">02</Listbox.Item>
-				<Listbox.Item id="03">03</Listbox.Item>
+				<Listbox.Item id="01" value="01">01</Listbox.Item>
+				<Listbox.Item id="02" value="02">02</Listbox.Item>
+				<Listbox.Item id="03" value="03">03</Listbox.Item>
 			</Listbox>
 		);
 	},
@@ -76,6 +76,7 @@ export const FocusControlled: Story = {
 						<Listbox.Item
 							key={id}
 							id={id}
+							value={id}
 							onClick={({ id }) => {
 								setSelected(id);
 							}}
@@ -117,24 +118,30 @@ export const WithObjectMapping = {
 			},
 			{ id: "a3", name: "Bob", description: "Data Scientist", age: 25 },
 			{
-				id: "a4",
+                id: "a4",
 				name: "Charlie",
 				description: "Product Manager",
 				age: 35,
 			},
 			{ id: "a5", name: "David", description: "UX Designer", age: 28 },
 			{
-				id: "a6",
+                id: "a6",
 				name: "Eve",
 				description: "Marketing Specialist",
 				age: 40,
 			},
+            {
+                id: "a7",
+                name: "Ara",
+                description: "Software Engineer",
+                age: 30,
+            },
 		];
 
 		return (
 			<Listbox>
 				{sampleData.map((entry) => (
-					<Listbox.Item key={entry.id} id={entry.id}>
+					<Listbox.Item key={entry.id} value={entry.name} id={entry.id}>
 						{`${entry.name}`}
                         <div>
                         {`${entry.description} / ${entry.age}`}
