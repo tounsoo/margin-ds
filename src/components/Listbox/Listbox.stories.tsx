@@ -1,9 +1,8 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Listbox } from "./Listbox";
-import { useState, type KeyboardEvent } from "react";
+import { useState } from "react";
 import { Button } from "../Button";
 import { Flexbox } from "../Flexbox";
-import { useTypeahead } from "../../hooks";
 import { useList } from "../../hooks/useListbox";
 
 const meta = {
