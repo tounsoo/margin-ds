@@ -27,7 +27,7 @@ export const Default: Story = {
 					<Flexbox
 						flexDirection="column"
 						gap="1rem"
-						style={{ width: "clamp(200px, 400px, 90svw)" }}
+						style={{ width: "clamp(200px, 400px, -webkit-fill-available)" }}
 					>
 						<Flexbox justifyContent="space-between">
 							<Heading as="h3">Dialog Title</Heading>
