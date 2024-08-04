@@ -82,17 +82,20 @@ $height: calc($spacing-5 + $spacing-0_5);
     }
 
     .switch:not(:disabled):not([aria-disabled="true"]) {
-        &:hover {
-            background-color: light-dark($color-gray-300, $color-gray-500)
-        }
-        &[aria-checked="true"]:hover {
-            background-color: light-dark($color-gray-700, $color-gray-100)
+        @media (pointer: fine) {
+            &:hover {
+                background-color: light-dark($color-gray-300, $color-gray-500)
+            }
+            &[aria-checked="true"]:hover {
+                background-color: light-dark($color-gray-700, $color-gray-100)
+            }
         }
     }
 
     .switch:disabled,
     .switch[aria-disabled="true"] {
         background-color: light-dark($color-gray-400, $color-gray-400);
+        cursor: not-allowed;
         
         .toggle {
             background-color: light-dark($color-gray-100, $color-gray-800);
@@ -100,7 +103,6 @@ $height: calc($spacing-5 + $spacing-0_5);
                 border-color: light-dark($color-gray-400, $color-gray-500);
             }
         }
-        cursor: not-allowed;
     }
 
     @media (prefers-reduced-motion) {
