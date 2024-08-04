@@ -13,7 +13,7 @@ import {
 } from "react";
 import styles from "./Listbox.module.scss";
 import cx from "classnames";
-import { getLabel, mergeRefs, rankFilterByKey, type WithRelevance } from "../../functions";
+import { getLabel, mergeRefs } from "../../functions";
 import { ListboxItem } from "./ListboxItem";
 import { isEqualWith } from "lodash";
 
@@ -39,6 +39,7 @@ export type ListboxProps = ComponentPropsWithRef<"ul"> & {
 
 type ItemLabelType = {
     text: string
+    id: string
 }
 
 export const Listbox = (props: ListboxProps) => {
@@ -57,13 +58,13 @@ export const Listbox = (props: ListboxProps) => {
 	const elRef = useRef<HTMLUListElement>(null);
     const counter = useRef(0);
 	const [itemArr, setItemArr] = useState<(string | null)[]>();
-    const [itemLabelArr, setItemLabelArr] = useState<WithRelevance<ItemLabelType>[]>();
+    const [itemLabelArr, setItemLabelArr] = useState<ItemLabelType[]>();
 	const [focusedItem, setFocusedItem] = useState<string | null>();
 	const [selectedItem, setSelectedItem] = useState<string | null | undefined>(
 		defaultSelected,
 	);
     const [searchString, setSearchString] = useState("");
-    const [result, setResult] = useState<WithRelevance<ItemLabelType>[]>();
+    const [result, setResult] = useState<ItemLabelType[]>();
 
 	const classNames = cx(styles.listbox, className, {
 		[styles["pseudo-focus-visible"]]: pseudoFocusVisible,
@@ -79,15 +80,11 @@ export const Listbox = (props: ListboxProps) => {
     useEffect(() => {
         if (!itemLabelArr) return;
         if (!searchString) return;
-        const newResult = rankFilterByKey({
-			data: itemLabelArr,
-			searchString,
-			keys: ['text'],
-		});
-
-		if (!newResult.length) {
-			return;
-		}
+        const filteredItems = itemLabelArr.filter(item =>
+            item.text.toLowerCase().startsWith(searchString.toLowerCase())
+        );
+		if (!filteredItems.length) return;
+        const newResult = filteredItems.sort((a, b) => a.text.localeCompare(b.text));
 
         const sameResult = result?.length === newResult.length && isEqualWith(
 			result,
