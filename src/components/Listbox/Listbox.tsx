@@ -1,20 +1,21 @@
 import {
 	createContext,
-	useContext,
 	useEffect,
 	useRef,
 	useState,
 	useMemo,
+    Children,
 	type Dispatch,
 	type SetStateAction,
 	type ComponentPropsWithRef,
 	type KeyboardEvent,
-	type MouseEvent,
+    type ReactElement,
 } from "react";
 import styles from "./Listbox.module.scss";
 import cx from "classnames";
-import type { SetRequired } from "type-fest";
-import { mergeRefs } from "../../functions";
+import { getLabel, mergeRefs, rankFilterByKey, type WithRelevance } from "../../functions";
+import { ListboxItem } from "./ListboxItem";
+import { isEqualWith } from "lodash";
 
 type ListboxContextType = {
 	focusedItem?: string | null;
@@ -26,7 +27,7 @@ type ListboxContextType = {
 	onSelectionChange?: ListboxProps["onSelectionChange"];
 };
 
-const ListContext = createContext<ListboxContextType>({});
+export const ListContext = createContext<ListboxContextType>({});
 
 export type ListboxProps = ComponentPropsWithRef<"ul"> & {
 	defaultSelected?: string;
@@ -35,6 +36,10 @@ export type ListboxProps = ComponentPropsWithRef<"ul"> & {
 	focusedItem?: string;
 	pseudoFocusVisible?: boolean;
 };
+
+type ItemLabelType = {
+    text: string
+}
 
 export const Listbox = (props: ListboxProps) => {
 	const {
@@ -50,15 +55,65 @@ export const Listbox = (props: ListboxProps) => {
 		...rest
 	} = props;
 	const elRef = useRef<HTMLUListElement>(null);
+    const counter = useRef(0);
 	const [itemArr, setItemArr] = useState<(string | null)[]>();
+    const [itemLabelArr, setItemLabelArr] = useState<WithRelevance<ItemLabelType>[]>();
 	const [focusedItem, setFocusedItem] = useState<string | null>();
 	const [selectedItem, setSelectedItem] = useState<string | null | undefined>(
 		defaultSelected,
 	);
+    const [searchString, setSearchString] = useState("");
+    const [result, setResult] = useState<WithRelevance<ItemLabelType>[]>();
+
 	const classNames = cx(styles.listbox, className, {
 		[styles["pseudo-focus-visible"]]: pseudoFocusVisible,
 	});
 
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    useEffect(() => {
+		const timer = setTimeout(() => setSearchString(""), 500);
+		return () => clearTimeout(timer);
+	}, [searchString]);
+    
+    // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+    useEffect(() => {
+        if (!itemLabelArr) return;
+        if (!searchString) return;
+        const newResult = rankFilterByKey({
+			data: itemLabelArr,
+			searchString,
+			keys: ['text'],
+		});
+
+		if (!newResult.length) {
+			return;
+		}
+
+        const sameResult = result?.length === newResult.length && isEqualWith(
+			result,
+			newResult,
+		);
+
+        if (sameResult && searchString.length === 1) {
+            counter.current++;
+			if (newResult.length === 1) {
+                counter.current = 0;
+                setFocusedItem(newResult[0].id);
+				return;
+			}
+			if (newResult.length <= counter.current) {
+                counter.current = 0;
+				setFocusedItem(newResult[0].id);
+				return;
+			}
+            setFocusedItem(newResult[counter.current].id);
+			return;
+		}
+		counter.current = 0;
+        setFocusedItem(newResult[0].id);
+		setResult(newResult);
+    }, [itemLabelArr, searchString])
+    
 	// biome-ignore lint/correctness/useExhaustiveDependencies: Inital render
 	useEffect(() => {
 		if (!elRef.current) return;
@@ -68,9 +123,20 @@ export const Listbox = (props: ListboxProps) => {
 		const itemValues = Array.from(items).map((item) =>
 			item.getAttribute("id"),
 		);
+        
 		setItemArr(itemValues);
 		setFocusedItem(focusedItemProp ?? defaultSelected ?? itemValues[0]);
 	}, []);
+
+    useEffect(() => {
+        const result = (Children.toArray(children) as ReactElement[]).map((child) => {
+            return {
+                id: (child.props as object & {id: string}).id,
+                text: getLabel(child)
+            };
+        })
+        setItemLabelArr(result);
+    }, [children])
 
 	useEffect(() => {
 		if (typeof focusedItemProp === "undefined") return;
@@ -102,6 +168,9 @@ export const Listbox = (props: ListboxProps) => {
 	const thisIndex = (focusedItem && itemArr?.indexOf(focusedItem)) || 0;
 	const handleKeyDown = (e: KeyboardEvent<HTMLUListElement>) => {
 		onKeyDown?.(e);
+        if (/^[a-zA-Z0-9]$/.test(e.key)) {
+			setSearchString((prev) => prev + e.key);
+		}
 		if (["ArrowDown", "ArrowUp", "Home", "End"].includes(e.code)) {
 			e.preventDefault();
 			e.stopPropagation();
@@ -159,53 +228,4 @@ export const Listbox = (props: ListboxProps) => {
 	);
 };
 
-export type ListboxItemProps = Omit<
-	SetRequired<ComponentPropsWithRef<"li">, "id">,
-	"onClick" | "onMouseEnter"
-> & {
-	onClick?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;
-	onMouseEnter?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;
-};
-
-Listbox.Item = (props: ListboxItemProps) => {
-	const { children, className, id, onClick, onMouseEnter, ...rest } = props;
-	const {
-		focusedItem,
-		setFocusedItem,
-		selectedItem,
-		setSelectedItem,
-		onSelectionChange,
-		controlled,
-	} = useContext(ListContext);
-	const classNames = cx(styles["listbox-item"], className);
-
-	const handleClick = (e: MouseEvent<HTMLLIElement>) => {
-		onClick?.({ id }, e);
-		if (controlled) return;
-		if (selectedItem === id) {
-			setFocusedItem?.(undefined);
-			setSelectedItem?.(undefined);
-			onSelectionChange?.(undefined);
-			return;
-		}
-		setFocusedItem?.(id);
-		setSelectedItem?.(id);
-		onSelectionChange?.({ selection: id });
-	};
-
-	return (
-		<li
-			className={classNames}
-			data-focused={focusedItem === id}
-			onClick={handleClick}
-			onMouseEnter={(e: MouseEvent<HTMLLIElement>) =>
-				onMouseEnter?.({ id }, e)
-			}
-			aria-selected={selectedItem === id}
-			id={id}
-			{...rest}
-		>
-			{children}
-		</li>
-	);
-};
+Listbox.Item = ListboxItem;

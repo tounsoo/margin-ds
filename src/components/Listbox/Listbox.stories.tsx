@@ -3,7 +3,6 @@ import { Listbox } from "./Listbox";
 import { useState } from "react";
 import { Button } from "../Button";
 import { Flexbox } from "../Flexbox";
-import { useList } from "../../hooks/useListbox";
 
 const meta = {
 	title: "Component/Listbox",
@@ -93,60 +92,53 @@ export const FocusControlled: Story = {
 	},
 };
 
-type User = {
-	id: string;
-	name: string;
-	description: string;
-	age: number;
-};
-export const WithTypeahead = {
+export const WithObjectMapping = {
 	render: function Render() {
+                
+        type User = {
+            id: string;
+            name: string;
+            description: string;
+            age: number;
+        };
+
 		const sampleData: User[] = [
 			{
-				id: "1",
+				id: "a1",
 				name: "Alice C.",
 				description: "Software Engineer",
 				age: 30,
 			},
 			{
-				id: "2",
-				name: "Alice D.",
+				id: "a2",
+				name: "Alicee D.",
 				description: "Software Engineer",
 				age: 30,
 			},
-			{ id: "3", name: "Bob", description: "Data Scientist", age: 25 },
+			{ id: "a3", name: "Bob", description: "Data Scientist", age: 25 },
 			{
-				id: "4",
+				id: "a4",
 				name: "Charlie",
 				description: "Product Manager",
 				age: 35,
 			},
-			{ id: "5", name: "David", description: "UX Designer", age: 28 },
+			{ id: "a5", name: "David", description: "UX Designer", age: 28 },
 			{
-				id: "6",
+				id: "a6",
 				name: "Eve",
 				description: "Marketing Specialist",
 				age: 40,
 			},
 		];
 
-		const { focusItem, handleKeyDown } = useList({
-			data: sampleData,
-			keys: ["name", "description", "age"],
-		});
-
 		return (
-			<Listbox
-				onKeyDown={handleKeyDown}
-				focusedItem={
-					sampleData[
-						sampleData.findIndex((obj) => obj.id === focusItem.id)
-					].id
-				}
-			>
+			<Listbox>
 				{sampleData.map((entry) => (
 					<Listbox.Item key={entry.id} id={entry.id}>
-						{`${entry.name} / ${entry.description} / ${entry.age}`}
+						{`${entry.name}`}
+                        <div>
+                        {`${entry.description} / ${entry.age}`}
+                        </div>
 					</Listbox.Item>
 				))}
 			</Listbox>

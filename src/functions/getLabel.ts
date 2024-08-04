@@ -13,7 +13,7 @@ export function getLabel(node: ReactNode | object): string {
 	}
 	if (Array.isArray(node)) {
 		if (!node.length) return "";
-		return node.map((entry) => getLabel(entry)).join("");
+		return node.map((entry) => getLabel(entry)).join(" ");
 	}
 
 	if (isValidElement(node)) {

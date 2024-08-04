@@ -33,7 +33,7 @@
 //     "description",
 // ]);
 
-export type WithRelevance<T> = T & { relevance?: number };
+export type WithRelevance<T> = T & { relevance?: number; id: string };
 
 export type RankFilterByKeyProps<T> = {
 	data: WithRelevance<T>[];
@@ -41,22 +41,26 @@ export type RankFilterByKeyProps<T> = {
 	keys: (keyof T)[];
 	preserveOrder?: boolean;
 };
-export function rankFilterByKey<T>(props: RankFilterByKeyProps<T>): T[] {
+
+export function rankFilterByKey<T>(
+	props: RankFilterByKeyProps<T>,
+): WithRelevance<T>[] {
 	const { data, searchString, keys, preserveOrder } = props;
 	const searchPattern = new RegExp(searchString, "i");
+
+	// Function to compute relevance score
 	function computeRelevance(item: WithRelevance<T>): number {
 		let score = 0;
-		keys.forEach((key, index) => {
-			if (item[key]) {
-				const match = item[key].toString().match(searchPattern);
+
+		// biome-ignore lint/complexity/noForEach: <explanation>
+		keys.forEach((key) => {
+			const value = item[key];
+			if (typeof value === "string") {
+				const match = value.match(searchPattern);
 				if (match) {
-					const matchIndex = item[key]
-						.toString()
-						.search(searchPattern);
-					const positionScore = Math.max(
-						10 - index * 2 - Math.floor(matchIndex / 10),
-						0,
-					);
+					// Calculate the position score based on the match index
+					const matchIndex = value.search(searchPattern);
+					const positionScore = Math.max(100 - matchIndex, 0); // Higher score for earlier matches
 					score += positionScore;
 				}
 			}
@@ -65,20 +69,17 @@ export function rankFilterByKey<T>(props: RankFilterByKeyProps<T>): T[] {
 		return score;
 	}
 
-	for (const item of data) {
+	// Calculate relevance for each item
+	// biome-ignore lint/complexity/noForEach: <explanation>
+	data.forEach((item) => {
 		item.relevance = computeRelevance(item);
-	}
+	});
 
+	// Filter items with relevance greater than 0
 	const filteredArr = data.filter((item) => (item.relevance ?? 0) > 0);
 
-	if (preserveOrder) {
-		return filteredArr;
-	}
-	// Filter out items with relevance score of 0
-
-	// Sort by relevance in descending order
-	return filteredArr.sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0));
-
-	// Return items without the relevance property
-	// return filteredArr.map(({ relevance, ...rest }) => rest as T);
+	// Return results either in original or sorted order based on preserveOrder flag
+	return preserveOrder
+		? filteredArr
+		: filteredArr.sort((a, b) => (b.relevance ?? 0) - (a.relevance ?? 0));
 }
