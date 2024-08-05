@@ -1,116 +1,49 @@
 import {
-	useEffect,
+    useEffect,
 	useRef,
 	useState,
+    type RefObject,
 	type ChangeEvent,
-	type ComponentPropsWithRef,
 } from "react";
 import styles from "./RadioGroup.module.scss";
 import cx from "classnames";
-import type { Except, RequireAtLeastOne, SetRequired } from "type-fest";
+import type { SetRequired } from "type-fest";
 import { useAccessibleTarget } from "../../hooks";
 import { useA11y } from "../../providers";
-import type { a11yProps } from "../../types";
-import { mergeRefs } from "../../functions";
+import type { A11yProps, BaseComponentProps } from "../../types";
+import { Flexbox } from "../Flexbox";
+import { Label } from "../Label";
 
-type RequiredProps = "id" | "aria-label" | "aria-labelledby";
-export type RadioGroupProps = Except<
-	ComponentPropsWithRef<"div">,
-	RequiredProps
-> &
-	RequireAtLeastOne<ComponentPropsWithRef<"input">, RequiredProps> & {};
+export type RadioGroupProps =
+	BaseComponentProps<"input", "defaultValue">;
 export const RadioGroup = (props: RadioGroupProps) => {
 	const { className, defaultValue, ...rest } = props;
 	const classNames = cx(styles["radio-group"], className);
-
-	useEffect(() => {
-		if (rest["aria-label"]) return;
-		if (
-			rest["aria-labelledby"] &&
-			!document.querySelectorAll(`[id='${rest["aria-labelledby"]}']`)
-				.length
-		) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• element with 'id' matching 'aria-labelledby' not found\n",
-			);
-			return;
-		}
-		if (
-			rest.id &&
-			!document.querySelectorAll(`[for='${rest.id}']`).length
-		) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• element with 'for' matching 'id' not found\n",
-				"• use id with htmlFor\n",
-			);
-			return;
-		}
-		if (!rest.id) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• use id with htmlFor\n",
-			);
-			return;
-		}
-	}, [rest.id, rest["aria-label"], rest["aria-labelledby"]]);
 
 	return <div role="radiogroup" className={classNames} {...rest} />;
 };
 
 export type RadioGroupItemProps = SetRequired<
-	ComponentPropsWithRef<"input">,
+	BaseComponentProps<"input", "name" | "checked" | "disabled">,
 	"name"
 > & {
-	a11y?: a11yProps;
+    value: string;
+    radioInputRef?: RefObject<HTMLInputElement>
+	a11y?: A11yProps;
 };
 
 RadioGroup.Item = (props: RadioGroupItemProps) => {
-	const { className, checked, onChange, style, a11y, ref, ...rest } = props;
+	const { className, checked, onChange, a11y, id, value, ref, children, radioInputRef, ...rest } = props;
 	const [checkState, setCheckState] = useState(checked);
 	const classNames = cx(styles.item, className);
-	const radioRef = useRef<HTMLInputElement>(null);
+	const containerRef = useRef<HTMLDivElement>(null);
 
 	const { level } = useA11y();
 	const safetyMargin = useAccessibleTarget({
-		element: radioRef,
+		element: containerRef,
 		level: a11y?.level ?? level,
-		clear: a11y?.clear,
+		clear:  { inlineStart: true },
 	});
-
-	useEffect(() => {
-		if (rest["aria-label"]) return;
-		if (
-			rest["aria-labelledby"] &&
-			!document.querySelectorAll(`[id='${rest["aria-labelledby"]}']`)
-				.length
-		) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• element with 'id' matching 'aria-labelledby' not found\n",
-			);
-			return;
-		}
-		if (
-			rest.id &&
-			!document.querySelectorAll(`[for='${rest.id}']`).length
-		) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• element with 'for' matching 'id' not found\n",
-				"• use id with htmlFor\n",
-			);
-			return;
-		}
-		if (!rest.id) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• use id with htmlFor\n",
-			);
-			return;
-		}
-	}, [rest.id, rest["aria-label"], rest["aria-labelledby"]]);
 
 	function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
 		if (typeof checked !== "undefined") {
@@ -125,20 +58,19 @@ RadioGroup.Item = (props: RadioGroupItemProps) => {
 		setCheckState(checked);
 	}, [checked]);
 
-	const combinedStyle = {
-		...safetyMargin,
-		...style,
-	};
-
 	return (
-		<input
-			type="radio"
-			ref={mergeRefs(ref, radioRef)}
-			style={combinedStyle}
-			checked={checkState}
-			className={classNames}
-			onChange={handleOnChange}
-			{...rest}
-		/>
+        <Flexbox alignItems="center" style={{...safetyMargin}} gap=".5rem" ref={containerRef}>
+            <input
+                type="radio"
+                ref={radioInputRef}
+                checked={checkState}
+                className={classNames}
+                id={(value ?? id)}
+                value={value}
+                onChange={handleOnChange}
+                {...rest}
+            />
+            <Label className={styles.label} htmlFor={(value ?? id)}>{children}</Label>
+        </Flexbox>
 	);
 };

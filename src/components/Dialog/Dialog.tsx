@@ -1,7 +1,7 @@
 import {
-	type ComponentPropsWithRef,
 	type KeyboardEvent,
 	type MouseEvent,
+	type SyntheticEvent,
 	useCallback,
 	useEffect,
 	useRef,
@@ -9,10 +9,10 @@ import {
 import styles from "./Dialog.module.scss";
 import cx from "classnames";
 import { mergeRefs } from "../../functions";
+import type { BaseComponentProps } from "../../types";
 
-export type DialogProps = Omit<ComponentPropsWithRef<"dialog">, "open"> & {
+export type DialogProps = Omit<BaseComponentProps<"dialog">, "open"> & {
 	open?: boolean;
-	onClose?: () => void;
 };
 
 const dialogCountDown = () => {
@@ -31,9 +31,9 @@ export const Dialog = (props: DialogProps) => {
 	const { children, className, open, onClose, onClick, ref, ...rest } = props;
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
-	const closeDialog = useCallback(() => {
+	const closeDialog = useCallback((e: SyntheticEvent<HTMLDialogElement, Event>) => {
 		if (!onClose) return;
-		onClose?.();
+		onClose?.(e);
 		dialogCountDown();
 	}, [onClose]);
 
@@ -53,7 +53,7 @@ export const Dialog = (props: DialogProps) => {
 			yPos > box.bottom ||
 			yPos < box.y;
 		if (isOutside) {
-			closeDialog();
+			closeDialog(e);
 		}
 		onClick?.(e);
 	};
@@ -71,9 +71,9 @@ export const Dialog = (props: DialogProps) => {
 		document.body.setAttribute("data-dialog-counter", `${+getCounter + 1}`);
 		dialogRef.current?.showModal();
 
-		dialogRef.current?.addEventListener("close", closeDialog);
+		dialogRef.current?.addEventListener("close", () => closeDialog);
 		return () => {
-			dialogRef.current?.removeEventListener("close", closeDialog);
+			dialogRef.current?.removeEventListener("close", () => closeDialog);
 		};
 	}, [open, closeDialog]);
 

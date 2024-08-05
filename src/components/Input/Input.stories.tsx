@@ -28,7 +28,7 @@ export const WithButton = {
 	render: function Render() {
 		return (
 			<Flexbox gap=".5rem">
-				<Input aria-label="Test Input 2" disabled />
+				<Input aria-label="Test Input 2" />
 				<Button>Action</Button>
 			</Flexbox>
 		);
@@ -56,7 +56,7 @@ export const AAA = {
 		return (
 			<A11yProvider level="AAA">
 				<Flexbox gap=".5rem">
-					<Input aria-label="Test Input 2" disabled />
+					<Input aria-label="Test Input 2" />
 					<Button>Action</Button>
 				</Flexbox>
 			</A11yProvider>

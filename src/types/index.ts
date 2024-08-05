@@ -1,1 +1,2 @@
-export * from "./a11y";
+export * from "./A11y";
+export * from "./BaseComponentProps";

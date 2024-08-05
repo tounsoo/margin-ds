@@ -1,11 +1,11 @@
 import { type RefObject, useEffect, useState } from "react";
-import type { a11yProps } from "../../types";
+import type { A11yProps } from "../../types";
 
 export type useAccessibleTargetProps = {
 	// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 	element: RefObject<any>;
-	level?: a11yProps["level"];
-	clear?: a11yProps["clear"];
+	level?: A11yProps["level"];
+	clear?: A11yProps["clear"];
 };
 
 export const useAccessibleTarget = ({

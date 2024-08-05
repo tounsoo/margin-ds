@@ -1,7 +1,7 @@
-import type { ComponentPropsWithRef } from "react";
+import type { BaseComponentProps } from "../../types";
 import styles from "./SrOnly.module.scss";
 
-export const SrOnly = (props: ComponentPropsWithRef<"span">) => {
+export const SrOnly = (props: BaseComponentProps<"span">) => {
 	const { className, ...rest } = props;
 	return <span className={styles["sr-only"]} {...rest} />;
 };

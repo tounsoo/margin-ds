@@ -1,7 +1,6 @@
 import {
 	useRef,
 	useState,
-	type ComponentPropsWithRef,
 	type ReactElement,
 	type MouseEvent,
 	type KeyboardEvent,
@@ -14,7 +13,7 @@ import styles from "./DatePicker.module.scss";
 import { Button } from "../Button";
 import { Heading } from "../Heading";
 import { Label } from "../Label";
-import type { a11yProps } from "../../types";
+import type { A11yProps, BaseComponentProps } from "../../types";
 import {
 	getClosestDate,
 	getFirstOfWeek,
@@ -33,10 +32,8 @@ export type DatePickerCellProps = {
 	tabIndex: number;
 };
 
-export type DatePickerProps = Omit<
-	ComponentPropsWithRef<"div">,
-	"defaultValue"
-> &
+export type DatePickerProps = 
+	BaseComponentProps<"div"> &
 	Omit<UseMonthProps, "date"> & {
 		invalid?: {
 			dates?: Temporal.PlainDate[];
@@ -54,7 +51,7 @@ export type DatePickerProps = Omit<
 			e,
 		}: { date: Temporal.PlainDate; e: MouseEvent<HTMLElement> }) => void;
 		cell?: (props: DatePickerCellProps) => ReactElement;
-		a11y?: a11yProps;
+		a11y?: A11yProps;
 	};
 
 export const DatePicker = (props: DatePickerProps) => {
@@ -112,10 +109,6 @@ export const DatePicker = (props: DatePickerProps) => {
 		});
 
 	const updateFocus = (date: Temporal.PlainDate) => {
-		// Safari sometimes does not apply focus ring
-		// might need to use document.queryselect().click()
-		// to force this if the issue persists
-
 		setTimeout(() => {
 			const targetElement = gridRef.current?.querySelector(
 				`[data-value="${date.toString()}"]`,
@@ -125,7 +118,6 @@ export const DatePicker = (props: DatePickerProps) => {
 	};
 
 	const onKeyboardDown = (
-		// date: Temporal.PlainDate,
 		e: KeyboardEvent<HTMLButtonElement>,
 	) => {
 		const overrides = [

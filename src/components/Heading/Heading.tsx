@@ -1,9 +1,9 @@
-import type { ComponentPropsWithRef } from "react";
+import type { BaseComponentProps } from "../../types";
 import styles from "./Heading.module.scss";
 import cx from "classnames";
 
 export type HeadingProps<T extends "h1" | "h2" | "h3" | "h4" | "h5" | "h6"> =
-	ComponentPropsWithRef<T> & {
+	BaseComponentProps<T> & {
 		as: T;
 	};
 

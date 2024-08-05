@@ -1,8 +1,8 @@
-import type { ComponentPropsWithRef } from "react";
 import styles from "./Card.module.scss";
 import cx from "classnames";
+import type { BaseComponentProps } from "../../types";
 
-export type CardProps = ComponentPropsWithRef<"div">;
+export type CardProps = BaseComponentProps<'div'>;
 
 export const Card = (props: CardProps) => {
 	const { className, ...rest } = props;

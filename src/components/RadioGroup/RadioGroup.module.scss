@@ -44,6 +44,10 @@
 
         color: light-dark($color-gray-950, $color-gray-50);
         background-color: transparent;
+
+        .label {
+            line-height: 1rem;
+        }
     }
 }
 

@@ -6,7 +6,6 @@ import {
 	useMemo,
 	type Dispatch,
 	type SetStateAction,
-	type ComponentPropsWithRef,
 	type KeyboardEvent,
 } from "react";
 import styles from "./Listbox.module.scss";
@@ -14,6 +13,7 @@ import cx from "classnames";
 import { mergeRefs } from "../../functions";
 import { ListboxItem, type ListboxItemProps } from "./ListboxItem";
 import { isEqualWith } from "lodash";
+import type { BaseComponentProps } from "../../types";
 
 type ListboxContextType = {
 	focusedItem?: string | null;
@@ -27,7 +27,7 @@ type ListboxContextType = {
 
 export const ListContext = createContext<ListboxContextType>({});
 
-export type ListboxProps = ComponentPropsWithRef<"ul"> & {
+export type ListboxProps = BaseComponentProps<"ul"> & {
 	defaultSelected?: string;
 	selected?: string | null;
 	onSelectionChange?: (data?: { selection?: string }) => void;

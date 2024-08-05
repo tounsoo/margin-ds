@@ -1,19 +1,12 @@
-import {
-	useEffect,
-	useRef,
-	useState,
-	type ComponentPropsWithRef,
-	type MouseEvent,
-} from "react";
+import { useEffect, useRef, useState, type MouseEvent } from "react";
 import styles from "./Button.module.scss";
 import cx from "classnames";
 import { useA11y } from "../../providers";
-import type { a11yProps } from "../../types";
+import type { BaseComponentProps, A11yProps } from "../../types";
 import { useAccessibleTarget } from "../../hooks";
-import { getLabel } from "../../functions";
 import { Flexbox, type FlexboxProps } from "../Flexbox";
 
-export type ButtonProps = ComponentPropsWithRef<"button"> & {
+export type ButtonProps = BaseComponentProps<"button", "disabled"> & {
 	/**
 	 * @default default
 	 */
@@ -23,8 +16,7 @@ export type ButtonProps = ComponentPropsWithRef<"button"> & {
 	 */
 	size?: "small" | "medium";
 	fill?: boolean;
-
-	a11y?: a11yProps;
+	a11y?: A11yProps;
 };
 
 export const Button = (props: ButtonProps) => {
@@ -52,15 +44,6 @@ export const Button = (props: ButtonProps) => {
 		clear: a11y?.clear,
 	});
 
-	const hasNoLabel = getLabel(children).length === 0;
-	if (hasNoLabel && !(rest["aria-label"] || rest["aria-labelledby"])) {
-		console.error(
-			"[A11y Violation] Button needs discernible text\n",
-			"• aria-label is missing\n",
-			"• aria-labelledby is missing\n",
-		);
-	}
-
 	const combinedStyle = {
 		...safetyMargin,
 		...style,
@@ -84,7 +67,10 @@ Button.Group = (props: FlexboxProps) => {
 	return <Flexbox className={classNames} {...rest} />;
 };
 
-export type ButtonToggleProps = Omit<ButtonProps, "appearance"> & {
+export type ButtonToggleProps = Omit<
+	ButtonProps,
+	"appearance" | "aria-pressed"
+> & {
 	pressed?: boolean;
 	defaultPressed?: boolean;
 	onPressedChange?: (pressed: boolean) => void;

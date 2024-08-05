@@ -42,7 +42,7 @@ export const WithIcon: Story = {
 	},
 };
 
-export const Fill: Story = {
+export const Fill = {
 	render: function Render() {
 		return (
 			<div style={{ width: 280, border: "1px solid red" }}>

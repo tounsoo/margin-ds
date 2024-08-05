@@ -1,8 +1,8 @@
-import type { ComponentPropsWithRef } from "react";
+import type { BaseComponentProps } from "../../types";
 import cx from "classnames";
 import styles from "./Paragraph.module.scss";
 
-export type ParagraphProps = ComponentPropsWithRef<"p"> & {
+export type ParagraphProps = BaseComponentProps<"p"> & {
 	size?: "x-small" | "small" | "medium" | "large" | "x-large" | "xx-large";
 };
 export const Paragraph = (props: ParagraphProps) => {

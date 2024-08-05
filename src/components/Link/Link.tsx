@@ -1,8 +1,8 @@
-import type { ComponentPropsWithRef } from "react";
+import type { BaseComponentProps } from "../../types";
 import styles from "./Link.module.scss";
 import cx from "classnames";
 
-export type LinkProps = ComponentPropsWithRef<"a"> & {
+export type LinkProps = BaseComponentProps<"a", "href"> & {
 	/**
 	 * @default default
 	 */

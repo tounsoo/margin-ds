@@ -1,12 +1,13 @@
-import { type ComponentPropsWithRef, useContext, type MouseEvent } from "react";
+import { useContext, type MouseEvent } from "react";
 import type { SetRequired } from "type-fest";
 import styles from './Listbox.module.scss';
 import cx from 'classnames';
 import { ListContext } from "./Listbox";
+import type { BaseComponentProps } from "../../types";
 
 export type ListboxItemProps = Omit<
-	SetRequired<ComponentPropsWithRef<"li">, "id">,
-	"onClick" | "onMouseEnter" | "value"
+	SetRequired<BaseComponentProps<"li">, "id">,
+	"onClick" | "onMouseEnter"
 > & {
 	onClick?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;
 	onMouseEnter?: (data: { id: string }, e: MouseEvent<HTMLLIElement>) => void;

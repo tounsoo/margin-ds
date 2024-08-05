@@ -7,7 +7,7 @@ type VetoOption = {
 	inlineEnd?: never;
 };
 
-export type a11yProps = {
+export type A11yProps = {
 	level?: "AA" | "AAA";
 	clear?:
 		| SetRequired<
