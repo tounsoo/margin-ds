@@ -1,20 +1,18 @@
-import { useEffect, useRef, type ComponentPropsWithRef } from "react";
-import type { Except, RequireAtLeastOne } from "type-fest";
+import { useRef } from "react";
+import type { RequireAtLeastOne } from "type-fest";
 import styles from "./Input.module.scss";
 import cx from "classnames";
-import type { A11yProps } from "../../types";
+import type { A11yProps, BaseComponentProps } from "../../types";
 import { useAccessibleTarget } from "../../hooks";
 import { useA11y } from "../../providers";
 import { mergeRefs } from "../../functions";
 
-type RequiredProps = "id" | "aria-label" | "aria-labelledby";
-export type InputProps = Except<
-	ComponentPropsWithRef<"input">,
-	RequiredProps
-> &
-	RequireAtLeastOne<ComponentPropsWithRef<"input">, RequiredProps> & {
-		a11y?: A11yProps;
-	};
+export type InputProps = RequireAtLeastOne<
+	BaseComponentProps<"input", "defaultValue" | "value">,
+	"id" | "aria-label" | "aria-labelledby"
+> & {
+	a11y?: A11yProps;
+};
 
 export const Input = (props: InputProps) => {
 	const { style, a11y, ref, ...rest } = props;
@@ -28,46 +26,14 @@ export const Input = (props: InputProps) => {
 		clear: a11y?.clear,
 	});
 
-    useEffect(() => {
-		if (rest["aria-label"]) return;
-		if (
-			rest["aria-labelledby"] &&
-			!document.querySelectorAll(`[id='${rest["aria-labelledby"]}']`)
-				.length
-		) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• element with 'id' matching 'aria-labelledby' not found\n",
-			);
-			return;
-		}
-		if (
-			rest.id &&
-			!document.querySelectorAll(`[for='${rest.id}']`).length
-		) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• element with 'for' matching 'id' not found\n",
-				"• use id with htmlFor\n",
-			);
-			return;
-		}
-		if (!rest.id) {
-			console.error(
-				"[A11y Violation] Form element needs proper label\n",
-				"• use id with htmlFor\n",
-			);
-			return;
-		}
-	}, [rest.id, rest["aria-label"], rest["aria-labelledby"]]);
-
 	const combinedStyle = {
 		...safetyMargin,
 		...style,
 	};
+    
 	return (
 		<input
-			ref={ mergeRefs(ref, inputRef)}
+			ref={mergeRefs(ref, inputRef)}
 			style={combinedStyle}
 			className={classNames}
 			{...rest}

@@ -69,13 +69,13 @@ export const AAA: Story = {
 		children: (
 			<A11yProvider level="AAA">
 				<RadioGroup id="radiogroup-example">
-					<RadioGroup.Item id="test2-01" name="test2" value="First">
+					<RadioGroup.Item id="test3-01" name="test3" value="First">
 						First
 					</RadioGroup.Item>
-					<RadioGroup.Item id="test2-02" name="test2" value="Second">
+					<RadioGroup.Item id="test3-02" name="test3" value="Second">
 						Second
 					</RadioGroup.Item>
-					<RadioGroup.Item id="test2-03" name="test2" value="Third">
+					<RadioGroup.Item id="test3-03" name="test3" value="Third">
 						Third
 					</RadioGroup.Item>
 				</RadioGroup>

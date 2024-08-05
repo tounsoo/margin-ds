@@ -1,30 +1,50 @@
-import {
-	type ChangeEvent,
-	useEffect,
-	useRef,
-	useState,
-} from "react";
+import { type ChangeEvent, useEffect, useRef, useState } from "react";
 import styles from "./Checkbox.module.scss";
 import cx from "classnames";
 import { useAccessibleTarget } from "../../hooks";
 import { useA11y } from "../../providers";
 import type { A11yProps, BaseComponentProps } from "../../types";
+import type { RequireAtLeastOne } from "type-fest";
+import { Flexbox, type FlexboxProps } from "../Flexbox";
+import { Label } from "../Label";
 import { mergeRefs } from "../../functions";
 
-export type CheckboxProps = BaseComponentProps<"input", "checked" | "defaultChecked"> & {
-		a11y?: A11yProps;
-	};
+export type CheckboxProps = RequireAtLeastOne<BaseComponentProps<
+	"input",
+	"checked" | "defaultChecked"
+>, 'id' | 'aria-label' | 'aria-labelledby'> & {
+	value: string;
+	container?: FlexboxProps;
+	a11y?: A11yProps;
+};
 export const Checkbox = (props: CheckboxProps) => {
-	const { className, checked, style, a11y, onChange, ref, ...rest } = props;
-	const checkboxRef = useRef<HTMLInputElement>(null);
+	const {
+		className,
+		checked,
+		a11y,
+		onChange,
+		container = {},
+		id,
+		value,
+		children,
+		...rest
+	} = props;
+
+	const {
+		style: containerStyle,
+		ref: containerRefProp,
+		...containerRest
+	} = container;
+
+	const containerRef = useRef<HTMLDivElement>(null);
 	const [checkState, setCheckState] = useState(checked);
 	const classNames = cx(styles.checkbox, className);
 
 	const { level } = useA11y();
 	const safetyMargin = useAccessibleTarget({
-		element: checkboxRef,
+		element: containerRef,
 		level: a11y?.level ?? level,
-		clear: a11y?.clear,
+		clear: { inlineStart: true },
 	});
 
 	useEffect(() => {
@@ -40,20 +60,28 @@ export const Checkbox = (props: CheckboxProps) => {
 		onChange?.(e);
 	}
 
-	const combinedStyle = {
-		...safetyMargin,
-		...style,
-	};
-
 	return (
-		<input
-			type="checkbox"
-			className={classNames}
-			style={combinedStyle}
-			ref={mergeRefs(ref, checkboxRef)}
-			checked={checkState}
-			onChange={handleOnChange}
-			{...rest}
-		/>
+		<Flexbox
+			alignItems="center"
+			style={{ ...safetyMargin, ...containerStyle }}
+			gap=".5rem"
+			ref={mergeRefs(containerRefProp, containerRef)}
+			{...containerRest}
+		>
+			<input
+				type="checkbox"
+				className={classNames}
+				checked={checkState}
+				onChange={handleOnChange}
+				id={value ?? id}
+				value={value}
+				{...rest}
+			/>
+			{children ? (
+				<Label className={styles.label} htmlFor={value ?? id}>
+					{children}
+				</Label>
+			) : null}
+		</Flexbox>
 	);
 };
