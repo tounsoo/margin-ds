@@ -9,6 +9,7 @@ import cx from "classnames";
 import { useA11y } from "../../providers";
 import { useAccessibleTarget } from "../../hooks";
 import type { A11yProps, BaseComponentProps } from "../../types";
+import{ Flexbox, type FlexboxProps } from "../Flexbox";
 import { mergeRefs } from "../../functions";
 
 
@@ -18,6 +19,7 @@ export type SwitchProps =
 		defaultChecked?: boolean;
 		checked?: boolean;
 		onChange?: (e: boolean) => void;
+        container?: FlexboxProps;
 		a11y?: A11yProps;
 	};
 
@@ -29,14 +31,20 @@ export const Switch = (props: SwitchProps) => {
 		onClick,
 		onChange,
 		a11y,
-		style,
-        ref,
+        container = {},
 		...rest
 	} = props;
 	const switchRef = useRef<HTMLButtonElement>(null);
+    const containerRef = useRef<HTMLDivElement>(null);
 	const [checkState, setCheckState] = useState(
 		checked ?? defaultChecked ?? false,
 	);
+    const {
+		style: containerStyle,
+		ref: containerRefProp,
+		...containerRest
+	} = container;
+
 	const onClickHandler = (e: MouseEvent<HTMLButtonElement>) => {
 		if (typeof checked === "undefined") {
 			onChange?.(!checkState);
@@ -59,23 +67,24 @@ export const Switch = (props: SwitchProps) => {
 		setCheckState(checked);
 	}, [checked]);
 
-	const combinedStyle = {
-		...safetyMargin,
-		...style,
-	};
-
 	return (
+        <Flexbox
+			alignItems="center"
+			style={{ ...safetyMargin, ...containerStyle }}
+			gap=".5rem"
+			ref={mergeRefs(containerRefProp, containerRef)}
+			{...containerRest}
+		>
 		<button
 			type="button"
-			ref={mergeRefs(ref, switchRef)}
 			role="switch"
 			aria-checked={checkState}
 			onClick={onClickHandler}
 			className={cx(styles.switch, className)}
-			style={combinedStyle}
 			{...rest}
 		>
 			<span className={styles.toggle} />
 		</button>
+        </Flexbox>
 	);
 };
