@@ -55,7 +55,7 @@ export const Switch = (props: SwitchProps) => {
 
 	const { level } = useA11y();
 	const safetyMargin = useAccessibleTarget({
-		element: switchRef,
+		element: containerRef,
 		level: a11y?.level ?? level,
 		clear: a11y?.clear,
 	});
