@@ -23,6 +23,7 @@ export const Default: Story = {
 				defaultSelected="01"
 				onSelectionChange={console.log}
 				style={{ width: 200 }}
+                aria-label="number list"
 			>
 				<Listbox.Item id="01" value="01">01</Listbox.Item>
 				<Listbox.Item id="02" value="02">02</Listbox.Item>
@@ -71,6 +72,7 @@ export const FocusControlled: Story = {
 					pseudoFocusVisible={focusVisible}
 					focusedItem={idArr[focusIndex]}
 					selected={selected}
+                    aria-label="number list"
 				>
 					{idArr.map((id) => (
 						<Listbox.Item
@@ -139,7 +141,7 @@ export const WithObjectMapping = {
 		];
 
 		return (
-			<Listbox>
+			<Listbox aria-label="object list">
 				{sampleData.map((entry) => (
 					<Listbox.Item key={entry.id} value={entry.name} id={entry.id}>
 						{`${entry.name}`}

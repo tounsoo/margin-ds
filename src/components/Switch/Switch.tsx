@@ -3,6 +3,7 @@ import {
 	useEffect,
 	useState,
 	useRef,
+    useId,
 } from "react";
 import styles from "./Switch.module.scss";
 import cx from "classnames";
@@ -11,6 +12,7 @@ import { useAccessibleTarget } from "../../hooks";
 import type { A11yProps, BaseComponentProps } from "../../types";
 import{ Flexbox, type FlexboxProps } from "../Flexbox";
 import { mergeRefs } from "../../functions";
+import { Label } from "../Label";
 
 
 export type SwitchProps = 
@@ -30,11 +32,12 @@ export const Switch = (props: SwitchProps) => {
 		className,
 		onClick,
 		onChange,
+        children,
 		a11y,
+        id,
         container = {},
 		...rest
 	} = props;
-	const switchRef = useRef<HTMLButtonElement>(null);
     const containerRef = useRef<HTMLDivElement>(null);
 	const [checkState, setCheckState] = useState(
 		checked ?? defaultChecked ?? false,
@@ -60,6 +63,9 @@ export const Switch = (props: SwitchProps) => {
 		clear: a11y?.clear,
 	});
 
+    const uid = useId();
+    const pid = id ?? uid;
+
 	// biome-ignore lint/correctness/useExhaustiveDependencies: onChange should not rerender
 	useEffect(() => {
 		if (typeof checked === "undefined") return;
@@ -81,10 +87,16 @@ export const Switch = (props: SwitchProps) => {
 			aria-checked={checkState}
 			onClick={onClickHandler}
 			className={cx(styles.switch, className)}
+            aria-labelledby={pid}
 			{...rest}
 		>
 			<span className={styles.toggle} />
 		</button>
+        {children ? (
+				<Label className={styles.label} id={pid}>
+					{children}
+				</Label>
+			) : null}
         </Flexbox>
 	);
 };

@@ -19,20 +19,14 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
 	render: function Render() {
 		return (
-			<Flexbox gap=".5rem" alignItems="center">
-				<Switch id="switch-id" />
-				<Label htmlFor="switch-id">Default(uncontrolled)</Label>
-			</Flexbox>
+				<Switch id="switch-id">Default(uncontrolled)</Switch>
 		);
 	},
 };
 export const Controlled = {
 	render: function Render() {
 		return (
-			<Flexbox gap=".5rem" alignItems="center">
-				<Switch id="switch-id" checked={true} />
-				<Label htmlFor="switch-id">Controlled</Label>
-			</Flexbox>
+				<Switch id="switch-id" checked={true}>Controlled</Switch>
 		);
 	},
 };
@@ -41,18 +35,10 @@ export const Disabled = {
 	render: function Render() {
 		return (
 			<Flexbox gap="1rem" flexDirection="column">
-				<Flexbox gap=".5rem" alignItems="center">
-					<Switch id="switch-id" defaultChecked disabled />
-					<Label htmlFor="switch-id" aria-disabled>
-						Checked disabled
-					</Label>
-				</Flexbox>
-				<Flexbox gap=".5rem" alignItems="center">
-					<Switch id="switch-id" disabled />
-					<Label htmlFor="switch-id" aria-disabled>
-						Unchecked disabled
-					</Label>
-				</Flexbox>
+					<Switch id="switch-id" defaultChecked disabled>
+                    Checked disabled</Switch>
+					<Switch id="switch-id" disabled>Unchecked disabled</Switch>
+					
 			</Flexbox>
 		);
 	},
@@ -61,10 +47,7 @@ export const AAA = {
 	render: function Render() {
 		return (
 			<A11yProvider level="AAA">
-				<Flexbox gap=".5rem" alignItems="center">
-					<Switch id="switch-id" />
-					<Label htmlFor="switch-id">Default(uncontrolled)</Label>
-				</Flexbox>
+					<Switch id="switch-id">Default(uncontrolled)</Switch>
 			</A11yProvider>
 		);
 	},

@@ -42,6 +42,8 @@ export const ListboxItem = (props: ListboxItemProps) => {
 
 	return (
 		<li
+            // biome-ignore lint/a11y/noNoninteractiveElementToInteractiveRole: Not sure why this is a11y issue
+            role="option"
 			className={classNames}
 			data-focused={focusedItem === id}
 			onClick={handleClick}

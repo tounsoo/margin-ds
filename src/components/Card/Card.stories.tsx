@@ -28,30 +28,20 @@ export const Default: Story = {
 						Radiogroup Example
 					</Label>
 					<RadioGroup id="radiogroup-example">
-						<Flexbox>
-							<RadioGroup.Item
-								id="test2-01"
-								name="test2"
-								value="First"
-							/>
-							<Label htmlFor="test2-01">First</Label>
-						</Flexbox>
-						<Flexbox>
-							<RadioGroup.Item
-								id="test2-02"
-								name="test2"
-								value="Second"
-							/>
-							<Label htmlFor="test2-02">Second</Label>
-						</Flexbox>
-						<Flexbox>
-							<RadioGroup.Item
-								id="test2-03"
-								name="test2"
-								value="Third"
-							/>
-							<Label htmlFor="test2-03">Third</Label>
-						</Flexbox>
+                    <RadioGroup.Item id="test1-01" name="test1" value="First">
+					First
+				</RadioGroup.Item>
+				<RadioGroup.Item
+					id="test1-02"
+					name="test1"
+					value="Second"
+					disabled
+				>
+					Second
+				</RadioGroup.Item>
+				<RadioGroup.Item id="test1-03" name="test1" value="Third">
+					Third
+				</RadioGroup.Item>
 					</RadioGroup>
 					<Button.Group justifyContent="end">
 						<Button>First</Button>
@@ -73,30 +63,20 @@ export const Tester: Story = {
 						Radiogroup Example
 					</Label>
 					<RadioGroup id="radiogroup-example">
-						<Flexbox>
-							<RadioGroup.Item
-								id="test2-01"
-								name="test2"
-								value="First"
-							/>
-							<Label htmlFor="test2-01">First</Label>
-						</Flexbox>
-						<Flexbox>
-							<RadioGroup.Item
-								id="test2-02"
-								name="test2"
-								value="Second"
-							/>
-							<Label htmlFor="test2-02">Second</Label>
-						</Flexbox>
-						<Flexbox>
-							<RadioGroup.Item
-								id="test2-03"
-								name="test2"
-								value="Third"
-							/>
-							<Label htmlFor="test2-03">Third</Label>
-						</Flexbox>
+                    <RadioGroup.Item id="test2-01" name="test1" value="First">
+					First
+				</RadioGroup.Item>
+				<RadioGroup.Item
+					id="test2-02"
+					name="test1"
+					value="Second"
+					disabled
+				>
+					Second
+				</RadioGroup.Item>
+				<RadioGroup.Item id="test2-03" name="test1" value="Third">
+					Third
+				</RadioGroup.Item>
 					</RadioGroup>
 					<Button.Group justifyContent="end">
 						<Button>First</Button>

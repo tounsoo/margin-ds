@@ -86,13 +86,13 @@ RadioGroup.Item = (props: RadioGroupItemProps) => {
 				type="radio"
 				checked={checkState}
 				className={classNames}
-				id={value ?? id}
+				id={id ?? value}
 				value={value}
 				onChange={handleOnChange}
 				{...rest}
 			/>
 			{children ? (
-				<Label className={styles.label} htmlFor={value ?? id}>
+				<Label className={styles.label} htmlFor={id ?? value}>
 					{children}
 				</Label>
 			) : null}

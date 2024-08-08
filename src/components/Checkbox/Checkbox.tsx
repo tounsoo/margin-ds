@@ -73,12 +73,12 @@ export const Checkbox = (props: CheckboxProps) => {
 				className={classNames}
 				checked={checkState}
 				onChange={handleOnChange}
-				id={value ?? id}
+				id={id ?? value}
 				value={value}
 				{...rest}
 			/>
 			{children ? (
-				<Label className={styles.label} htmlFor={value ?? id}>
+				<Label className={styles.label} htmlFor={id ?? value}>
 					{children}
 				</Label>
 			) : null}
