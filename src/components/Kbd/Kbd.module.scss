@@ -1,0 +1,29 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+    .kbd {
+        all: unset;
+    }
+}
+
+@layer base {
+    .kbd {
+        color-scheme: light dark;
+        box-sizing: border-box;
+        display: inline;
+
+        font-family: monospace;
+        font-size: .8em;
+        line-height: inherit;
+
+        padding-block: calc($spacing-1_5 / 2);
+        padding-inline: $spacing-1_5;
+        border-radius: $radius-md;
+        border-width: 0.0625rem;
+        border-style: solid;
+        border-color: light-dark($color-gray-300, $color-gray-700);
+        background-color: light-dark($color-gray-100, $color-gray-950);
+        box-shadow: $shadow;
+    }
+}
