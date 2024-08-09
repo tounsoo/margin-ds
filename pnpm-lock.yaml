@@ -18,11 +18,11 @@ importers:
         specifier: ^4.17.21
         version: 4.17.21
       react:
-        specifier: 19.0.0-rc-8269d55d-20240802
-        version: 19.0.0-rc-8269d55d-20240802
+        specifier: 19.0.0-rc-9d2da591-20240808
+        version: 19.0.0-rc-9d2da591-20240808
       react-dom:
-        specifier: 19.0.0-rc-8269d55d-20240802
-        version: 19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802)
+        specifier: 19.0.0-rc-9d2da591-20240808
+        version: 19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808)
       temporal-polyfill:
         specifier: ^0.2.5
         version: 0.2.5
@@ -32,7 +32,7 @@ importers:
         version: 1.8.3
       '@chromatic-com/storybook':
         specifier: ^1.6.1
-        version: 1.6.1(react@19.0.0-rc-8269d55d-20240802)
+        version: 1.6.1(react@19.0.0-rc-9d2da591-20240808)
       '@rsbuild/core':
         specifier: 1.0.1-beta.11
         version: 1.0.1-beta.11
@@ -59,19 +59,19 @@ importers:
         version: 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@storybook/addon-links':
         specifier: ^8.2.8
-        version: 8.2.8(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+        version: 8.2.8(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@storybook/addon-onboarding':
         specifier: ^8.2.8
-        version: 8.2.8(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+        version: 8.2.8(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@storybook/addon-storysource':
         specifier: ^8.2.8
         version: 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@storybook/blocks':
         specifier: ^8.2.8
-        version: 8.2.8(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+        version: 8.2.8(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@storybook/react':
         specifier: ^8.2.8
-        version: 8.2.8(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)
+        version: 8.2.8(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)
       '@storybook/test':
         specifier: ^8.2.8
         version: 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
@@ -89,7 +89,7 @@ importers:
         version: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
       storybook-react-rsbuild:
         specifier: ^0.0.11
-        version: 0.0.11(@rsbuild/core@1.0.1-beta.11)(@rspack/core@0.7.5(@swc/helpers@0.5.11))(esbuild@0.21.5)(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)(webpack@5.93.0(esbuild@0.21.5))
+        version: 0.0.11(@rsbuild/core@1.0.1-beta.11)(@rspack/core@0.7.5(@swc/helpers@0.5.11))(esbuild@0.21.5)(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)(webpack@5.93.0(esbuild@0.21.5))
       type-fest:
         specifier: ^4.24.0
         version: 4.24.0
@@ -3058,10 +3058,10 @@ packages:
     peerDependencies:
       react: ^18.3.1
 
-  react-dom@19.0.0-rc-8269d55d-20240802:
-    resolution: {integrity: sha512-2hMe555hjPNsikI3IybOEVhF/RID7EtGFgXqHHikQewIgp6i4D8BcvyOO7zVnh/8SffqbfuXjpYQpwSSS9ZlLA==}
+  react-dom@19.0.0-rc-9d2da591-20240808:
+    resolution: {integrity: sha512-/CbUEfalHpU765/ury8i1fnBbnlaieAoez5oDjZ3CDfybYI/cJJUJece3N+G13owIpKCwcMwCJfX4iuwI1mJkw==}
     peerDependencies:
-      react: 19.0.0-rc-8269d55d-20240802
+      react: 19.0.0-rc-9d2da591-20240808
 
   react-element-to-jsx-string@15.0.0:
     resolution: {integrity: sha512-UDg4lXB6BzlobN60P8fHWVPX3Kyw8ORrTeBtClmIlGdkOOE+GYQSFvmEU5iLLpwp/6v42DINwNcwOhOLfQ//FQ==}
@@ -3089,8 +3089,8 @@ packages:
     resolution: {integrity: sha512-wS+hAgJShR0KhEvPJArfuPVN1+Hz1t0Y6n5jLrGQbkb4urgPE/0Rve+1kMB1v/oWgHgm4WIcV+i7F2pTVj+2iQ==}
     engines: {node: '>=0.10.0'}
 
-  react@19.0.0-rc-8269d55d-20240802:
-    resolution: {integrity: sha512-vcBIi1I2mBP3SHTx3qSROW4Yx9p7g3MHSrZ8EKPhcoyfzWLpXpiDWZj7RgkwIyKdqX1qcO7rerow3pbIEXlnmw==}
+  react@19.0.0-rc-9d2da591-20240808:
+    resolution: {integrity: sha512-DKslyila8vF3j5SPZ9Hz7vgx1/QJACJSUmcd28nqaCfWSxsYj4K88UShw/EbIl01W2GYCsoHbmUMBrXqSnQxGw==}
     engines: {node: '>=0.10.0'}
 
   readable-stream@3.6.2:
@@ -3311,8 +3311,8 @@ packages:
   scheduler@0.23.2:
     resolution: {integrity: sha512-UOShsPwz7NrMUqhR6t0hWjFduvOzbtv7toDH1/hIrfRNIDBnnBWd0CwJTGvTpngVlmwGCdP9/Zl/tVrDqcuYzQ==}
 
-  scheduler@0.25.0-rc-8269d55d-20240802:
-    resolution: {integrity: sha512-CN5XfZFTyJ95r545Lg7GruSTkC7ITqpKQbOpgxWzxZEurPKCsfu/kspqukEVYrjSSGzHDk2mVi8fPudTAfz2nw==}
+  scheduler@0.25.0-rc-9d2da591-20240808:
+    resolution: {integrity: sha512-xPSTH2HnBxEfGg/2XHq9yu/W6JrKJRojpbboS9YkdhDJt1IhtaqU8l0I1BZtn9HyXvn1kExGe3B1WHwZs+fSdg==}
 
   schema-utils@3.3.0:
     resolution: {integrity: sha512-pN/yOAvcC+5rQ5nERGuwrjLlYvLTbCibnZ1I7B1LaiAz9BRBlE9GMgE/eqV30P7aJQUf7Ddimy/RsbYO/GrVGg==}
@@ -4639,12 +4639,12 @@ snapshots:
 
   '@bufbuild/protobuf@1.10.0': {}
 
-  '@chromatic-com/storybook@1.6.1(react@19.0.0-rc-8269d55d-20240802)':
+  '@chromatic-com/storybook@1.6.1(react@19.0.0-rc-9d2da591-20240808)':
     dependencies:
       chromatic: 11.7.0
       filesize: 10.1.4
       jsonfile: 6.1.0
-      react-confetti: 6.1.0(react@19.0.0-rc-8269d55d-20240802)
+      react-confetti: 6.1.0(react@19.0.0-rc-9d2da591-20240808)
       strip-ansi: 7.1.0
     transitivePeerDependencies:
       - '@chromatic-com/cypress'
@@ -5063,14 +5063,14 @@ snapshots:
       - jest
       - vitest
 
-  '@storybook/addon-links@8.2.8(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
+  '@storybook/addon-links@8.2.8(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
     dependencies:
       '@storybook/csf': 0.1.11
       '@storybook/global': 5.0.0
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
       ts-dedent: 2.2.0
     optionalDependencies:
-      react: 19.0.0-rc-8269d55d-20240802
+      react: 19.0.0-rc-9d2da591-20240808
 
   '@storybook/addon-measure@8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
     dependencies:
@@ -5078,9 +5078,9 @@ snapshots:
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
       tiny-invariant: 1.3.3
 
-  '@storybook/addon-onboarding@8.2.8(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
+  '@storybook/addon-onboarding@8.2.8(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
     dependencies:
-      react-confetti: 6.1.0(react@19.0.0-rc-8269d55d-20240802)
+      react-confetti: 6.1.0(react@19.0.0-rc-9d2da591-20240808)
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
     transitivePeerDependencies:
       - react
@@ -5128,26 +5128,26 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/blocks@8.2.8(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
+  '@storybook/blocks@8.2.8(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
     dependencies:
       '@storybook/csf': 0.1.11
       '@storybook/global': 5.0.0
-      '@storybook/icons': 1.2.10(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)
+      '@storybook/icons': 1.2.10(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)
       '@types/lodash': 4.17.7
       color-convert: 2.0.1
       dequal: 2.0.3
       lodash: 4.17.21
-      markdown-to-jsx: 7.4.7(react@19.0.0-rc-8269d55d-20240802)
+      markdown-to-jsx: 7.4.7(react@19.0.0-rc-9d2da591-20240808)
       memoizerific: 1.11.3
       polished: 4.3.1
-      react-colorful: 5.6.1(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)
+      react-colorful: 5.6.1(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
       telejson: 7.2.0
       ts-dedent: 2.2.0
       util-deprecate: 1.0.2
     optionalDependencies:
-      react: 19.0.0-rc-8269d55d-20240802
-      react-dom: 19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802)
+      react: 19.0.0-rc-9d2da591-20240808
+      react-dom: 19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808)
 
   '@storybook/codemod@8.2.8':
     dependencies:
@@ -5213,10 +5213,10 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  '@storybook/icons@1.2.10(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)':
+  '@storybook/icons@1.2.10(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)':
     dependencies:
-      react: 19.0.0-rc-8269d55d-20240802
-      react-dom: 19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802)
+      react: 19.0.0-rc-9d2da591-20240808
+      react-dom: 19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808)
 
   '@storybook/instrumenter@8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
     dependencies:
@@ -5253,19 +5253,19 @@ snapshots:
       react-dom: 18.3.1(react@18.3.1)
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
 
-  '@storybook/react-dom-shim@8.2.8(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
+  '@storybook/react-dom-shim@8.2.8(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))':
     dependencies:
-      react: 19.0.0-rc-8269d55d-20240802
-      react-dom: 19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802)
+      react: 19.0.0-rc-9d2da591-20240808
+      react-dom: 19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808)
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
 
-  '@storybook/react@8.2.8(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)':
+  '@storybook/react@8.2.8(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)':
     dependencies:
       '@storybook/components': 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@storybook/global': 5.0.0
       '@storybook/manager-api': 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@storybook/preview-api': 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
-      '@storybook/react-dom-shim': 8.2.8(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
+      '@storybook/react-dom-shim': 8.2.8(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@storybook/theming': 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@types/escodegen': 0.0.6
       '@types/estree': 0.0.51
@@ -5277,9 +5277,9 @@ snapshots:
       html-tags: 3.3.1
       lodash: 4.17.21
       prop-types: 15.8.1
-      react: 19.0.0-rc-8269d55d-20240802
-      react-dom: 19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802)
-      react-element-to-jsx-string: 15.0.0(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)
+      react: 19.0.0-rc-9d2da591-20240808
+      react-dom: 19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808)
+      react-element-to-jsx-string: 15.0.0(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)
       semver: 7.6.3
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
       ts-dedent: 2.2.0
@@ -6662,9 +6662,9 @@ snapshots:
     dependencies:
       react: 18.3.1
 
-  markdown-to-jsx@7.4.7(react@19.0.0-rc-8269d55d-20240802):
+  markdown-to-jsx@7.4.7(react@19.0.0-rc-9d2da591-20240808):
     dependencies:
-      react: 19.0.0-rc-8269d55d-20240802
+      react: 19.0.0-rc-9d2da591-20240808
 
   media-typer@0.3.0: {}
 
@@ -7006,14 +7006,14 @@ snapshots:
       react: 18.3.1
       react-dom: 18.3.1(react@18.3.1)
 
-  react-colorful@5.6.1(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802):
+  react-colorful@5.6.1(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808):
     dependencies:
-      react: 19.0.0-rc-8269d55d-20240802
-      react-dom: 19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802)
+      react: 19.0.0-rc-9d2da591-20240808
+      react-dom: 19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808)
 
-  react-confetti@6.1.0(react@19.0.0-rc-8269d55d-20240802):
+  react-confetti@6.1.0(react@19.0.0-rc-9d2da591-20240808):
     dependencies:
-      react: 19.0.0-rc-8269d55d-20240802
+      react: 19.0.0-rc-9d2da591-20240808
       tween-functions: 1.2.0
 
   react-docgen-typescript@2.2.2(typescript@5.5.4):
@@ -7041,17 +7041,17 @@ snapshots:
       react: 18.3.1
       scheduler: 0.23.2
 
-  react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802):
+  react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808):
     dependencies:
-      react: 19.0.0-rc-8269d55d-20240802
-      scheduler: 0.25.0-rc-8269d55d-20240802
+      react: 19.0.0-rc-9d2da591-20240808
+      scheduler: 0.25.0-rc-9d2da591-20240808
 
-  react-element-to-jsx-string@15.0.0(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802):
+  react-element-to-jsx-string@15.0.0(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808):
     dependencies:
       '@base2/pretty-print-object': 1.0.1
       is-plain-object: 5.0.0
-      react: 19.0.0-rc-8269d55d-20240802
-      react-dom: 19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802)
+      react: 19.0.0-rc-9d2da591-20240808
+      react-dom: 19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808)
       react-is: 18.1.0
 
   react-is@16.13.1: {}
@@ -7068,7 +7068,7 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  react@19.0.0-rc-8269d55d-20240802: {}
+  react@19.0.0-rc-9d2da591-20240808: {}
 
   readable-stream@3.6.2:
     dependencies:
@@ -7265,7 +7265,7 @@ snapshots:
     dependencies:
       loose-envify: 1.4.0
 
-  scheduler@0.25.0-rc-8269d55d-20240802: {}
+  scheduler@0.25.0-rc-9d2da591-20240808: {}
 
   schema-utils@3.3.0:
     dependencies:
@@ -7396,18 +7396,18 @@ snapshots:
       - webpack
       - webpack-cli
 
-  storybook-react-rsbuild@0.0.11(@rsbuild/core@1.0.1-beta.11)(@rspack/core@0.7.5(@swc/helpers@0.5.11))(esbuild@0.21.5)(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)(webpack@5.93.0(esbuild@0.21.5)):
+  storybook-react-rsbuild@0.0.11(@rsbuild/core@1.0.1-beta.11)(@rspack/core@0.7.5(@swc/helpers@0.5.11))(esbuild@0.21.5)(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)(webpack@5.93.0(esbuild@0.21.5)):
     dependencies:
       '@rollup/pluginutils': 5.1.0
       '@rsbuild/core': 1.0.1-beta.11
-      '@storybook/react': 8.2.8(react-dom@19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802))(react@19.0.0-rc-8269d55d-20240802)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)
+      '@storybook/react': 8.2.8(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)
       '@storybook/react-docgen-typescript-plugin': 1.0.1(typescript@5.5.4)(webpack@5.93.0(esbuild@0.21.5))
       '@types/node': 18.19.43
       find-up: 5.0.0
       magic-string: 0.30.11
-      react: 19.0.0-rc-8269d55d-20240802
+      react: 19.0.0-rc-9d2da591-20240808
       react-docgen: 7.0.3
-      react-dom: 19.0.0-rc-8269d55d-20240802(react@19.0.0-rc-8269d55d-20240802)
+      react-dom: 19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808)
       resolve: 1.22.8
       storybook: 8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2))
       storybook-builder-rsbuild: 0.0.11(@rsbuild/core@1.0.1-beta.11)(@rspack/core@0.7.5(@swc/helpers@0.5.11))(esbuild@0.21.5)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)(webpack@5.93.0(esbuild@0.21.5))
