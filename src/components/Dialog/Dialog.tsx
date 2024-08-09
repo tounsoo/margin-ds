@@ -1,7 +1,6 @@
 import {
 	type KeyboardEvent,
 	type MouseEvent,
-	type SyntheticEvent,
 	useCallback,
 	useEffect,
 	useRef,
@@ -11,8 +10,9 @@ import cx from "classnames";
 import { mergeRefs } from "../../functions";
 import type { BaseComponentProps } from "../../types";
 
-export type DialogProps = Omit<BaseComponentProps<"dialog">, "open"> & {
+export type DialogProps = Omit<BaseComponentProps<"dialog">, "open" | "onClose"> & {
 	open?: boolean;
+	onClose?: (e?: MouseEvent<HTMLDialogElement> | globalThis.MouseEvent) => void;
 };
 
 const dialogCountDown = () => {
@@ -28,12 +28,12 @@ const dialogCountDown = () => {
 };
 
 export const Dialog = (props: DialogProps) => {
-	const { children, className, open, onClose, onClick, ref, ...rest } = props;
+	const { children, className, open, onClose, ref, ...rest } = props;
 	const dialogRef = useRef<HTMLDialogElement>(null);
 
-	const closeDialog = useCallback((e: SyntheticEvent<HTMLDialogElement, Event>) => {
+	const closeDialog = useCallback(() => {
 		if (!onClose) return;
-		onClose?.(e);
+		onClose?.();
 		dialogCountDown();
 	}, [onClose]);
 
@@ -41,22 +41,24 @@ export const Dialog = (props: DialogProps) => {
 		if (!onClose && e.key === "Escape") {
 			e.preventDefault();
 		}
+        onClose?.()
 	};
 
-	const onClickHandler = (e: MouseEvent<HTMLDialogElement>) => {
-		const xPos = e.pageX;
-		const yPos = e.pageY;
-		const box = (e.target as HTMLElement).getBoundingClientRect();
-		const isOutside =
-			xPos > box.right ||
-			xPos < box.x ||
-			yPos > box.bottom ||
-			yPos < box.y;
-		if (isOutside) {
-			closeDialog(e);
-		}
-		onClick?.(e);
-	};
+    // biome-ignore lint/correctness/useExhaustiveDependencies: onClose should not rerender
+    useEffect(() => {
+        if (!dialogRef.current) return;
+        const closeOnClickOutside = (e: globalThis.MouseEvent) => {
+            if (e.composedPath()[0] === dialogRef.current) {
+                onClose?.(e)
+            }
+
+        }
+        document.body.addEventListener("click", closeOnClickOutside);
+
+        return () => {
+            document.body.removeEventListener("click", closeOnClickOutside);
+        }
+    }, [])
 
 	useEffect(() => {
 		if (!open) {
@@ -79,7 +81,7 @@ export const Dialog = (props: DialogProps) => {
 
 	return (
 		<dialog
-			onClick={onClickHandler}
+			// onClick={onClickHandler}
 			className={cx(styles.dialog, className)}
 			ref={ mergeRefs(ref, dialogRef) }
 			onKeyDown={onKeyDownHandler}

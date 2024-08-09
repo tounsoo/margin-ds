@@ -20,11 +20,11 @@
 	"devDependencies": {
 		"@biomejs/biome": "1.8.3",
 		"@chromatic-com/storybook": "^1.6.1",
-		"@rsbuild/core": "1.0.1-beta.10",
-		"@rsbuild/plugin-babel": "1.0.1-beta.10",
+		"@rsbuild/core": "1.0.1-beta.11",
+		"@rsbuild/plugin-babel": "1.0.1-beta.11",
 		"@rsbuild/plugin-lightningcss": "1.0.1-beta.6",
-		"@rsbuild/plugin-react": "1.0.1-beta.10",
-		"@rsbuild/plugin-sass": "1.0.1-beta.10",
+		"@rsbuild/plugin-react": "1.0.1-beta.11",
+		"@rsbuild/plugin-sass": "1.0.1-beta.11",
 		"@storybook/addon-a11y": "^8.2.8",
 		"@storybook/addon-essentials": "^8.2.8",
 		"@storybook/addon-interactions": "^8.2.8",
@@ -41,7 +41,7 @@
 		"classnames": "^2.5.1",
 		"storybook": "^8.2.8",
 		"storybook-react-rsbuild": "^0.0.11",
-		"type-fest": "^4.23.0",
+		"type-fest": "^4.24.0",
 		"typescript": "^5.5.4"
 	},
 	"overrides": {
