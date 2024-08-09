@@ -1,0 +1,82 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer reset {
+}
+
+@layer base {
+    .tooltip {
+        color-scheme: light dark;
+        position: absolute;
+        border-radius: $radius-md;
+        background-color: light-dark($color-gray-900, $color-gray-200);
+        color: light-dark($color-white, $color-black);
+        margin: $spacing-1;
+        font-family: $font-family;
+        font-size: $font-size-sm;
+        line-height: $font-size-xs--line-height;
+    }
+}
+
+@layer state {
+    .tooltip {
+        &.block-start--center {
+            inset-area: block-start center
+        }
+        &.block-start--span-inline-start {
+            inset-area: block-start span-inline-start
+        }
+        &.block-start--span-inline-end {
+            inset-area: block-start span-inline-end
+        }
+        &.block-start {
+            inset-area: block-start
+        }
+        &.inline-start--center {
+            inset-area: inline-start center
+        }
+        &.inline-start--span-block-start {
+            inset-area: inline-start span-block-start
+        }
+        &.inline-start--span-block-end {
+            inset-area: inline-start span-block-end
+        }
+        &.inline-start {
+            inset-area: inline-start
+        }
+        &.block-end--center {
+            inset-area: block-end center
+        }
+        &.block-end--span-inline-start {
+            inset-area: block-end span-inline-start
+        }
+        &.block-end--span-inline-end {
+            inset-area: block-end span-inline-end
+        }
+        &.block-end {
+            inset-area: block-end
+        }
+        &.inline-end--center {
+            inset-area: inline-end center
+        }
+        &.inline-end--span-block-start {
+            inset-area: inline-end span-block-start
+        }
+        &.inline-end--span-block-end {
+            inset-area: inline-end span-block-end
+        }
+        &.inline-end {
+            inset-area: inline-end
+        }
+
+
+
+// @position-try --bottom {
+//     margin: var(--padding) 0 0 var(--padding);
+//     left: anchor(--submenu left);
+//     top: anchor(--submenu bottom);
+//     margin-left: var(--padding);
+//   }
+
+    }
+}

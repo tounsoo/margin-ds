@@ -72,9 +72,6 @@ importers:
       '@storybook/react':
         specifier: ^8.2.8
         version: 8.2.8(react-dom@19.0.0-rc-9d2da591-20240808(react@19.0.0-rc-9d2da591-20240808))(react@19.0.0-rc-9d2da591-20240808)(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))(typescript@5.5.4)
-      '@storybook/test':
-        specifier: ^8.2.8
-        version: 8.2.8(storybook@8.2.8(@babel/preset-env@7.25.3(@babel/core@7.25.2)))
       '@types/lodash':
         specifier: ^4.17.7
         version: 4.17.7
