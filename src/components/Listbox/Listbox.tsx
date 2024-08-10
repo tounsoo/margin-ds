@@ -40,6 +40,7 @@ type ItemLabelType = {
 	id: string;
 };
 
+
 export const Listbox = (props: ListboxProps) => {
 	const {
 		children,
@@ -77,14 +78,11 @@ export const Listbox = (props: ListboxProps) => {
 	useEffect(() => {
 		if (!itemArr) return;
 		if (!searchString) return;
-		const filteredItems = itemArr.filter((item) =>
+		const newResult = itemArr.filter((item) =>
 			item.value.toLowerCase().startsWith(searchString.toLowerCase()),
 		);
-		if (!filteredItems.length) return;
-		const newResult = filteredItems.sort((a, b) =>
-			a.value.localeCompare(b.value),
-		);
-
+		if (!newResult?.length) return;
+		
 		const sameResult =
 			result?.length === newResult.length &&
 			isEqualWith(result, newResult) && searchString.length === 1;

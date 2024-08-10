@@ -13,7 +13,7 @@ import styles from "./Menu.module.scss";
 import cx from "classnames";
 import { mergeRefs } from "../../functions";
 import { MenuItem, type MenuItemProps } from "./MenuItem";
-import { isEqualWith } from "lodash";
+import { filter, isEqualWith } from "lodash";
 import type { BaseComponentProps } from "../../types";
 
 type MenuContextType = {
@@ -63,14 +63,11 @@ export const Menu = (props: MenuProps) => {
 	useEffect(() => {
 		if (!itemArr) return;
 		if (!searchString) return;
-		const filteredItems = itemArr.filter((item) =>
+		const newResult = itemArr.filter((item) =>
 			item.value.toLowerCase().startsWith(searchString.toLowerCase()),
 		);
-		if (!filteredItems.length) return;
-		const newResult = filteredItems.sort((a, b) =>
-			a.value.localeCompare(b.value),
-		);
-
+		if (!newResult?.length) return;
+		
 		const sameResult =
 			result?.length === newResult.length &&
 			isEqualWith(result, newResult) && searchString.length === 1;
