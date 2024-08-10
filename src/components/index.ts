@@ -15,3 +15,4 @@ export * from "./RadioGroup";
 export * from "./Spacer";
 export * from "./SrOnly";
 export * from "./Switch";
+export * from "./Tooltip";
