@@ -8,6 +8,7 @@ import {
 	type SetStateAction,
 	type KeyboardEvent,
 	type FocusEvent,
+    type RefObject,
 } from "react";
 import styles from "./Menu.module.scss";
 import cx from "classnames";
@@ -19,6 +20,7 @@ import type { BaseComponentProps } from "../../types";
 type MenuContextType = {
 	focusedItem?: string | null;
 	setFocusedItem?: Dispatch<SetStateAction<string | null | undefined>>;
+    menuRef?: RefObject<HTMLUListElement | null>
 };
 
 export const MenuContext = createContext<MenuContextType>({});
@@ -120,6 +122,7 @@ export const Menu = (props: MenuProps) => {
 		return {
 			focusedItem,
 			setFocusedItem,
+            menuRef: elRef
 		};
 	}, [
 		focusedItem,
@@ -164,7 +167,6 @@ export const Menu = (props: MenuProps) => {
 		}
 		if (e.code === "Space" || e.code === "Enter") {
             (elRef.current?.querySelector(`li[id="${focusedItem}"]`) as HTMLElement).click();
-            setTimeout(() => elRef.current?.hidePopover(), 0);
 		}
 	};
 	return (

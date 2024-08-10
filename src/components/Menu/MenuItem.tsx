@@ -19,12 +19,14 @@ export const MenuItem = (props: MenuItemProps) => {
 	const {
 		focusedItem,
 		setFocusedItem,
+        menuRef
 	} = useContext(MenuContext);
 	const classNames = cx(styles["menu-item"], className);
 
 	const handleClick = (e: MouseEvent<HTMLLIElement>) => {
 		onClick?.({ id }, e);
 		setFocusedItem?.(id);
+        setTimeout(() => menuRef?.current?.hidePopover(), 0);
 	};
 
 	return (
