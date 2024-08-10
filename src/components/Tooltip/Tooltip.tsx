@@ -22,13 +22,13 @@ export type Position =
 
 export type TooltipProps = Omit<BaseComponentProps<"span">, 'id'> & {
 	position?: Position;
-	fallbackPositions?: Position[];
+    disableFlip?: 'block' | 'inline' | 'both';
 };
 
 export const Tooltip = (
 	props: TooltipProps,
 ) => {
-	const { position = "block-end", fallbackPositions, children, className, ...rest } = props;
+	const { position = "block-end", disableFlip, children, className, ...rest } = props;
 	
 	const classNames = cx(styles.tooltip, className, {
 		// positions
@@ -56,6 +56,11 @@ export const Tooltip = (
 		[styles["inline-end--span-block-end"]]:
 			position === "inline-end span-block-end",
 		[styles["inline-end"]]: position === "inline-end",
+
+        // flip fallback control
+        [styles["disable-flip-block"]]: disableFlip === 'block',
+        [styles["disable-flip-inline"]]: disableFlip === 'inline',
+        [styles["disable-flip"]]: disableFlip === 'both',
 	});
 
 	return <span className={classNames} popover="auto" {...rest}>{children}</span>;

@@ -11,10 +11,14 @@
         border-radius: $radius-md;
         background-color: light-dark($color-gray-900, $color-gray-200);
         color: light-dark($color-white, $color-black);
-        margin: $spacing-1;
+        margin: $spacing-1_5;
+        padding-inline: $spacing-1_5;
+        padding-block: $spacing-1;
         font-family: $font-family;
-        font-size: $font-size-sm;
+        font-size: $font-size-xs;
         line-height: $font-size-xs--line-height;
+        position-try-options: flip-block flip-inline;
+        box-shadow: $shadow-lg;
     }
 }
 
@@ -69,14 +73,14 @@
             inset-area: inline-end
         }
 
-
-
-// @position-try --bottom {
-//     margin: var(--padding) 0 0 var(--padding);
-//     left: anchor(--submenu left);
-//     top: anchor(--submenu bottom);
-//     margin-left: var(--padding);
-//   }
-
+        &.disable-flip {
+            position-try-options: none;
+        }
+        &.disable-flip-inline {
+            position-try-options: flip-block;
+        } 
+        &.disable-flip-block {
+            position-try-options: flip-inline;
+        }
     }
 }
