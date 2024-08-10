@@ -1,0 +1,98 @@
+@use '@tokens/global.scss' as *;
+@layer reset, base, variant, state, component;
+
+@layer base {
+    .menu {
+        color-scheme: light dark;
+        list-style: none;
+        position: absolute;
+
+        flex-direction: column;
+        box-sizing: border-box;
+
+        font-family: $font-family;
+        font-size: $font-size-sm;
+        line-height: $font-size-sm--line-height;
+        gap: $spacing-1;
+        padding-block: $spacing-2;
+        padding-inline: $spacing-2;
+        margin: 0;
+       
+        border-radius: $radius-md;
+        border: none;
+        outline-style: solid;
+        outline-width: 0;
+        outline-color: transparent;
+        outline: none;
+        box-shadow: $shadow-lg;
+        inset-area: block-end span-inline-end;
+
+       .menu-item {
+            display: flex;
+            flex-grow: 1;
+            justify-content: space-between;
+            align-items: center;
+            box-sizing: border-box;
+            position: relative;
+            cursor: pointer;
+            
+
+            font-family: $font-family;
+            font-size: $font-size-sm;
+            line-height: $font-size-sm--line-height;
+            gap: $spacing-4;
+            padding-block: $spacing-2;
+            padding-inline: $spacing-3;
+            border-radius: $radius-md;
+
+            min-height: $font-size-sm--line-height + $spacing-4;
+            min-width: $font-size-sm--line-height + $spacing-4;
+
+            outline-style: solid;
+            outline-color: transparent;
+            outline-width: 0;
+            transition-property: outline;
+            transition-duration: $default-transition-duration;
+            transition-timing-function: $transition-timing-function-out;
+       }
+
+    }
+}
+
+@layer state {
+    .menu:focus-visible {
+        outline-width: 0.125rem;
+        outline-offset: 0.125rem;
+        outline-color: light-dark($color-gray-950, $color-gray-50)
+    }
+    .menu-item:not(:disabled):not([aria-disabled="true"]) {
+        @media (pointer: fine) {
+            &:hover {
+                background-color: light-dark($color-gray-200, $color-gray-600)
+            }
+            
+            &:active {
+                background-color: light-dark($color-gray-300, $color-gray-500)
+            }
+        }
+    }
+
+    .menu-item:disabled,
+    .menu-item[aria-disabled="true"] {
+        opacity: .4;
+        cursor: not-allowed;
+    }
+
+    .menu:focus-visible,
+    .menu.pseudo-focus-visible {
+        .menu-item[data-focused="true"] {
+            background-color: light-dark($color-gray-200, $color-gray-600)
+        }
+    }
+    
+    @media (prefers-reduced-motion) {
+        .menu-item {
+            transition: outline-offset 0.1ms;
+        }
+    }
+}

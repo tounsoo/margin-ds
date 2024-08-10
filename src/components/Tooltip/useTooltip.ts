@@ -6,11 +6,11 @@ export const useTooltip = ({
 	anchorProps: {
 		style: CSSProperties;
 		popoverTarget: string;
-		popover: "manual";
 	};
 	tooltipProps: {
 		style: CSSProperties;
 		id: string;
+		popover: "manual";
 	};
 } => {
 	const id = useId();
@@ -32,7 +32,6 @@ export const useTooltip = ({
 		onMouseLeave: hidePopover,
 		onFocus: showPopover,
 		onBlur: hidePopover,
-		popover: "manual" as const,
 	};
 
 	const tooltipProps = {
@@ -40,6 +39,7 @@ export const useTooltip = ({
 			positionAnchor: anchorName,
 		} as CSSProperties,
 		id: id,
+		popover: "manual" as const,
 	};
 	return {
 		anchorProps,

@@ -13,12 +13,11 @@
         box-sizing: border-box;
         display: inline;
 
-        font-family: monospace;
+        font-family: $font-family-mono;
         font-size: .8em;
         line-height: inherit;
 
         padding: calc($spacing-1_5 / 2);
-        // border-radius: $radius-md;
         background-color: light-dark($color-gray-200, $color-gray-950);
     }
 }
