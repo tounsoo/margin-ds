@@ -42,17 +42,17 @@ export const WithIcon: Story = {
 	},
 };
 
-export const SplitButton: StoryObj<typeof Button.Split> = {
-    args: {
-        appearance: "default",
-        children: "Split Button"
-    },
-	render: function Render(args) {
-		return (
-            <Button.Split {...args} />
-		);
-	},
-};
+// export const SplitButton: StoryObj<typeof Button.Split> = {
+//     args: {
+//         appearance: "default",
+//         children: "Split Button"
+//     },
+// 	render: function Render(args) {
+// 		return (
+//             <Button.Split {...args} />
+// 		);
+// 	},
+// };
 
 export const Fill = {
 	render: function Render() {
