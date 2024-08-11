@@ -141,7 +141,7 @@ export const WithObjectMapping = {
 		];
 
 		return (
-			<Listbox aria-label="object list">
+			<Listbox aria-label="object list" onSelectionChange={console.log}>
 				{sampleData.map((entry) => (
 					<Listbox.Item key={entry.id} value={entry.name} id={entry.id}>
 						{`${entry.name}`}

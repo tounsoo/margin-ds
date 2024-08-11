@@ -30,7 +30,7 @@ export const ListContext = createContext<ListboxContextType>({});
 export type ListboxProps = BaseComponentProps<"ul"> & {
 	defaultSelected?: string;
 	selected?: string | null;
-	onSelectionChange?: (data?: { selection?: string }) => void;
+	onSelectionChange?: (data?: { selected?: string }) => void;
 	focusedItem?: string;
 	pseudoFocusVisible?: boolean;
 };
@@ -189,7 +189,7 @@ export const Listbox = (props: ListboxProps) => {
 				return;
 			}
 			setSelectedItem?.(focusedItem ?? undefined);
-			focusedItem && onSelectionChange?.({ selection: focusedItem });
+			focusedItem && onSelectionChange?.({ selected: focusedItem });
 		}
 	};
 	return (

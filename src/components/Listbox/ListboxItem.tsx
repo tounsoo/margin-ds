@@ -37,7 +37,7 @@ export const ListboxItem = (props: ListboxItemProps) => {
 		}
 		setFocusedItem?.(id);
 		setSelectedItem?.(id);
-		onSelectionChange?.({ selection: id });
+		onSelectionChange?.({ selected: id });
 	};
 
 	return (
