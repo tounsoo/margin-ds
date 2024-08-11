@@ -1,18 +1,15 @@
-import { type RefObject, useId, type CSSProperties } from "react";
+import {
+	useId,
+	useState,
+	type RefObject,
+	type CSSProperties,
+	type HTMLAttributes,
+} from "react";
+import type { TooltipProps } from "./Tooltip";
 
 export const useTooltip = ({
 	tooltipRef,
-}: { tooltipRef: RefObject<HTMLSpanElement | null> }): {
-	anchorProps: {
-		style: CSSProperties;
-		popoverTarget: string;
-	};
-	tooltipProps: {
-		style: CSSProperties;
-		id: string;
-		popover: "manual";
-	};
-} => {
+}: { tooltipRef: RefObject<HTMLSpanElement | null> }) => {
 	const id = useId();
 	const showPopover = () => {
 		tooltipRef.current?.showPopover();
@@ -23,26 +20,51 @@ export const useTooltip = ({
 
 	// below to be removed once React resolves the issue
 	const anchorName = `--anchor-${id.replace(/:\s*/g, "")}`;
-	const anchorProps = {
-		style: {
-			anchorName,
-		} as CSSProperties,
-		popoverTarget: id,
-		onMouseEnter: showPopover,
-		onMouseLeave: hidePopover,
-		onFocus: showPopover,
-		onBlur: hidePopover,
+	const getAnchorProps = (props?: HTMLAttributes<unknown>) => {
+		return {
+			...props,
+			style: {
+				...props?.style,
+				anchorName,
+			} as CSSProperties,
+			"aria-describedby": id,
+			popoverTarget: id,
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			onMouseEnter: (e: any) => {
+				props?.onMouseEnter?.(e);
+				showPopover();
+			},
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			onMouseLeave: (e: any) => {
+				props?.onMouseLeave?.(e);
+				hidePopover();
+			},
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			onFocus: (e: any) => {
+				props?.onFocus?.(e);
+				showPopover();
+			},
+			// biome-ignore lint/suspicious/noExplicitAny: <explanation>
+			onBlur: (e: any) => {
+				props?.onBlur?.(e);
+				hidePopover();
+			},
+		};
 	};
 
-	const tooltipProps = {
-		style: {
-			positionAnchor: anchorName,
-		} as CSSProperties,
-		id: id,
-		popover: "manual" as const,
+	const getTooltipProps = (props?: TooltipProps) => {
+		return {
+			...props,
+			style: {
+				...props?.style,
+				positionAnchor: anchorName,
+			} as CSSProperties,
+			id: id,
+			popover: "manual" as const,
+		};
 	};
 	return {
-		anchorProps,
-		tooltipProps,
+		getAnchorProps,
+		getTooltipProps,
 	};
 };

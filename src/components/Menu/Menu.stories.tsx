@@ -20,7 +20,7 @@ type Story = StoryObj<typeof meta>;
 export const Default: Story = {
 	render: function Render() {
 		const menuRef = useRef<HTMLUListElement>(null);
-		const { getAnchorProps, getMenuProps } = useMenu(menuRef);
+		const { getAnchorProps, getMenuProps } = useMenu({menuRef});
 
 		return (
 			<>

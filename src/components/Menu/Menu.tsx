@@ -14,7 +14,7 @@ import styles from "./Menu.module.scss";
 import cx from "classnames";
 import { mergeRefs } from "../../functions";
 import { MenuItem, type MenuItemProps } from "./MenuItem";
-import { filter, isEqualWith } from "lodash";
+import { isEqualWith } from "lodash";
 import type { BaseComponentProps } from "../../types";
 
 type MenuContextType = {

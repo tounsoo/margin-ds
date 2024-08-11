@@ -1,6 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { useTooltip } from "./useTooltip";
-import { A11yProvider } from "../../providers";
 import { Button } from "../Button";
 import { Tooltip } from "./Tooltip";
 import { useRef } from "react";
@@ -20,12 +19,14 @@ type Story = StoryObj<typeof meta>;
 export const Default = {
 	render: function Render() {
         const tooltipRef = useRef<HTMLSpanElement>(null)
-        const { anchorProps, tooltipProps} = useTooltip({tooltipRef});
+        const { getAnchorProps, getTooltipProps } = useTooltip({tooltipRef});
 
 		return (
 				<>
-                    <Button {...anchorProps}>Click me</Button>
-                    <Tooltip ref={tooltipRef} {...tooltipProps}>Hello world</Tooltip>
+                    <Button {...getAnchorProps()}>Click me</Button>
+                    <Tooltip {...getTooltipProps({
+                        ref: tooltipRef
+                    })}>Hello world</Tooltip>
                 </>
 		);
 	},

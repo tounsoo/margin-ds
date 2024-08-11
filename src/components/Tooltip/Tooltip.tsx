@@ -63,5 +63,5 @@ export const Tooltip = (
         [styles["disable-flip"]]: disableFlip === 'both',
 	});
 
-	return <span className={classNames} popover="auto" {...rest}>{children}</span>;
+	return <span role="tooltip" className={classNames} popover="auto" {...rest}>{children}</span>;
 };

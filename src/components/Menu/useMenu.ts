@@ -4,12 +4,13 @@ import {
 	useId,
 	useState,
 	type CSSProperties,
-	type MouseEvent,
 	type HTMLAttributes,
 } from "react";
 import type { MenuProps } from "./Menu";
 
-export const useMenu = (menuRef: RefObject<HTMLUListElement | null>) => {
+export const useMenu = ({
+	menuRef,
+}: { menuRef: RefObject<HTMLUListElement | null> }) => {
 	const [isOpen, setIsOpen] = useState(false);
 	const id = useId();
 
